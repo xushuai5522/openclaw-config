@@ -1,0 +1,204 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.2.18",
+    "lastTouchedAt": "2026-02-19T12:13:00.436Z"
+  },
+  "wizard": {
+    "lastRunAt": "2026-02-15T15:41:18.729Z",
+    "lastRunVersion": "2026.2.15",
+    "lastRunCommand": "onboard",
+    "lastRunMode": "local"
+  },
+  "browser": {
+    "enabled": true,
+    "headless": false,
+    "defaultProfile": "openclaw"
+  },
+  "auth": {
+    "profiles": {
+      "minimax-cn:default": {
+        "provider": "minimax-cn",
+        "mode": "api_key"
+      }
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "Minimax2.5": {
+        "baseUrl": "https://mydamoxing.cn/v1",
+        "apiKey": "sk-TIzgo6H7YSK3reuoV6JrhtlDd4DV1h5i3huUCjkPE65KQkeF",
+        "models": [
+          {
+            "id": "MiniMax-M2.5-highspeed",
+            "name": "MiniMax-M2.5-highspeed",
+            "api": "openai-completions",
+            "reasoning": false,
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            }
+          }
+        ]
+      },
+      "a": {
+        "baseUrl": "http://192.168.1.60:11434/v1",
+        "apiKey": "123",
+        "models": [
+          {
+            "id": "qwen3:14b",
+            "name": "qwen3:14b",
+            "api": "openai-completions",
+            "reasoning": false,
+            "input": [
+              "text",
+              "image"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            }
+          }
+        ]
+      },
+      "minimax-cn": {
+        "baseUrl": "https://api.minimaxi.com/anthropic",
+        "api": "anthropic-messages",
+        "models": [
+          {
+            "id": "MiniMax-M2.5",
+            "name": "MiniMax M2.5",
+            "reasoning": true,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 15,
+              "output": 60,
+              "cacheRead": 2,
+              "cacheWrite": 10
+            },
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "Minimax2.5/MiniMax-M2.5-highspeed"
+      },
+      "models": {
+        "Minimax2.5/MiniMax-M2.5-highspeed": {},
+        "a/qwen3:14b": {},
+        "minimax-cn/MiniMax-M2.5": {
+          "alias": "Minimax"
+        }
+      },
+      "workspace": "/Users/xs/.openclaw/workspace",
+      "memorySearch": {
+        "enabled": true,
+        "sources": [
+          "memory"
+        ],
+        "provider": "openai"
+      },
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "timeoutSeconds": 600
+    }
+  },
+  "tools": {
+    "exec": {
+      "host": "gateway",
+      "security": "full"
+    }
+  },
+  "messages": {
+    "queue": {
+      "debounceMs": 2000,
+      "drop": "new"
+    },
+    "inbound": {
+      "debounceMs": 1000
+    }
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true
+  },
+  "channels": {
+    "feishu": {
+      "appId": "cli_a91a7f06faf8dced",
+      "appSecret": "knOX2LVgdiy1fd9Ipcr4thpAxFzAT50i",
+      "connectionMode": "websocket",
+      "dmPolicy": "pairing",
+      "enabled": true,
+      "groupPolicy": "allowlist",
+      "requireMention": true
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "6bd1f4eb4672f986b7436f3f30b338c09539783abfdc0f50"
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    },
+    "nodes": {
+      "allowCommands": [
+        "run"
+      ],
+      "denyCommands": [
+        "camera.snap",
+        "camera.clip",
+        "screen.record",
+        "calendar.add",
+        "contacts.add",
+        "reminders.add"
+      ]
+    }
+  },
+  "plugins": {
+    "entries": {
+      "feishu": {
+        "enabled": true
+      },
+      "google-gemini-cli-auth": {
+        "enabled": true
+      },
+      "llm-task": {
+        "enabled": true
+      },
+      "memory-core": {
+        "enabled": true
+      }
+    },
+    "installs": {
+      "feishu": {
+        "source": "npm",
+        "spec": "@m1heng-clawd/feishu",
+        "installPath": "/Users/xs/.openclaw/extensions/feishu",
+        "version": "0.1.9",
+        "installedAt": "2026-02-15T16:04:54.014Z"
+      }
+    }
+  }
+}
