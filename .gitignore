@@ -1,0 +1,53 @@
+# 图片文件
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp
+*.svg
+
+# 视频文件
+*.mp4
+*.mov
+*.avi
+*.mkv
+
+# 临时文件
+*.tmp
+*.log
+*.pyc
+__pycache__/
+
+# 项目过程文件
+products/
+images/
+image-pipeline/
+xiaohongshu/
+图库/
+chat-history/
+
+# 临时脚本和测试文件
+rrz_*.py
+rrz_*.png
+taobao_*.py
+taobao_*.png
+test_*.py
+*_test.py
+
+# 数据文件
+dashboard/
+data/
+projects/
+
+# Python包
+python-*.pkg
+
+# 其他临时文件
+*.pkg
+current.png
+result.png
+edit_*.png
+fix*.png
+new_*.png
+shop_*.png
+add_*.png
