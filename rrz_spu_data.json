@@ -1,0 +1,296 @@
+{
+  "id": 804995,
+  "name": "90新 苹果 Mac mini M4 2024款 迷你主机",
+  "sub_title": "M4芯片 高性能 低功耗",
+  "condition": 4,
+  "detail": "",
+  "category_id": 395,
+  "brand_id": 26,
+  "spu_model_id": 24635,
+  "cover": "",
+  "scene": 1,
+  "sign": 8,
+  "hint_content": "",
+  "type": 2,
+  "spu_device": null,
+  "spu_target": [
+    {
+      "type": 3,
+      "target_id": 400,
+      "target": "运行内存",
+      "detail": "16GB"
+    },
+    {
+      "type": 3,
+      "target_id": 401,
+      "target": "CPU",
+      "detail": "其他"
+    },
+    {
+      "type": 3,
+      "target_id": 402,
+      "target": "显卡类型",
+      "detail": "集显"
+    },
+    {
+      "type": 3,
+      "target_id": 952,
+      "target": "上市日期",
+      "detail": "2024"
+    },
+    {
+      "type": 3,
+      "target_id": 1040,
+      "target": "处理器",
+      "detail": "Apple M4"
+    },
+    {
+      "type": 3,
+      "target_id": 1041,
+      "target": "硬盘容量",
+      "detail": "256GB"
+    },
+    {
+      "type": 3,
+      "target_id": 1042,
+      "target": "显卡芯片",
+      "detail": "Apple M4 10核GPU"
+    },
+    {
+      "type": 3,
+      "target": "品牌",
+      "detail": "苹果"
+    },
+    {
+      "type": 3,
+      "target": "型号",
+      "detail": "Mac mini（M4）2024款"
+    },
+    {
+      "type": 9,
+      "target": "16:00"
+    },
+    {
+      "type": 10,
+      "target": "明天",
+      "detail": "20:00",
+      "target_id": 2
+    },
+    {
+      "type": 11,
+      "target": "后天",
+      "detail": "20:00",
+      "target_id": 3
+    }
+  ],
+  "accessory_config_type": 1,
+  "spu_package_target_group": [],
+  "spu_ms_info": {
+    "agent_ratio": 20,
+    "sign": 2,
+    "pay_type": 0,
+    "take_point_ids": "",
+    "return_point_ids": "",
+    "trip_type": 1
+  },
+  "spu_port": {
+    "sign": 5
+  },
+  "spu_service": [
+    {
+      "type": 2,
+      "name": "二手台式机赔偿标准",
+      "picture": "https://img1.rrzuji.cn/uploads/scheme/2512/23/o/GRHNwm6TelwkoctpHLSt.png"
+    },
+    {
+      "type": 3,
+      "name": "二手台式机自然损耗标准",
+      "picture": "https://img1.rrzuji.cn/uploads/scheme/2512/03/o/holuhQwIkJZFgjWTMxFy.png"
+    }
+  ],
+  "spu_picture": [],
+  "spu_logistics": [
+    {
+      "type": 1,
+      "pay_type": 1,
+      "express_way": 3,
+      "expense": "",
+      "province": "江苏省",
+      "city": "苏州市",
+      "region": "虎丘区",
+      "address": "江苏省苏州市虎丘区华山路与支英街交汇处 景山玫瑰园1期30栋601室",
+      "shop_address_id": 25353,
+      "region_id": 320505
+    },
+    {
+      "type": 2,
+      "pay_type": 1,
+      "express_way": 3,
+      "expense": "",
+      "province": "江苏省",
+      "city": "苏州市",
+      "region": "虎丘区",
+      "address": "江苏省苏州市高新区景山玫瑰园1期30栋601室",
+      "region_id": 320505,
+      "shop_address_id": 1979,
+      "value_service": 0
+    }
+  ],
+  "sku": [
+    {
+      "id": 8409213,
+      "attribute": [
+        {
+          "type": 1,
+          "title": "租赁方案",
+          "value": "到期须归还",
+          "sort": 1,
+          "sign": 0
+        }
+      ],
+      "rental": [
+        {
+          "rental": "25",
+          "total_rental": "25",
+          "days": 1
+        },
+        {
+          "rental": "23.33",
+          "total_rental": "70",
+          "days": 3
+        },
+        {
+          "rental": "18.57",
+          "total_rental": "130",
+          "days": 7
+        },
+        {
+          "rental": "11.67",
+          "total_rental": "350",
+          "days": 30
+        },
+        {
+          "rental": "10",
+          "total_rental": "900",
+          "days": 90
+        },
+        {
+          "rental": "8.89",
+          "total_rental": "1600",
+          "days": 180
+        },
+        {
+          "rental": "7.67",
+          "total_rental": "2800",
+          "days": 365
+        },
+        {
+          "rental": "6.85",
+          "total_rental": "5000",
+          "days": 730
+        },
+        {
+          "rental": "6.85",
+          "total_rental": "7500",
+          "days": 1095
+        }
+      ],
+      "target": [],
+      "type": 1,
+      "deposit": "3000",
+      "price": "",
+      "ms_price": "",
+      "stock": 5,
+      "status": 10,
+      "sign": 8,
+      "price_model": 4,
+      "sort": 0,
+      "buyout_template": null
+    },
+    {
+      "id": 8409214,
+      "attribute": [
+        {
+          "type": 1,
+          "title": "租赁方案",
+          "value": "到期可归还/续租",
+          "sort": 1,
+          "sign": 0
+        }
+      ],
+      "rental": [
+        {
+          "rental": "30",
+          "total_rental": "30",
+          "days": 1
+        },
+        {
+          "rental": "26.67",
+          "total_rental": "80",
+          "days": 3
+        },
+        {
+          "rental": "21.43",
+          "total_rental": "150",
+          "days": 7
+        },
+        {
+          "rental": "13.33",
+          "total_rental": "400",
+          "days": 30
+        },
+        {
+          "rental": "11.11",
+          "total_rental": "1000",
+          "days": 90
+        },
+        {
+          "rental": "10",
+          "total_rental": "1800",
+          "days": 180
+        },
+        {
+          "rental": "7.67",
+          "total_rental": "2800",
+          "days": 365
+        },
+        {
+          "rental": "7.53",
+          "total_rental": "5500",
+          "days": 730
+        },
+        {
+          "rental": "7.31",
+          "total_rental": "8000",
+          "days": 1095
+        }
+      ],
+      "target": [],
+      "type": 2,
+      "deposit": "3000",
+      "price": "3500",
+      "ms_price": "",
+      "stock": 5,
+      "status": 10,
+      "sign": 10,
+      "price_model": 4,
+      "sort": 1,
+      "buyout_template": null
+    }
+  ],
+  "fix_sku_attr_list": [],
+  "fix_spu_attr_list": [],
+  "server_credential_bind": [],
+  "spu_other_target": [],
+  "spu_diff_price_setting": [],
+  "rent_svc_tag_list": [
+    {
+      "id": 9,
+      "name": "缺货必赔",
+      "detail": "用户在商家发起扣款申请后12小时内支付租金，若后续订单因缺货被取消，平台自动赔付1张优惠券至用户账户。",
+      "h5_url": "/pagesLoad/config-page/config-page?id=25348",
+      "is_required": true,
+      "config_snap_id": 8
+    }
+  ]
+}

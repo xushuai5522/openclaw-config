@@ -1,0 +1,47 @@
+[
+  {
+    "id": "195292",
+    "name": "Apple TV",
+    "found_words": [
+      "最",
+      "第一"
+    ],
+    "status": "needs_fix"
+  },
+  {
+    "id": "195016",
+    "name": "Wacom PTH660",
+    "found_words": [
+      "最",
+      "第一"
+    ],
+    "status": "needs_fix"
+  },
+  {
+    "id": "104113",
+    "name": "PSV",
+    "found_words": [
+      "最",
+      "第一"
+    ],
+    "status": "needs_fix"
+  },
+  {
+    "id": "110557",
+    "name": "索尼镜头",
+    "found_words": [
+      "最",
+      "第一"
+    ],
+    "status": "needs_fix"
+  },
+  {
+    "id": "110560",
+    "name": "适马镜头",
+    "found_words": [
+      "最",
+      "第一"
+    ],
+    "status": "needs_fix"
+  }
+]

@@ -1,0 +1,280 @@
+{
+  "products": [
+    {
+      "date": "2026-02-18T01:39:25.936174",
+      "results": [
+        {
+          "id": "195292",
+          "timestamp": "2026-02-18T01:37:39.783810",
+          "title": "",
+          "subtitle": "",
+          "issues": [],
+          "fixes": [],
+          "status": "submit_failed",
+          "notes": ""
+        },
+        {
+          "id": "195016",
+          "timestamp": "2026-02-18T01:38:02.921738",
+          "title": "",
+          "subtitle": "",
+          "issues": [],
+          "fixes": [],
+          "status": "submit_failed",
+          "notes": ""
+        },
+        {
+          "id": "104113",
+          "timestamp": "2026-02-18T01:38:23.552757",
+          "title": "PSV 2000黑商店 海量游戏免费玩",
+          "subtitle": "PSV 2000黑商店",
+          "issues": [],
+          "fixes": [],
+          "status": "submit_failed",
+          "notes": ""
+        },
+        {
+          "id": "110557",
+          "timestamp": "2026-02-18T01:38:44.389528",
+          "title": "",
+          "subtitle": "",
+          "issues": [],
+          "fixes": [],
+          "status": "submit_failed",
+          "notes": ""
+        },
+        {
+          "id": "110560",
+          "timestamp": "2026-02-18T01:39:04.919510",
+          "title": "适马30-1.4mm 人像专用镜头",
+          "subtitle": "适马30-1.4mm 人像专用镜头",
+          "issues": [],
+          "fixes": [],
+          "status": "submit_failed",
+          "notes": ""
+        }
+      ],
+      "sensitive_words": [
+        "最",
+        "第一",
+        "唯一",
+        "国家级",
+        "最佳",
+        "最专业",
+        "最便宜",
+        "非常完美",
+        "全网最低",
+        "租完即送",
+        "免押",
+        "免息",
+        "分期",
+        "免息分期",
+        "治疗",
+        "减肥减脂",
+        "较新",
+        "一般新",
+        "很新",
+        "全新",
+        "真4K",
+        "真4k",
+        "正品",
+        "原装",
+        "顶级",
+        "顶尖",
+        "极致",
+        "完美",
+        "顶级"
+      ]
+    },
+    {
+      "date": "2026-02-18T01:44:39.214514",
+      "results": [
+        {
+          "id": "195292",
+          "timestamp": "2026-02-18T01:42:40.886732",
+          "title": "Apple TV 7代 4K播放器",
+          "subtitle": "Apple TV 7代 2022 真4K",
+          "issues": [
+            "营销语含敏感词: ['真4K', '真4k']"
+          ],
+          "fixes": [
+            "营销语: Apple TV 7代 2022 真4K -> Apple TV 7代 2022"
+          ],
+          "status": "submit_failed",
+          "notes": ""
+        },
+        {
+          "id": "195016",
+          "timestamp": "2026-02-18T01:43:03.969919",
+          "title": "wacom手绘板pth660 k0中号wacom660数位板",
+          "subtitle": "wacom660数位板",
+          "issues": [],
+          "fixes": [],
+          "status": "submit_failed",
+          "notes": ""
+        },
+        {
+          "id": "104113",
+          "timestamp": "2026-02-18T01:43:29.600749",
+          "title": "PSV 2000黑商店 海量游戏免费玩",
+          "subtitle": "PSV 2000黑商店",
+          "issues": [],
+          "fixes": [],
+          "status": "submit_failed",
+          "notes": ""
+        },
+        {
+          "id": "110557",
+          "timestamp": "2026-02-18T01:43:52.997977",
+          "title": "索尼EF 24-240mm一镜走天下",
+          "subtitle": "E卡口 索尼原装正品",
+          "issues": [
+            "营销语含敏感词: ['正品', '原装']"
+          ],
+          "fixes": [
+            "营销语: E卡口 索尼原装正品 -> E卡口 索尼"
+          ],
+          "status": "submit_failed",
+          "notes": ""
+        },
+        {
+          "id": "110560",
+          "timestamp": "2026-02-18T01:44:16.324560",
+          "title": "适马30-1.4mm 人像专用镜头",
+          "subtitle": "适马30-1.4mm 人像专用镜头",
+          "issues": [],
+          "fixes": [],
+          "status": "submit_failed",
+          "notes": ""
+        }
+      ],
+      "sensitive_words": [
+        "最",
+        "第一",
+        "唯一",
+        "国家级",
+        "最佳",
+        "最专业",
+        "最便宜",
+        "非常完美",
+        "全网最低",
+        "租完即送",
+        "免押",
+        "免息",
+        "分期",
+        "免息分期",
+        "治疗",
+        "减肥减脂",
+        "较新",
+        "一般新",
+        "很新",
+        "全新",
+        "真4K",
+        "真4k",
+        "正品",
+        "原装",
+        "顶级",
+        "顶尖",
+        "极致",
+        "完美",
+        "顶级"
+      ]
+    },
+    {
+      "date": "2026-02-18T01:47:00.849802",
+      "results": [
+        {
+          "id": "195292",
+          "timestamp": "2026-02-18T01:45:04.100626",
+          "title": "Apple TV 7代 4K播放器",
+          "subtitle": "Apple TV 7代 2022 真4K",
+          "issues": [
+            "营销语含敏感词: ['真4K', '真4k']"
+          ],
+          "fixes": [
+            "营销语: Apple TV 7代 2022 真4K -> Apple TV 7代 2022"
+          ],
+          "status": "submit_failed",
+          "notes": ""
+        },
+        {
+          "id": "195016",
+          "timestamp": "2026-02-18T01:45:27.702236",
+          "title": "wacom手绘板pth660 k0中号wacom660数位板",
+          "subtitle": "wacom660数位板",
+          "issues": [],
+          "fixes": [],
+          "status": "submit_failed",
+          "notes": ""
+        },
+        {
+          "id": "104113",
+          "timestamp": "2026-02-18T01:45:51.122259",
+          "title": "PSV 2000黑商店 海量游戏免费玩",
+          "subtitle": "PSV 2000黑商店",
+          "issues": [],
+          "fixes": [],
+          "status": "submit_failed",
+          "notes": ""
+        },
+        {
+          "id": "110557",
+          "timestamp": "2026-02-18T01:46:14.323955",
+          "title": "索尼EF 24-240mm一镜走天下",
+          "subtitle": "E卡口 索尼原装正品",
+          "issues": [
+            "营销语含敏感词: ['正品', '原装']"
+          ],
+          "fixes": [
+            "营销语: E卡口 索尼原装正品 -> E卡口 索尼"
+          ],
+          "status": "submit_failed",
+          "notes": ""
+        },
+        {
+          "id": "110560",
+          "timestamp": "2026-02-18T01:46:37.525162",
+          "title": "适马30-1.4mm 人像专用镜头",
+          "subtitle": "适马30-1.4mm 人像专用镜头",
+          "issues": [],
+          "fixes": [],
+          "status": "submit_failed",
+          "notes": ""
+        }
+      ],
+      "sensitive_words": [
+        "最",
+        "第一",
+        "唯一",
+        "国家级",
+        "最佳",
+        "最专业",
+        "最便宜",
+        "非常完美",
+        "全网最低",
+        "租完即送",
+        "免押",
+        "免息",
+        "分期",
+        "免息分期",
+        "治疗",
+        "减肥减脂",
+        "较新",
+        "一般新",
+        "很新",
+        "全新",
+        "真4K",
+        "真4k",
+        "正品",
+        "原装",
+        "顶级",
+        "顶尖",
+        "极致",
+        "完美",
+        "顶级"
+      ]
+    }
+  ],
+  "rules": [],
+  "notes": []
+}

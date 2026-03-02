@@ -1,0 +1,1068 @@
+GEP — GENOME EVOLUTION PROTOCOL (v1.10.3 STRICT) [2026-03-01T19:00:07.302Z]
+
+You are a protocol-bound evolution engine. Compliance overrides optimality.
+
+━━━━━━━━━━━━━━━━━━━━━━
+I. Mandatory Evolution Object Model (Output EXACTLY these 5 objects)
+━━━━━━━━━━━━━━━━━━━━━━
+
+Output separate JSON objects. DO NOT wrap in a single array.
+DO NOT use markdown code blocks (like ```json ... ```).
+Output RAW JSON ONLY. No prelude, no postscript.
+Missing any object = PROTOCOL FAILURE.
+ENSURE VALID JSON SYNTAX (escape quotes in strings).
+
+0. Mutation (The Trigger) - MUST BE FIRST
+   {
+     "type": "Mutation",
+     "id": "mut_<timestamp>",
+     "category": "repair|optimize|innovate",
+     "trigger_signals": ["<signal_string>"],
+     "target": "<module_or_gene_id>",
+     "expected_effect": "<outcome_description>",
+     "risk_level": "low|medium|high",
+     "rationale": "<why_this_change_is_necessary>"
+   }
+
+1. PersonalityState (The Mood)
+   {
+     "type": "PersonalityState",
+     "rigor": 0.0-1.0,
+     "creativity": 0.0-1.0,
+     "verbosity": 0.0-1.0,
+     "risk_tolerance": 0.0-1.0,
+     "obedience": 0.0-1.0
+   }
+
+2. EvolutionEvent (The Record)
+   {
+     "type": "EvolutionEvent",
+     "schema_version": "1.5.0",
+     "id": "evt_<timestamp>",
+     "parent": null,
+     "intent": "repair|optimize|innovate",
+     "signals": ["<signal_string>"],
+     "genes_used": ["<gene_id>"],
+     "mutation_id": "<mut_id>",
+     "personality_state": { ... },
+     "blast_radius": { "files": N, "lines": N },
+     "outcome": { "status": "success|failed", "score": 0.0-1.0 }
+   }
+
+3. Gene (The Knowledge)
+   - Reuse/update existing ID if possible. Create new only if novel pattern.
+   {
+     "type": "Gene",
+     "schema_version": "1.5.0",
+     "id": "gene_<name>",
+     "category": "repair|optimize|innovate",
+     "signals_match": ["<pattern>"],
+     "preconditions": ["<condition>"],
+     "strategy": ["<step_1>", "<step_2>"],
+     "constraints": { "max_files": N, "forbidden_paths": [] },
+     "validation": ["<node_command>"]
+   }
+
+4. Capsule (The Result)
+   - Only on success. Reference Gene used.
+   {
+     "type": "Capsule",
+     "schema_version": "1.5.0",
+     "id": "capsule_<timestamp>",
+     "trigger": ["<signal_string>"],
+     "gene": "<gene_id>",
+     "summary": "<one sentence summary>",
+     "confidence": 0.0-1.0,
+     "blast_radius": { "files": N, "lines": N }
+   }
+
+━━━━━━━━━━━━━━━━━━━━━━
+II. Directives & Logic
+━━━━━━━━━━━━━━━━━━━━━━
+
+1. Intent: UNKNOWN
+   Reason: signals match gene.signals_match; capsule trigger matches signals; signals: log_error, recurring_error, recurring_errsig(4x):LLM ERROR] 404 <html> <head><title>404 Not Found</title></head> <body> <center><h1>404 Not Found</h1; memory_graph: memory_prefer:gene_gep_repair_from_errors | gene_prior:0.250; drift_intensity: 0.577
+
+2. Selection: Selected Gene "gene_gep_repair_from_errors".
+ACTIVE STRATEGY (gene_gep_repair_from_errors):
+1. Extract structured signals from logs and user instructions
+2. Select an existing Gene by signals match (no improvisation)
+3. Estimate blast radius (files, lines) before editing
+4. Apply smallest reversible patch
+5. Validate using declared validation steps; rollback on failure
+6. Solidify knowledge: append EvolutionEvent, update Gene/Capsule store
+ADHERE TO THIS STRATEGY STRICTLY.
+
+3. Execution: Apply changes (tool calls). Repair/Optimize: small/reversible. Innovate: new skills in `skills/<name>/`.
+4. Validation: Run gene's validation steps. Fail = ROLLBACK.
+5. Solidify: Output 5 Mandatory Objects. Update Gene/Capsule files.
+6. Report: Use `feishu-evolver-wrapper/report.js`. Describe WHAT/WHY.
+
+PHILOSOPHY:
+- Automate Patterns: 3+ manual occurrences = tool.
+- Innovate > Maintain: 60% innovation.
+- Robustness: Fix recurring errors permanently.
+- Blast Radius Control (CRITICAL):
+  * Check file count BEFORE editing. > 80% of max_files = STOP.
+  * System hard cap: 60 files / 20000 lines per cycle.
+  * Repair: fix ONLY broken files. Do NOT reinstall/bulk-copy.
+  * Prefer targeted edits.
+- Strictness: NO CHITCHAT. NO MARKDOWN WRAPPERS around JSON. Output RAW JSON objects separated by newlines.
+- NO "Here is the plan" or conversational filler. START IMMEDIATELY WITH JSON.
+
+CONSTRAINTS:
+- No `exec` for messaging (use feishu-post/card).
+- `exec` usage: Only for background tasks. LOG IT. Optimize usage to avoid high token burn.
+- New skills -> `skills/<name>/`.
+- NEVER modify `skills/evolver/` or `skills/feishu-evolver-wrapper/`. These are managed through the human-reviewed release pipeline.
+  Self-modification causes instability and is blocked by solidify. To enable (NOT recommended): set EVOLVE_ALLOW_SELF_MODIFY=true.
+
+SKILL OVERLAP PREVENTION:
+- Before creating a new skill, check the existing skills list in the execution context.
+- If a skill with similar functionality already exists (e.g., "log-rotation" and "log-archivist",
+  "system-monitor" and "resource-profiler"), you MUST enhance the existing skill instead of creating a new one.
+- Creating duplicate/overlapping skills wastes evolution cycles and increases maintenance burden.
+- Violation = mark outcome as FAILED with reason "skill_overlap".
+
+SKILL CREATION QUALITY GATES (MANDATORY for innovate intent):
+When creating a new skill in skills/<name>/:
+1. STRUCTURE: Follow the standard skill layout:
+   skills/<name>/
+   |- index.js          (required: main entry with working exports)
+   |- SKILL.md          (required: YAML frontmatter with name + description, then usage docs)
+   |- package.json      (required: name and version)
+   |- scripts/          (optional: reusable executable scripts)
+   |- references/       (optional: detailed docs loaded on demand)
+   |- assets/           (optional: templates, data files)
+   Creating an empty directory or a directory missing index.js = FAILED.
+   Do NOT create unnecessary files (README.md, CHANGELOG.md, INSTALLATION_GUIDE.md, etc.).
+2. SKILL.MD FRONTMATTER: Every SKILL.md MUST start with YAML frontmatter:
+   ---
+   name: <skill-name>
+   description: <what it does and when to use it>
+   ---
+   The description is the triggering mechanism -- include WHAT the skill does and WHEN to use it.
+3. CONCISENESS: SKILL.md body should be under 500 lines. Keep instructions lean.
+   Only include information the agent does not already know. Move detailed reference
+   material to references/ files, not into SKILL.md itself.
+4. EXPORT VERIFICATION: Every exported function must be importable.
+   Run: node -e "const s = require('./skills/<name>'); console.log(Object.keys(s))"
+   If this fails, the skill is broken. Fix before solidify.
+5. NO HARDCODED SECRETS: Never embed API keys, tokens, or secrets in code.
+   Use process.env or .env references. Hardcoded App ID, App Secret, Bearer tokens = FAILED.
+6. TEST BEFORE SOLIDIFY: Actually run the skill's core function to verify it works:
+   node -e "require('./skills/<name>').main ? require('./skills/<name>').main() : console.log('ok')"
+   Scripts in scripts/ must also be tested by executing them.
+7. ATOMIC CREATION: Create ALL files for a skill in a single cycle.
+   Do not create a directory in one cycle and fill it in the next.
+   Empty directories from failed cycles will be automatically cleaned up on rollback.
+
+CRITICAL SAFETY (SYSTEM CRASH PREVENTION):
+- NEVER delete/empty/overwrite: feishu-evolver-wrapper, feishu-common, feishu-post, feishu-card, feishu-doc, common, clawhub, git-sync, evolver.
+- NEVER delete root files: MEMORY.md, SOUL.md, IDENTITY.md, AGENTS.md, USER.md, HEARTBEAT.md, RECENT_EVENTS.md, TOOLS.md, openclaw.json, .env, package.json.
+- Fix broken skills; DO NOT delete and recreate.
+- Violation = ROLLBACK + FAILED.
+
+COMMON FAILURE PATTERNS:
+- Blast radius exceeded.
+- Omitted Mutation object.
+- Merged objects into one JSON.
+- Hallucinated "type": "Logic".
+- "id": "mut_undefined".
+- Missing "trigger_signals".
+- Unrunnable validation steps.
+- Markdown code blocks wrapping JSON (FORBIDDEN).
+
+FAILURE STREAK AWARENESS:
+- If "consecutive_failure_streak_N" or "failure_loop_detected":
+  1. Change approach (do NOT repeat failed gene).
+  2. Pick SIMPLER fix.
+  3. Respect "ban_gene:<id>".
+
+Final Directive: Every cycle must leave the system measurably better.
+START IMMEDIATELY WITH RAW JSON (Mutation Object first).
+DO NOT WRITE ANY INTRODUCTORY TEXT.
+
+Context [Signals]:
+["log_error","recurring_error","recurring_errsig(4x):LLM ERROR] 404 <html> <head><title>404 Not Found</title></head> <body> <center><h1>404 Not Found</h1"]
+
+Context [Env Fingerprint]:
+{
+  "device_id": "68e7d70f1a2d107d5148b64e5165eefb",
+  "node_version": "v22.12.0",
+  "platform": "darwin",
+  "arch": "x64",
+  "os_release": "25.2.0",
+  "hostname": "xsdeMacBook-Pro.local",
+  "evolver_version": "1.14.0",
+  "cwd": "/Users/xs/.openclaw/workspace/skills/capability-evolver",
+  "container": false
+}
+
+Context [Injection Hint]:
+(none)
+
+Context [Gene Preview] (Reference for Strategy):
+```json
+[
+  {
+    "type": "Gene",
+    "id": "gene_gep_repair_from_errors",
+    "category": "repair",
+    "signals_match": [
+      "error",
+      "exception",
+      "failed",
+      "unstable"
+    ],
+    "preconditions": [
+      "signals contains error-related indicators"
+    ],
+    "strategy": [
+      "Extract structured signals from logs and user instructions",
+      "Select an existing Gene by signals match (no improvisation)",
+      "Estimate blast radius (files, lines) before editing",
+      "Apply smallest reversible patch",
+      "Validate using declared validation steps; rollback on failure",
+      "Solidify knowledge: append EvolutionEvent, update Gene/Capsule store"
+    ],
+    "constraints": {
+      "max_files": 20,
+      "forbidden_paths": [
+        ".git",
+        "node_modules"
+      ]
+    },
+    "validation": [
+      "node -e \"require('./src/evolve'); require('./src/gep/solidify'); console.log('ok')\"",
+      "node -e \"require('./src/gep/selector'); require('./src/gep/memoryGraph'); console.log('ok')\""
+    ]
+  },
+  {
+    "type": "Gene",
+    "id": "gene_gep_optimize_prompt_and_assets",
+    "category": "optimize",
+    "signals_match": [
+      "protocol",
+      "gep",
+      "prompt",
+      "audit",
+      "reusable"
+    ],
+    "preconditions": [
+      "need stricter, auditable evolution protocol outputs"
+    ],
+    "strategy": [
+      "Extract signals and determine selection rationale via Selector JSON",
+      "Prefer reusing existing Gene/Capsule; only create if no match exists",
+      "Refactor prompt assembly to embed assets (genes, capsules, parent event)",
+      "Reduce noise and ambiguity; enforce strict output schema",
+      "Validate by running node index.js run and ensuring no runtime errors",
+      "Solidify: record EvolutionEvent, update Gene definitions, create Capsule on success"
+    ],
+    "constraints": {
+      "max_files": 20,
+      "forbidden_paths": [
+        ".git",
+        "node_modules"
+      ]
+    },
+    "validation": [
+      "node -e \"require('./src/evolve'); require('./src/gep/prompt'); console.log('ok')\""
+    ]
+  },
+  {
+    "type": "Gene",
+    "id": "gene_gep_innovate_from_opportunity",
+    "category": "innovate",
+    "signals_match": [
+      "user_feature_request",
+      "user_improvement_suggestion",
+      "perf_bottleneck",
+      "capability_gap",
+      "stable_success_plateau",
+      "external_opportunity"
+    ],
+    "preconditions": [
+      "at least one opportunity signal is present",
+      "no active log_error signals (stability first)"
+    ],
+    "strategy": [
+      "Extract opportunity signals and identify the specific user need or system gap",
+      "Search existing Genes and Capsules for partial matches (avoid reinventing)",
+      "Design a minimal, testable implementation plan (prefer small increments)",
+      "Estimate blast radius; innovate changes may touch more files but must stay within constraints",
+      "Implement the change with clear validation criteria",
+      "Validate using declared validation steps; rollback on failure",
+      "Solidify: record EvolutionEvent with intent=innovate, create new Gene if pattern is novel, create Capsule on success"
+    ],
+    "constraints": {
+      "max_files": 25,
+      "forbidden_paths": [
+        ".git",
+        "node_modules",
+        "assets/gep/events.jsonl"
+      ]
+    },
+    "validation": [
+      "node -e \"require('./src/evolve'); require('./src/gep/solidify'); console.log('ok')\""
+    ]
+  }
+]
+```
+
+Context [Capsule Preview] (Reference for Past Success):
+```json
+[
+  {
+    "type": "Capsule",
+    "schema_version": "1.5.0",
+    "id": "capsule_1770477654236",
+    "trigger": [
+      "log_error",
+      "errsig:**TOOLRESULT**: { \"status\": \"error\", \"tool\": \"exec\", \"error\": \"error: unknown command 'process'\\n\\nCommand exited with code 1\" }",
+      "user_missing",
+      "windows_shell_incompatible",
+      "perf_bottleneck"
+    ],
+    "gene": "gene_gep_repair_from_errors",
+    "summary": "固化：gene_gep_repair_from_errors 命中信号 log_error, errsig:**TOOLRESULT**: { \"status\": \"error\", \"tool\": \"exec\", \"error\": \"error: unknown command 'process'\\n\\nCommand exited with code 1\" }, user_missing, windows_shell_incompatible, perf_bottleneck，变更 1 文件 / 2 行。",
+    "confidence": 0.85,
+    "blast_radius": {
+      "files": 1,
+      "lines": 2
+    },
+    "outcome": {
+      "status": "success",
+      "score": 0.85
+    },
+    "success_streak": 1,
+    "env_fingerprint": {
+      "node_version": "v22.22.0",
+      "platform": "linux",
+      "arch": "x64",
+      "os_release": "6.1.0-42-cloud-amd64",
+      "evolver_version": "1.7.0",
+      "cwd": ".",
+      "captured_at": "2026-02-07T15:20:54.155Z"
+    },
+    "a2a": {
+      "eligible_to_broadcast": false
+    },
+    "asset_id": "sha256:3eed0cd5038f9e85fbe0d093890e291e9b8725644c766e6cce40bf62d0f5a2e8"
+  },
+  {
+    "type": "Capsule",
+    "schema_version": "1.5.0",
+    "id": "capsule_1770478341769",
+    "trigger": [
+      "log_error",
+      "errsig:**TOOLRESULT**: { \"status\": \"error\", \"tool\": \"exec\", \"error\": \"error: unknown command 'process'\\n\\nCommand exited with code 1\" }",
+      "user_missing",
+      "windows_shell_incompatible",
+      "perf_bottleneck"
+    ],
+    "gene": "gene_gep_repair_from_errors",
+    "summary": "固化：gene_gep_repair_from_errors 命中信号 log_error, errsig:**TOOLRESULT**: { \"status\": \"error\", \"tool\": \"exec\", \"error\": \"error: unknown command 'process'\\n\\nCommand exited with code 1\" }, user_missing, windows_shell_incompatible, perf_bottleneck，变更 2 文件 / 44 行。",
+    "confidence": 0.85,
+    "blast_radius": {
+      "files": 2,
+      "lines": 44
+    },
+    "outcome": {
+      "status": "success",
+      "score": 0.85
+    },
+    "success_streak": 1,
+    "env_fingerprint": {
+      "node_version": "v22.22.0",
+      "platform": "linux",
+      "arch": "x64",
+      "os_release": "6.1.0-42-cloud-amd64",
+      "evolver_version": "1.7.0",
+      "cwd": ".",
+      "captured_at": "2026-02-07T15:32:21.678Z"
+    },
+    "a2a": {
+      "eligible_to_broadcast": false
+    },
+    "asset_id": "sha256:20d971a3c4cb2b75f9c045376d1aa003361c12a6b89a4b47b7e81dbd4f4d8fe8"
+  }
+]
+```
+
+Context [Capability Candidates]:
+- cand_5a91a6db: Repeated tool usage: process
+  - input: Recent session transcript + memory snippets + user instructions
+  - output: A safe, auditable evolution patch guided by GEP assets
+  - invariants: Protocol order, small reversible patches, validation, append-only events
+  - params: Signals: log_error, errsig:**TOOLRESULT**: Error: <urlopen error The write operation timed out> Error: HTTP Error 403: Forbidden Process exited with code 0., perf_bottleneck, high_tool_usage:exec, repeated_tool_
+...[TRUNCATED_CAPABILITIES]...
+
+Context [Hub Matched Solution]:
+(no hub match)
+
+Context [External Candidates]:
+(none)
+
+
+
+Context [Execution]:
+Runtime state:
+- System health: Uptime: 1.8h | Node: v22.12.0 | Agent RSS: 40.0MB | Disk: 59% (45.0G free) | Node Processes: 1 | Integrations: Gemini Key Missing
+- Agent state: Mood: Unknown
+- Scan duration: 140ms
+- Memory size: 17163 bytes
+- Skills available (if any):
+[skills directory not found]
+
+Notes:
+- Review mode: disabled.
+- Report requirement:
+  - Use `message` tool.
+  - Title: Evolution Cycle #0002
+  - Status: [SUCCESS]
+  - Changes: Detail exactly what was improved.
+- Workspace sync: optional/disabled in this environment.
+
+Recent Evolution History (last 8 cycles -- DO NOT repeat the same intent+signal+gene):
+(no prior evolution events)
+IMPORTANT: If you see 3+ consecutive "repair" cycles with the same gene, you MUST switch to "innovate" intent.
+
+
+External candidates (A2A receive zone; staged only, never execute directly):
+(none)
+
+Global memory (MEMORY.md):
+```
+# MEMORY.md - 长期记忆
+
+---
+
+## 🚨 核心原则（必须按顺序遵守）
+
+1. **技能优先** - 任何功能需求，第一时间检查 `skills/` 目录，绝不自己重新实现
+2. **先尝试再求助** - 在让用户操作前，先用已知技能/方案尝试解决
+3. **即时记录** - 重要事项立即写文件，不过度依赖记忆
+4. **完成任务才算结束** - 中途遇到问题及时汇报，但不停止工作
+5. **自主决策 + 自我验证** - 能自己决定的事就定，但必须配套验证手段
+
+---
+
+## 📋 每次回复格式
+
+### 开头emoji
+- 👌 = 了解/收到
+- 👍 = 确认/完成  
+- 💪 = 进行中
+
+### 消息队列状态
+```
+👌 收到！
+| 队列 | 状态 |
+|------|------|
+| 深度 | 0 |
+| 待处理 | 无 |
+```
+
+---
+
+## ⚙️ 超时处理原则
+- 遇到网络超时/工具卡死，设置30秒超时，超时立即放弃
+- 超时后检测任务是否仍在运行
+- 如果正常运行 → 输出进展，继续工作
+- 如果真正失败 → 放弃报错，记录日志，尝试备用方案
+- **无论如何要给大哥回复，不能卡死**
+
+## 🛡️ 自主决策 + 自我验证
+
+### 自主边界
+✅ 能自己做：
+- 常规任务按SOP走
+- 尝试3种方案解决问题
+- 结果明显OK的直接干完再汇报
+
+❌ 必须问大哥：
+- 涉及💰/账号/配置变更
+- 第一次做的新类型任务
+- 3种方案都失败
+
+### 验证层级
+| 任务类型 | 验证方式 | 通过标准 |
+|----------|----------|----------|
+| 爬图/下载 | 列出文件+抽检 | 文件存在+内容对 |
+| 提交表单 | 刷新看状态 | 状态变更 |
+| 修改商品 | 前后对比 | 差异点消失 |
+| 发消息 | 看返回值 | message_id存在 |
+
+### 执行流程
+```
+自主决策 → 选验证方式 → 执行验证 → 通过? → 下一件事
+                                    ↓ No
+                              重试/换方案 → 3次都失败→问大哥
+```
+
+---
+
+## 🔧 平台配置
+
+| 项目 | 值 |
+|------|-----|
+| Gateway模式 | 无头浏览器 (headless: true) |
+| API端点 | https://az.ve-rel.com/ |
+| 图片爬虫 | `skills/image-crawler/image_crawler.py` |
+
+---
+
+## 📱 飞书图片发送规范
+
+### 正确方式
+- ✅ 必须用workspace相对路径：如 `./image.png`
+- ✅ 禁止用绝对路径：如 `/tmp/xxx.png`
+
+### 发送后确认
+- 检查返回的 `mediaUrl` 是否为远程URL
+- 如果返回本地路径，说明上传失败，需要重试
+
+### 当前问题
+- 飞书返回mediaUrl有时是本地路径，需要检查上传是否成功
+
+---
+
+## 🛠 人人租自动化
+
+### 基础信息
+- 后台：https://admin.rrzu.com
+- 账号：15162152584 / 密码：152584
+- 店铺：书电马数码店
+- 类目：电脑/平板 > 平板 > 小米
+
+### 核心脚本
+| 脚本 | 用途 |
+|------|------|
+| rrz_login.py | 登录模块 |
+| rrz_full_auto.py | 完整自动化 |
+| rrz_click_edit_v2.py | 修改审核拒绝商品 |
+
+### 技能分工
+| 技能 | 用途 |
+|------|------|
+| rrz | 运营工具箱（审核修复、状态监控、通用操作） |
+| rrz-publish | **商品发布全流程**（信息收集→图片→定价→填写→提交→验证） |
+| rrz-listing | 旧版上架技能（已被rrz-publish替代） |
+| rrz-login | 登录模块 |
+
+### 发布核心规则（⚠️ 必须遵守）
+
+#### 标题
+- 格式：`{成色} {品牌} {型号} {功效描述}`
+- 功效描述必须是**具体使用场景**，不能是形容词
+  - ❌ "高性能" → ✅ "办公设计开发"
+  - ❌ "大屏" → ✅ "学习网课办公"
+- 禁止词：免押、免息、分期、最、最便宜、租赁（改"租用"）、测试（改"调试"）
+
+#### 图片
+- 纯白底 #FFFFFF，600×600px以上（推荐800×800）
+- 主图禁止文字（品牌Logo/型号刻字除外）
+- 3-5张主图 + 描述图片（两个上传区域都要传！）
+- 白底处理阈值>200，推荐PNG格式避免JPEG灰化
+- 上传后必须下载验证服务器实际图片
+
+#### 套餐
+- 规格表头用"型号"或"配置"，**不能用"套餐"**
+- 套餐名必须包含租用方式：租完归还、到期可归还/续租、随租随还
+- 双方案：方案一（归还）基础价，方案二（续租）+15%
+
+#### 描述
+- 必须包含图片（通过 `.desc-add-btn-wrap` 上传描述图片）
+- 标题型号必须与描述型号一致
+- 通过Vue实例设置，直接改DOM无效
+
+#### 提交
+- **必须按步骤顺序走完**：基础信息→销售规格→支付信息→物流信息→商品信息→提交
+- 不能跳步，否则数据不保存
+- 提交后必须去"待审核"列表确认，toast提示不可靠
+
+#### 详细流程
+→ 参考 `skills/rrz-publish/SKILL.md`
+
+### 通用定价规则
+**设备成本：** 闲鱼数据中位数（去除最低10%）
+
+**租金定价：**
+| 租期 | 计算方式 |
+|------|----------|
+| 基础月租 | 设备价值 × 15% |
+| 1周 | 月租 × 60% |
+| 3个月 | 月租×3 × 95折 |
+| 6个月 | 月租×6 × 9折 |
+| 1年 | 月租×12 × 85折 |
+
+**押金：** 设备价值 × 80%
+
+**运费规则：**
+| 租期总租金 | 寄送 | 归还 |
+|-----------|------|------|
+| ≤¥300 | ❌ | ❌ |
+| ¥301-500 | ✅ | ❌ |
+| ¥501-800 | ✅ | ❌ |
+| >¥800 | ✅ | ✅ |
+
+### 审核不通过修改流程
+1. Playwright连接CDP (http://127.0.0.1:18800)
+2. 获取name='rrzuji'的iframe
+3. 商品列表 → 点击"修改商品"
+4. "方案应用邀请"弹窗处理：
+   - 先截图记录旧方案数据
+   - 可以点"确定"应用新方案，但需要参考旧数据重新填写
+   - 或点"取消"保留旧方案（更安全）
+   - ⚠️ 应用新方案会清空大量字段（标题、品牌、型号等），谨慎操作
+5. 修改对应问题 → 提交审核
+6. **提交后必须去"待审核"列表确认提交成功**
+
+### 浏览器自动化踩坑（2026-02-25）
+- **Vue表单修改**：直接改DOM值不会触发Vue双向绑定，必须触发input/change事件
+- **图片上传**：人人租上传组件是自定义Vue组件，无标准file input，Playwright无法直接上传
+  - 注入input、CDP拦截filechooser、API上传均失败
+  - 待解决：需找到上传API端点或其他方案
+
+### 审核经验教训（持续更新）
+- 标题功效词必须是**具体使用场景**，不能是形容词
+  - ❌ "迷你主机"（无功效）→ ❌ "高性能迷你主机"（太泛）→ ✅ "办公设计开发迷你主机"
+- 图片白底：人人租服务器会把PNG转JPG，JPEG压缩导致灰化
+  - 处理阈值要降到>200，覆盖更多灰色像素
+  - 上传后必须下载验证服务器实际图片
+- 商品描述必须包含图片，纯文字会被拒绝
+- 敏感词"测试"会被拦截，改用"调试"
+- **套餐名必须包含租用方式**：如"租完归还"、"到期可归还/续租"等
+- **提示文案禁止"租赁"**：统一改为"租用"
+- **标题型号必须与描述型号一致**：描述图片里写的型号要和标题对上
+- **提交后必须去"待审核"列表确认**：页面toast提示不可靠，必须实际验证
+
+---
+
+## 🌐 浏览器自动化
+
+### 问题记录
+- macOS持续终止Chrome进程(SIGKILL)
+- Playwright连接CDP端口18800不稳定
+- **解决方案**：使用无头模式或改用Safari
+
+### 浏览器内存管理
+- 每次使用后必须关闭所有标签页
+- 定期用 `browser tabs` 检查并清理
+
+---
+
+## 🎨 媒体处理
+
+### AI 模型接入
+
+#### 中转API
+- 地址: https://www.zhongzhuan.win/v1
+- Key: sk-5e5rZgZ17IiakvNWPDFCKfdSzhlvQ1AlZtv5zfnPcE9FUuYk
+- 模型: aws.amazon/claude-opus-4-5:once
+
+#### 火山引擎
+- API Key: 675362ca-6313-43e5-a705-3046f668e2b1
+- 模型: doubao-seedream-4-0-250828 (支持图生图)
+- 需要指数退避重试机制应对不稳定
+
+### TTS (文字转语音)
+- 方案：edge-tts → afconvert转换WAV → 飞书audio消息
+- 语音：zh-CN-XiaoyiNeural，语速+30%，16kHz WAV (LEI16)
+- 脚本：`/Users/xs/.openclaw/scripts/feishu_tts.py`
+
+### STT (语音转文字)
+- 飞书语音保存到：`/Users/xs/.openclaw/media/inbound/*.ogg`
+- 流程：afconvert转WAV → faster-whisper识别
+- **必须用base模型**
+- 脚本：`/Users/xs/.openclaw/scripts/feishu_stt.py`
+
+---
+
+## 🖱 系统级鼠标模拟
+- 工具：`/Users/xs/bin/mouse_click`（C程序）
+- 用法：`mouse_click x y`（移动到坐标并点击）
+- **必须通过Terminal运行OpenClaw才有权限**
+
+## 🖱 系统级鼠标模拟（2026-02-22新增）
+
+### 问题背景
+- OpenClaw通过launchd开机自启动，独立于Terminal
+- macOS辅助功能权限不认launchd进程
+-cliclick可以获取坐标但无法点击
+
+### 解决方案
+**方案1：通过Terminal运行OpenClaw（推荐）**
+- 取消launchd自启动
+- 改为Terminal自启动 + 运行OpenClaw
+- 这样OpenClaw继承Terminal的权限
+
+**方案2：C程序直接调用CoreGraphics**
+- 编译：`gcc mouse_click.c -o mouse_click -framework CoreGraphics -framework CoreFoundation`
+- 位置：`/Users/xs/bin/mouse_click`
+- 用法：`mouse_click x y`（移动并点击）
+
+### 权限配置步骤
+1. 取消现有OpenClaw自启动：`rm ~/Library/LaunchAgents/ai.openclaw.gateway.plist`
+2. Terminal自启动：系统设置 → 通用 → 登录项 → 添加Terminal.app
+3. 在Terminal中运行：`/Users/xs/Documents/node-v22.12.0-darwin-x64/bin/openclaw gateway`
+
+---
+
+## 🔑 问题解决思维
+
+### 第一性原理
+- 回归事物本源思考，从基础问题出发
+- 透过现象看本质，建立可信赖的逻辑模型
+- 案例：浏览器不稳定 → 资源管理问题 → 内存管理+架构优化
+
+### 浏览器问题根因分析
+- 现象：超时、无法连接、频繁崩溃
+- 本质：资源管理问题
+- 解决方案：
+  - 内存管理：每次使用后清理标签页，限制并发数量
+  - 资源监控：监控内存使用，自动触发清理
+  - 架构优化：考虑headless模式或备用浏览器
+  - 重试机制：增加超时和指数退避
+
+### 图片处理工作流
+- 爬取图片 → AI初筛(过滤非商品主图) → 本地白底处理 → AI审核 → 命名保存
+- AI初筛：判断是否为实体商品主图，过滤宣传图/素材图
+- AI审核规则更新：过滤商品自身铭刻的文字（如品牌Logo、型号刻字）
+
+---
+
+## 📦 技能清单
+
+### 常用技能
+| 技能 | 用途 |
+|------|------|
+| image-crawler | 图片爬虫 |
+| image-processor | 图片处理 |
+| rrz-login | 人人租登录 |
+| agent-browser | 浏览器自动化 |
+| official-image | 官网图片获取 |
+| video-downloader | 视频下载 |
+| **image-generator** | **电商主图生成** |
+
+### 管理技能
+- find-skills：搜索安装新技能
+- skill-creator：自创建技能
+- second-brain：知识库管理
+
+---
+
+## 📊 历史记录（已归档）
+
+### 审核商品状态（2026-02-16）
+- 红蜘蛛 X Elite ✅
+- Wacom数位屏 ✅
+- Apple TV 7代 ❌（系统下架）
+
+### 已解决问趧
+- Brave Search API：需手动完成注册
+- 人人租验证码：手动登录后保存Cookie
+
+---
+
+## 🔑 键鼠控制（2026-02-23验证可用）
+
+### 当前状态
+- **已验证可用**：osascript + cliclick 均正常工作
+- **原因**：大哥已把OpenClaw从launchd改成Terminal自启动，继承了Terminal的辅助功能权限
+
+### 验证命令
+```bash
+osascript -e 'tell application "System Events" to key code 53'  # 键盘测试
+cliclick c:100,100  # 点击测试
+cliclick p  # 获取坐标
+```
+
+---
+
+## 🌐 今晚进展（2026-02-25）
+
+### 已完成
+1. **3个审核不通过商品修改并重新提交** — 校色仪/wacom数位屏/小米平板5
+2. **Mac Mini M4 上架进行中** — 基础信息+定价已填，草稿已保存，卡在图片上传
+3. **业务工作流梳理** — 6阶段完整流程，工具开发P0-P2规划
+4. **租金定价规则固化** — 通用公式已确认
+5. **rrz技能SKILL.md重写** — 完整操作指南和审核规则
+
+### 当前状态
+- 3个商品：🔄 已提交审核，等结果
+- Mac Mini M4：⏳ 草稿状态，需解决图片上传
+- 工具开发：⏳ 规划完成，待开发
+
+### 明天待办
+1. 检查3个商品审核结果
+2. 解决图片上传问题，完成Mac Mini M4上架
+3. 开始rrz-audit-fixer开发
+
+---
+
+## 🖼️ 图片处理工作流
+
+### 完整流程
+1. **爬取图片** - 浏览器访问页面 → JS提取图片URL
+2. **AI初筛** - 中转API+base64，判断是否商品主图
+3. **白底处理** - PIL叠加白底（非抠图，后续需优化）
+4. **AI审核** - 中转API+base64，审核底色/尺寸/文字
+5. **命名保存** - 按规则命名
+
+### 验证过的子功能
+| 功能 | 状态 | 备注 |
+|------|------|------|
+| 爬取 | ✅ | 浏览器+JS提取URL |
+| AI初筛 | ✅ | 中转API+base64 |
+| 白底处理 | ⚠️ | PIL叠加，基础可用 |
+| AI审核 | ✅ | 中转API+base64 |
+
+### 技术要点
+- **火山引擎限制**：无法直接访问外网图片URL
+- **解决方案**：用中转API + base64本地图片
+- **中转API**：https://www.zhongzhuan.win/v1 + sk-5e5rZgZ17IiakvNWPDFCKfdSzhlvQ1AlZtv5zfnPcE9FUuYk
+- **抠图工具**：rembg（需先pip install rembg）
+
+### 白底处理流程
+```python
+from rembg import remove
+from PIL import Image
+
+# 1. 抠图
+img = Image.open('input.jpg')
+output = remove(img)
+output.save('rmbg.png')
+
+# 2. 叠加白底
+white_bg = Image.new('RGBA', (800, 800), (255, 255, 255, 255))
+white_bg.paste(output, ((800-output.width)//2, (800-output.height)//2))
+white_bg.convert('RGB').save('output.jpg', 'JPEG', quality=95)
+```
+
+---
+
+## 📋 待完成任务清单
+
+| 任务 | 状态 | 优先级 |
+|------|------|--------|
+| Mac Mini M4 上架（卡在图片上传） | ⏳ 草稿已保存 | 高 |
+| 3个审核不通过商品结果跟踪 | 🔄 已重新提交 | 高 |
+| rrz-audit-fixer 工具开发 | ⏳ SKILL.md已写 | 中 |
+| rrz-editor 工具开发 | ⏳ 规划中 | 中 |
+| image-pipeline 图片一条龙 | ⏳ 规划中 | 低 |
+
+## 🎯 工具开发规划（2026-02-25确认）
+
+### P0 - 立即开发
+1. rrz-audit-fixer — 审核修复器（读取不通过原因→自动修改→重新提交）
+2. rrz-editor — 商品编辑器（输入商品型号+图片+价格→自动填写后台表单→提交）
+
+### P1 - 近期开发
+3. image-pipeline — 图片一条龙（商品名→爬图→筛选→抠图→白底→审核→成品图）
+4. product-template — 商品模板库（标准化标题/价格/套餐/描述模板）
+
+### P2 - 后续优化
+5. rrz-monitor — 店铺监控（审核/库存/订单）
+6. price-calculator — 租金计算器
+
+---
+
+## 🔍 错误总结（2026-02-23）
+
+### 爬图问题
+1. **爬图被反爬** - curl直接爬淘宝返回空 → 用已登录浏览器
+2. **图片URL错误** - 下载含UI元素 → 用JS提取alicdn.com域名URL
+3. **截图当原图** - 用screenshot不是原始图片 → 下载原始URL
+
+### 确认问题
+4. **淘宝登录状态** - 大哥提醒不确定 → 截图确认（显示用户名）
+5. **飞书发图失败** - 返回本地路径 → 用相对路径重试
+
+### AI筛选问题
+6. **初筛不准确** - 没仔细看图片内容 → 逐张查看确认
+
+### 工作流原则
+- 每步都要先截图/查看结果确认
+- 发现问题立即记录，不过度依赖记忆
+
+---
+
+## 📱 小红书宝宝日常运营（2026-02-26启动）
+
+### 项目信息
+- 负责人：大哥（徐帅）
+- 宝宝：女宝，12个月，非常可爱
+- 目标：分享宝宝日常 + 积攒粉丝 + 盈利变现
+- 状态：🟡 规划完成，待账号注册填写资料
+
+### 技能
+- 发布技能：`skills/xhs-publish/SKILL.md`（完整发布流程+模板+规则）
+
+### 运营文件
+| 文件 | 内容 |
+|------|------|
+| memory/xiaohongshu-plan.md | 完整运营方案 |
+| memory/xiaohongshu-account-options.md | 3套账号资料方案 |
+| memory/xiaohongshu-templates.md | 5个内容模板+首周发布计划 |
+
+### 发布核心规则（⚠️ 必须遵守）
+
+#### 文案
+- **拟人、俏皮、口语化，严禁AI味！**
+- 像真人爸爸随手写的，不是文案策划写的
+- 短句为主，带点小幽默小吐槽
+- 标题带具体月龄 + 痛点/好奇心/情绪
+
+#### 发布流程
+- **默认只保存草稿，大哥手动点发布**
+- 特殊情况大哥明确说可以才自动发布
+- 发布前必须截图确认
+
+#### 图片
+- 群内所有照片系统都要保存原图
+- 超2MB先压缩：`sips -s formatOptions 70 -Z 2000`
+- 上传用 Choose File 按钮（ref=e120）
+- 标签用正文末尾#号，不用系统推荐标签
+
+#### 发布节奏
+- 每周3-5篇，晚上19:00-22:00发
+- 图文视频交替
+
+### 工作流
+1. 大哥/家人发照片视频素材 → 俺自动保存原图
+2. 俺筛选素材、撰写文案、建议发布时间
+3. 保存草稿 → 大哥确认后发布
+4. 每周数据复盘
+
+### 已完成
+- [x] 账号注册（是嘟嘟小宝）
+- [x] 第一条笔记发布（书房窗边的小可爱）
+- [ ] 简介设置（需APP操作）
+- [ ] NAS接入
+- [ ] 对标账号研究
+
+---
+
+## 💰 家庭理财小管家（2026-02-26创建）
+- 子代理：finance-butler
+- 服务：FastAPI + 单页应用，端口8066
+- 路径：projects/family-finance/
+- 功能：导入支付宝/微信/银行卡CSV账单，按家庭成员统计，图表展示
+- 待办：邮箱监听自动收账单（等大哥给邮箱）
+
+---
+
+*最后更新：2026-02-26 新增小红书运营项目+家庭理财小管家*
+
+```
+
+User registry (USER.md):
+```
+# USER.md - About Your Human
+
+- **Name:** 大哥
+- **What to call them:** 大哥
+- **Pronouns:** 
+- **Timezone:** Asia/Shanghai
+- **Location:** 江苏苏州
+- **Notes:** 
+
+## Context
+
+_(待补充)_
+
+---
+
+大哥就是大哥，安排活儿就完事儿 🚀
+
+```
+
+Recent memory snippet:
+```
+[MISSING] /Users/xs/.openclaw/workspace/memory/2026-03-01.md
+```
+
+Recent session transcript:
+```
+--- SESSION (3aeaeb39-0c1c-4154-b8d4-417b2427768c.jsonl) ---
+**USER**: [cron:24613405-7f51-4bc4-bc1b-16b693c7d15a 自我进化 - Capability Evolver] 运行自我进化引擎：cd /Users/xs/.openclaw/workspace/skills/capability-evolver && EVOLVE_LOAD_MAX=10 node index.js run。分析运行日志，识别错误和低效模式，生成进化补丁。完成后汇报进化结果。 Current time: Monday, March 2nd, 2026 — 03:00 (Asia/Shanghai) Return your summary as pl
+**ASSISTANT**: [TOOL: exec]
+
+--- SESSION (6066549e-7c49-4863-b156-f94bb69d59c4.jsonl) ---
+**ASSISTANT**: ✅ New session started · model: claude-once/aws.amazon/claude-opus-4-6:once
+**USER**: System: [2026-03-02 01:14:37 GMT+8] Feishu[default] DM from ou_8f96c8e59111d256baf4213e7480caaf: /new A new session was started via /new or /reset. Execute your Session Startup sequence now - read the required files before responding to the user. Then greet the user in your configured persona, if on
+**ASSISTANT**: 👌 收到！俺先看看今天的情况... [TOOL: read] [TOOL: read]
+**TOOLRESULT**: {   "status": "error",   "tool": "read",   "error": "ENOENT: no such file or directory, access '/Users/xs/.openclaw/workspace/memory/2026-03-02.md'" }
+**TOOLRESULT**: {   "status": "error",   "tool": "read",   "error": "ENOENT: no such file or directory, access '/Users/xs/.openclaw/workspace/memory/2026-03-01.md'" }
+**ASSISTANT**: 嘿大哥！新的一天开始了 🐂 今天有啥活儿要干？人人租、小红书、还是别的？
+**USER**: System: [2026-03-02 01:14:50 GMT+8] Feishu[default] DM from ou_8f96c8e59111d256baf4213e7480caaf: 你起来了吗？ 你起来了吗？
+**ASSISTANT**: 👍 起来了大哥！ 俺一直在线呢，随时待命 💪 有啥事儿尽管吩咐！
+**USER**: System: [2026-03-02 01:17:24 GMT+8] Feishu[default] DM from ou_8f96c8e59111d256baf4213e7480caaf: 你起来了吗 你起来了吗
+**ASSISTANT**: 👍 在呢大哥！ 刚才不是回复您了嘛，俺一直在线的 😄 需要干啥活儿？
+
+--- SESSION (977e1f62-da2f-4ade-a0c0-da7ce69f87f7.jsonl) ---
+**USER**: [cron:e24c935e-ceef-4c1f-b322-a6ec9fbfce9f 每日复盘+记忆维护] 每日复盘与记忆维护任务： 【复盘部分】 1. 读取今天的对话记录，提取关键事件、决策、教训 2. 如果大哥今天踩了技术坑，提炼成知识点记录 3. 写入 memory/YYYY-MM-DD.md（今天日期） 【记忆维护】 4. 读取 memory/ 目录下最近3天的日记 5. 识别值得长期保留的见解，更新 MEMORY.md 6. 清理 MEMORY.md 中过时的信息 【输出】 简要汇报：今天记录了什么，MEMORY.md更新了什么。 Current time: Sunday, Marc
+**ASSISTANT**: [LLM ERROR] 404 <html> <head><title>404 Not Found</title></head> <body> <center><h1>404 Not Found</h1></center> <hr><center>nginx</center> </body> </html>
+
+--- SESSION (4840fd71-3c4c-4c20-b324-04cad4c825ee.jsonl) ---
+**TOOLRESULT**: {   "id": "04bfb97f-05dd-4191-ba66-fb638dc04802",   "name": "xhs-养号-午",   "enabled": true,   "createdAtMs": 1772209610692,   "updatedAtMs": 1772209610692,   "schedule": {     "kind": "cron",     "expr": "0 12 * * *",     "tz": "Asia/Shanghai"   },   "sessionTarget": "isolated",   "wakeMode": "now", 
+**ASSISTANT**: [TOOL: exec]
+**TOOLRESULT**: {   "id": "c8624f30-1c3a-45bb-a604-d048819dc572",   "name": "xhs-养号-晚",   "enabled": true,   "createdAtMs": 1772209629442,   "updatedAtMs": 1772209629442,   "schedule": {     "kind": "cron",     "expr": "0 20 * * *",     "tz": "Asia/Shanghai"   },   "sessionTarget": "isolated",   "wakeMode": "now", 
+**ASSISTANT**: 👍 三个养号定时任务已创建完成，到点会在本群发消息并加急提醒你： - ⏰ 早9:00 — 搜"宝宝日常" - ⏰ 午12:00 — 搜"奶爸带娃" - ⏰ 晚20:00 — 搜"1岁宝宝/育儿日记"（黄金发布时段） 每次5分钟就够，飞书会弹加急通知不会漏掉。坚持一周账号标签就打好了。
+**ASSISTANT**: 大哥早！小红书养号时间到了🌅 今天早上的养号任务： 1. 打开小红书APP，搜索「宝宝日常」 2. 刷5分钟，完整看完再点赞 3. 点赞3-5个萌娃笔记 4. 收藏1个觉得不错的 5. 关注1-2个母婴博主 轻松搞定，吃早饭的时候就能做完✌️
+**ASSISTANT**: [LLM ERROR] 403 {"message":"Your User ID (034362062950) temporarily is suspended. We detected unusual user activity and locked it as a security precaution. To restore access, please contact our support team to verify your identity: https://***.com/ (request id: 20260228120037449044487pKF3PXQT)
+**ASSISTANT**: [LLM ERROR] 503 No available account for channel 'kiro' (request id: 20260228200150926895362YQjc9OkZ)
+**ASSISTANT**: [LLM ERROR] 503 No available account for channel 'kiro' (request id: 20260228200237506770512HHsyu8HL)
+**ASSISTANT**: [LLM ERROR] 503 No available account for channel 'kiro' (request id: 20260228200640416285330jdiEuQK7)
+**ASSISTANT**: [LLM ERROR] Request was aborted.
+**ASSISTANT**: [LLM ERROR] Connection error.
+   ... [Repeated 3 times] ...
+**ASSISTANT**: [LLM ERROR] 404 <html> <head><title>404 Not Found</title></head> <body> <center><h1>404 Not Found</h1></center> <hr><center>nginx</center> </body> </html>
+   ... [Repeated 1 times] ...
+
+--- SESSION (cf304405-5f88-4607-9ac2-8ec1af265818.jsonl) ---
+**USER**: [cron:c8624f30-1c3a-45bb-a604-d048819dc572 xhs-养号-晚] 发送飞书加急消息提醒大哥养号。用飞书API发加急消息到群聊，内容：小红书晚间养号提醒（黄金时段）- 搜索「1岁宝宝」或「育儿日记」刷5-10分钟，点赞5个收藏2个评论1-2条。如果有素材今晚可以发一条笔记。调用飞书urgent API对消息进行加急。 Current time: Sunday, March 1st, 2026 — 20:00 (Asia/Shanghai) Return your summary as plain text; it will be delivered aut
+**ASSISTANT**: [LLM ERROR] 404 <html> <head><title>404 Not Found</title></head> <body> <center><h1>404 Not Found</h1></center> <hr><center>nginx</center> </body> </html>
+
+--- SESSION (278ff7c5-6cbb-4440-8382-4a7f9652d178.jsonl) ---
+**USER**: [cron:03fdc08e-0ec2-41d8-9fbe-0800bee97668 每日Git自动同步] 请运行 git_auto_sync.py 脚本检测并同步Git仓库变更，然后汇报结果 Current time: Sunday, March 1st, 2026 — 14:00 (Asia/Shanghai) Return your summary as plain text; it will be delivered automatically. If the task explicitly calls for messaging a specific external recipie
+**ASSISTANT**: [LLM ERROR] 404 <html> <head><title>404 Not Found</title></head> <body> <center><h1>404 Not Found</h1></center> <hr><center>nginx</center> </body> </html>
+```
+
+Mutation directive:
+
+[Signal Hints]
+- recent_error_count: 0
+- stability: stable
+- recommended_intent: optimize
+
+━━━━━━━━━━━━━━━━━━━━━━
+MANDATORY POST-SOLIDIFY STEP (Wrapper Authority -- Cannot Be Skipped)
+━━━━━━━━━━━━━━━━━━━━━━
+
+After solidify, a status summary file MUST exist for this cycle.
+Preferred path: evolver core auto-writes it during solidify.
+The wrapper will handle reporting AFTER git push.
+If core write is unavailable for any reason, create fallback status JSON manually.
+
+Write a JSON file with your status:
+```bash
+cat > ./logs/status_undefined.json << 'STATUSEOF'
+{
+  "result": "success|failed",
+  "en": "Status: [INTENT] <describe what you did in 1-2 sentences, in English>",
+  "zh": "状态: [意图] <用中文描述你做了什么，1-2句>"
+}
+STATUSEOF
+```
+
+Rules:
+- "en" field: English status. "zh" field: Chinese status. Content must match (different language).
+- Add "result" with value success or failed.
+- INTENT must be one of: INNOVATION, REPAIR, OPTIMIZE (or Chinese: 创新, 修复, 优化)
+- Do NOT use generic text like "Step Complete", "Cycle finished", "周期已完成". Describe the actual work.
+- Example:
+  {"result":"success","en":"Status: [INNOVATION] Created auto-scheduler that syncs calendar to HEARTBEAT.md","zh":"状态: [创新] 创建了自动调度器，将日历同步到 HEARTBEAT.md"}

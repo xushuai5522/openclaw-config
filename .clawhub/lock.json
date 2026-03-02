@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "skills": {
+    "apple-notes": {
+      "version": "1.0.0",
+      "installedAt": 1771477095379
+    },
+    "apple-reminders": {
+      "version": "1.0.0",
+      "installedAt": 1771477146881
+    },
+    "things-mac": {
+      "version": "1.0.0",
+      "installedAt": 1771477207659
+    },
+    "github": {
+      "version": "1.0.0",
+      "installedAt": 1771477216279
+    },
+    "weather": {
+      "version": "1.0.0",
+      "installedAt": 1771477224937
+    },
+    "obsidian": {
+      "version": "1.0.0",
+      "installedAt": 1771477253910
+    },
+    "notion": {
+      "version": "1.0.0",
+      "installedAt": 1771477261391
+    },
+    "summarize": {
+      "version": "1.0.0",
+      "installedAt": 1771477266594
+    },
+    "peekaboo": {
+      "version": "1.0.0",
+      "installedAt": 1771478184873
+    },
+    "gsd": {
+      "version": "1.0.1",
+      "installedAt": 1771828762521
+    },
+    "flow": {
+      "version": "0.1.4",
+      "installedAt": 1771828782864
+    },
+    "debug-pro": {
+      "version": "1.0.0",
+      "installedAt": 1771828810703
+    },
+    "capability-evolver": {
+      "version": "1.14.0",
+      "installedAt": 1771828823419
+    }
+  }
+}
