@@ -51,3 +51,5 @@ fix*.png
 new_*.png
 shop_*.png
 add_*.png
+.memory_index/
+*.pkl
