@@ -5,6 +5,14 @@ metadata: {
   "openclaw": {
     "emoji": "🛡️",
     "os": ["darwin", "linux"],
+
+## 快速参考
+- **触发词**: 提示词防护、安全检查
+- **核心功能**: 防御prompt注入攻击
+- **适用场景**: 多语言检测、安全防护
+
+---
+
     "requires": {
       "bins": [],
       "env": []

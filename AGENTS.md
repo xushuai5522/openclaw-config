@@ -57,6 +57,48 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 - `trash` > `rm` (recoverable beats gone forever)
 - When in doubt, ask.
 
+### 🔒 敏感配置修改安全规则（防止把自己改崩）
+
+**口令触发：当大哥说"替我回顾"时，自动执行以下流程**
+
+**敏感操作定义（必须走安全流程）：**
+- 修改 `~/.openclaw/openclaw.json`
+- 修改 channel 配置（Telegram、Discord、飞书等）
+- 升级 OpenClaw 或插件
+- 修改 SSH、DNS、代理、网络配置
+- 任何可能导致 gateway 重启失败的操作
+
+**标准安全流程（3步走）：**
+
+1. **备份当前配置**
+   ```bash
+   cp ~/.openclaw/openclaw.json ~/.openclaw/openclaw.json.backup-$(date +%Y%m%d-%H%M%S)
+   ```
+
+2. **设置5分钟后提醒**
+   ```bash
+   echo "osascript -e 'display notification \"OpenClaw配置已修改，请确认是否正常\" with title \"配置变更提醒\"'" | at now + 5 minutes
+   ```
+
+3. **执行修改 + 等待确认**
+   - 执行修改操作
+   - 告知大哥："已完成修改，5分钟后会提醒您确认。如果一切正常，说'确认'；如果有问题，说'回滚'我立即恢复备份。"
+   - 等待大哥确认，不要继续其他敏感操作
+
+**回滚命令（出问题时）：**
+```bash
+# 列出最近的备份
+ls -lt ~/.openclaw/openclaw.json.backup-* | head -5
+
+# 恢复最新备份
+cp ~/.openclaw/openclaw.json.backup-YYYYMMDD-HHMMSS ~/.openclaw/openclaw.json
+
+# 重启 gateway
+openclaw gateway restart
+```
+
+**记住：宁可多问一句，不要把自己改挂。备份是最后的救命稻草。**
+
 ## External vs Internal
 
 **Safe to do freely:**

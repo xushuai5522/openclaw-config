@@ -1,50 +1,40 @@
 ---
 name: apple-notes
-description: Manage Apple Notes via the `memo` CLI on macOS (create, view, edit, delete, search, move, and export notes). Use when a user asks Clawdbot to add a note, list notes, search notes, or manage note folders.
-homepage: https://github.com/antoniorodr/memo
-metadata: {"clawdbot":{"emoji":"📝","os":["darwin"],"requires":{"bins":["memo"]},"install":[{"id":"brew","kind":"brew","formula":"antoniorodr/memo/memo","bins":["memo"],"label":"Install memo via Homebrew"}]}}
+description: Manage Apple Notes via the `memo` CLI on macOS (create, view, edit, delete, search, move, and export notes).
 ---
 
-# Apple Notes CLI
+# Apple Notes
 
-Use `memo notes` to manage Apple Notes directly from the terminal. Create, view, edit, delete, search, move notes between folders, and export to HTML/Markdown.
+## 快速参考
+- **触发词**: 备忘录、笔记、Apple Notes
+- **核心命令**: `memo create`, `memo list`, `memo search`
+- **依赖**: memo CLI (macOS)
 
-Setup
-- Install (Homebrew): `brew tap antoniorodr/memo && brew install antoniorodr/memo/memo`
-- Manual (pip): `pip install .` (after cloning the repo)
-- macOS-only; if prompted, grant Automation access to Notes.app.
+## 使用示例
 
-View Notes
-- List all notes: `memo notes`
-- Filter by folder: `memo notes -f "Folder Name"`
-- Search notes (fuzzy): `memo notes -s "query"`
+### 创建笔记
+```bash
+memo create "会议记录" "今天讨论了项目进度，下周一交付第一版"
+```
 
-Create Notes
-- Add a new note: `memo notes -a`
-  - Opens an interactive editor to compose the note.
-- Quick add with title: `memo notes -a "Note Title"`
+### 搜索笔记
+```bash
+memo search "项目"
+```
 
-Edit Notes
-- Edit existing note: `memo notes -e`
-  - Interactive selection of note to edit.
+### 列出所有笔记
+```bash
+memo list
+memo list --folder "工作"
+```
 
-Delete Notes
-- Delete a note: `memo notes -d`
-  - Interactive selection of note to delete.
+### 导出笔记
+```bash
+memo export "会议记录" --format markdown
+```
 
-Move Notes
-- Move note to folder: `memo notes -m`
-  - Interactive selection of note and destination folder.
-
-Export Notes
-- Export to HTML/Markdown: `memo notes -ex`
-  - Exports selected note; uses Mistune for markdown processing.
-
-Limitations
-- Cannot edit notes containing images or attachments.
-- Interactive prompts may require terminal access.
-
-Notes
-- macOS-only.
-- Requires Apple Notes.app to be accessible.
-- For automation, grant permissions in System Settings > Privacy & Security > Automation.
+## 使用场景
+- 快速记录想法
+- 会议记录
+- 待办事项
+- 知识收集

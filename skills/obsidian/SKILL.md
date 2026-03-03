@@ -5,6 +5,14 @@ homepage: https://help.obsidian.md
 metadata: {"clawdbot":{"emoji":"💎","requires":{"bins":["obsidian-cli"]},"install":[{"id":"brew","kind":"brew","formula":"yakitrak/yakitrak/obsidian-cli","bins":["obsidian-cli"],"label":"Install obsidian-cli (brew)"}]}}
 ---
 
+
+## 快速参考
+- **触发词**: Obsidian、Markdown笔记
+- **核心功能**: 管理Obsidian vault
+- **依赖**: obsidian-cli
+
+---
+
 # Obsidian
 
 Obsidian vault = a normal folder on disk.

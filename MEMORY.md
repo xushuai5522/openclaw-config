@@ -215,6 +215,23 @@
 - 每次使用后必须关闭所有标签页
 - 定期用 `browser tabs` 检查并清理
 
+### 人人租自动化技术债务（2026-03-03）
+**问题：**
+- CDP连接不稳定，频繁断开（ProtocolError: Page.handleJavaScriptDialog）
+- 页面弹窗干扰导致连接中断
+- 编辑页面在新标签页打开，但iframe加载检测失败
+- API需要特殊认证，Cookie方式无法访问
+
+**临时方案：**
+- 手动操作 + 脚本辅助
+- 或使用已打开的编辑页面批量处理
+
+**待优化方向：**
+1. 研究人人租前端代码，找到稳定的API调用方式
+2. 开发Chrome扩展直接注入页面操作
+3. 使用Puppeteer替代Playwright测试稳定性
+4. 增加更完善的错误重试和页面状态检测机制
+
 ---
 
 ## 🎨 媒体处理
@@ -271,6 +288,27 @@
 1. 取消现有OpenClaw自启动：`rm ~/Library/LaunchAgents/ai.openclaw.gateway.plist`
 2. Terminal自启动：系统设置 → 通用 → 登录项 → 添加Terminal.app
 3. 在Terminal中运行：`/Users/xs/Documents/node-v22.12.0-darwin-x64/bin/openclaw gateway`
+
+---
+
+## 🔒 防止AI把自己改崩（2026-03-02学习）
+
+### 问题根源
+AI改配置把自己搞挂，根本原因：**AI在敏感目录的操作权限太大**
+
+### 解决方案（已实施）
+1. **口令触发** - 大哥说"替我回顾"时，自动执行安全流程
+2. **标准流程** - 备份 → 设5分钟提醒 → 修改 → 等待确认
+3. **敏感操作** - openclaw.json、channel配置、升级、SSH/DNS/代理等
+
+### 学习来源
+- 抖音视频：Lando的AI实践《OpenClaw总把自己改崩我用一招解决》
+- 已写入 AGENTS.md 的 Safety 章节
+
+### 省Token技巧（本次实践）
+- 用 snapshot(compact=true) 获取文字内容，比 screenshot 省很多token
+- 只在关键页截图确认，其他页直接读文字
+- 多页图文：先snapshot看页码，再逐页翻阅
 
 ---
 

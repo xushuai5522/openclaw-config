@@ -1,0 +1,194 @@
+{
+  "workspace": "/Users/xs/.openclaw/workspace",
+  "skills_dir": "/Users/xs/.openclaw/workspace/skills",
+  "total": 30,
+  "skills": [
+    {
+      "name": "agent-browser",
+      "path": "skills/agent-browser",
+      "skill_md": "skills/agent-browser/SKILL.md",
+      "description": "浏览器自动化 - 无头浏览器控制，AI Agent专用"
+    },
+    {
+      "name": "image-pipeline",
+      "path": "skills/image-pipeline",
+      "skill_md": "skills/image-pipeline/SKILL.md",
+      "description": ""
+    },
+    {
+      "name": "peekaboo",
+      "path": "skills/peekaboo",
+      "skill_md": "skills/peekaboo/SKILL.md",
+      "description": "Capture and automate macOS UI with the Peekaboo CLI."
+    },
+    {
+      "name": "qmd",
+      "path": "skills/qmd",
+      "skill_md": "skills/qmd/SKILL.md",
+      "description": "超省token模式 - 快速响应、语义搜索、减少输出"
+    },
+    {
+      "name": "rrz-login",
+      "path": "skills/rrz-login",
+      "skill_md": "skills/rrz-login/SKILL.md",
+      "description": ""
+    },
+    {
+      "name": "prompt-guard",
+      "path": "skills/prompt-guard",
+      "skill_md": "skills/prompt-guard/SKILL.md",
+      "description": "提示词防护 - 防御prompt注入攻击，多语言检测"
+    },
+    {
+      "name": "system-diagnosis",
+      "path": "skills/system-diagnosis",
+      "skill_md": "skills/system-diagnosis/SKILL.md",
+      "description": ""
+    },
+    {
+      "name": "xhs-video-pipeline",
+      "path": "skills/xhs-video-pipeline",
+      "skill_md": "skills/xhs-video-pipeline/SKILL.md",
+      "description": "小红书视频制作流水线。协调视频分析、脚本撰写、剪辑、音频处理四个角色协同工作。当用户提到制作视频、剪辑视频、视频发布时激活。"
+    },
+    {
+      "name": "deep-research",
+      "path": "skills/deep-research",
+      "skill_md": "skills/deep-research/SKILL.md",
+      "description": "深度研究 - 复杂多步研究任务，长上下文推理"
+    },
+    {
+      "name": "summarize",
+      "path": "skills/summarize",
+      "skill_md": "skills/summarize/SKILL.md",
+      "description": "Summarize URLs or files with the summarize CLI (web, PDFs, images, audio, YouTube)."
+    },
+    {
+      "name": "find-skills",
+      "path": "skills/find-skills",
+      "skill_md": "skills/find-skills/SKILL.md",
+      "description": "技能搜索与安装 - 从48000+技能中快速找到最合适的并一键安装"
+    },
+    {
+      "name": "rrz-publish",
+      "path": "skills/rrz-publish",
+      "skill_md": "skills/rrz-publish/SKILL.md",
+      "description": "人人租商品发布全流程。从商品信息收集、图片处理、定价计算到后台表单填写、提交审核的完整自动化。当用户提到发布商品、上架、新品上架时激活。"
+    },
+    {
+      "name": "finance-butler",
+      "path": "skills/finance-butler",
+      "skill_md": "skills/finance-butler/SKILL.md",
+      "description": "家庭理财小管家 - 主动记账、支出分析、预算管理。当用户提到记账、花了多少钱、收入、支出、预算、账单、理财时激活此技能。"
+    },
+    {
+      "name": "notion",
+      "path": "skills/notion",
+      "skill_md": "skills/notion/SKILL.md",
+      "description": "Notion API for creating and managing pages, databases, and blocks."
+    },
+    {
+      "name": "apple-reminders",
+      "path": "skills/apple-reminders",
+      "skill_md": "skills/apple-reminders/SKILL.md",
+      "description": "Manage Apple Reminders via the `remindctl` CLI on macOS."
+    },
+    {
+      "name": "github",
+      "path": "skills/github",
+      "skill_md": "skills/github/SKILL.md",
+      "description": "\"Interact with GitHub using the `gh` CLI. Use `gh issue`, `gh pr`, `gh run`, and `gh api` for issues, PRs, CI runs, and advanced queries.\""
+    },
+    {
+      "name": "things-mac",
+      "path": "skills/things-mac",
+      "skill_md": "skills/things-mac/SKILL.md",
+      "description": "Manage Things 3 via the `things` CLI on macOS (add/update projects+todos via URL scheme; read/search/list from the local Things database). Use when a user asks Clawdbot to add a task to Things, list inbox/today/upcoming, search tasks, or inspect projects/areas/tags."
+    },
+    {
+      "name": "rrz",
+      "path": "skills/rrz",
+      "skill_md": "skills/rrz/SKILL.md",
+      "description": "人人租商家后台运营工具箱。商品管理、审核修复、状态监控。当用户提到人人租、商品上架、审核修改、套餐管理时激活此技能。"
+    },
+    {
+      "name": "n8n-workflow-automation",
+      "path": "skills/n8n-workflow-automation",
+      "skill_md": "skills/n8n-workflow-automation/SKILL.md",
+      "description": "n8n工作流自动化 -设计和输出n8n工作流JSON文件"
+    },
+    {
+      "name": "gsd",
+      "path": "skills/gsd",
+      "skill_md": "skills/gsd/SKILL.md",
+      "description": "Get Shit Done - Full project planning and execution workflow. Handles project initialization with deep context gathering, automated research, roadmap creation, phase planning, and execution with verification."
+    },
+    {
+      "name": "weather",
+      "path": "skills/weather",
+      "skill_md": "skills/weather/SKILL.md",
+      "description": "Get current weather and forecasts (no API key required)."
+    },
+    {
+      "name": "obsidian",
+      "path": "skills/obsidian",
+      "skill_md": "skills/obsidian/SKILL.md",
+      "description": "Work with Obsidian vaults (plain Markdown notes) and automate via obsidian-cli."
+    },
+    {
+      "name": "web-copy",
+      "path": "skills/web-copy",
+      "skill_md": "skills/web-copy/SKILL.md",
+      "description": ""
+    },
+    {
+      "name": "task-planning",
+      "path": "skills/task-planning",
+      "skill_md": "skills/task-planning/SKILL.md",
+      "description": "任务规划与拆分 - 复杂任务拆解为可执行的小步骤"
+    },
+    {
+      "name": "apple-notes",
+      "path": "skills/apple-notes",
+      "skill_md": "skills/apple-notes/SKILL.md",
+      "description": "Manage Apple Notes via the `memo` CLI on macOS (create, view, edit, delete, search, move, and export notes)."
+    },
+    {
+      "name": "humanizer",
+      "path": "skills/humanizer",
+      "skill_md": "skills/humanizer/SKILL.md",
+      "description": "去除AI味 - 识别和修复AI写作风格，让文字更自然像人写"
+    },
+    {
+      "name": "ai-meta",
+      "path": "skills/ai-meta",
+      "skill_md": "skills/ai-meta/SKILL.md",
+      "description": ""
+    },
+    {
+      "name": "xhs-publish",
+      "path": "skills/xhs-publish",
+      "skill_md": "skills/xhs-publish/SKILL.md",
+      "description": "小红书内容发布与维护。笔记创建、素材管理、文案撰写、发布流程、数据复盘。当用户提到小红书、发笔记、发帖、红书运营时激活。"
+    },
+    {
+      "name": "video-toolkit",
+      "path": "skills/video-toolkit",
+      "skill_md": "skills/video-toolkit/SKILL.md",
+      "description": ""
+    },
+    {
+      "name": "flow",
+      "path": "skills/flow",
+      "skill_md": "skills/flow/SKILL.md",
+      "description": "Intelligent skill orchestrator that compiles natural language requests into secure, reusable workflows"
+    }
+  ],
+  "core_skills": [
+    "rrz",
+    "rrz-publish",
+    "xhs-publish",
+    "image-generator",
+    "finance-butler"
+  ]
+}

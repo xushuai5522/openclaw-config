@@ -5,6 +5,14 @@ homepage: https://developers.notion.com
 metadata: {"clawdbot":{"emoji":"📝"}}
 ---
 
+
+## 快速参考
+- **触发词**: Notion、笔记、数据库
+- **核心功能**: 创建页面、管理数据库
+- **依赖**: Notion API
+
+---
+
 # notion
 
 Use the Notion API to create/read/update pages, data sources (databases), and blocks.

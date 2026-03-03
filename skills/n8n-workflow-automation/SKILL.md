@@ -5,6 +5,14 @@ metadata: {
   "openclaw": {
     "emoji": "🔄",
     "os": ["darwin", "linux"],
+
+## 快速参考
+- **触发词**: n8n、工作流自动化
+- **核心功能**: 设计和输出n8n工作流JSON
+- **适用场景**: 自动化业务流程
+
+---
+
     "requires": {
       "bins": [],
       "env": []

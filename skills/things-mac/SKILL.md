@@ -5,6 +5,14 @@ homepage: https://github.com/ossianhempel/things3-cli
 metadata: {"clawdbot":{"emoji":"✅","os":["darwin"],"requires":{"bins":["things"]},"install":[{"id":"go","kind":"go","module":"github.com/ossianhempel/things3-cli/cmd/things@latest","bins":["things"],"label":"Install things3-cli (go)"}]}}
 ---
 
+
+## 快速参考
+- **触发词**: Things、待办事项
+- **核心功能**: 管理Things 3任务
+- **依赖**: things CLI (macOS)
+
+---
+
 # Things 3 CLI
 
 Use `things` to read your local Things database (inbox/today/search/projects/areas/tags) and to add/update todos via the Things URL scheme.

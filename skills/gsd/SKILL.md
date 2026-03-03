@@ -5,6 +5,14 @@ user-invocable: true
 ---
 
 <objective>
+
+## 快速参考
+- **触发词**: 项目管理、GSD、Get Shit Done
+- **核心功能**: 项目规划、任务拆解、执行跟踪
+- **适用场景**: 完整项目从0到1
+
+---
+
 GSD (Get Shit Done) provides a complete workflow for taking projects from idea to execution through systematic planning, research, and phase-based development.
 
 **Full workflow port from Claude Code** - Includes:

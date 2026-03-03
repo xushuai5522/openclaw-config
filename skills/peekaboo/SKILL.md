@@ -5,6 +5,14 @@ homepage: https://peekaboo.boo
 metadata: {"clawdbot":{"emoji":"👀","os":["darwin"],"requires":{"bins":["peekaboo"]},"install":[{"id":"brew","kind":"brew","formula":"steipete/tap/peekaboo","bins":["peekaboo"],"label":"Install Peekaboo (brew)"}]}}
 ---
 
+
+## 快速参考
+- **触发词**: macOS UI自动化、屏幕控制
+- **核心功能**: 捕获和自动化macOS UI
+- **依赖**: Peekaboo CLI
+
+---
+
 # Peekaboo
 
 Peekaboo is a full macOS UI automation CLI: capture/inspect screens, target UI

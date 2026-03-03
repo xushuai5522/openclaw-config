@@ -15,6 +15,66 @@ metadata: {
 
 # Agent Browser - 浏览器自动化
 
+## 快速参考
+
+- **触发词**: 浏览器自动化、网页操作、爬虫
+- **核心功能**: 导航、点击、输入、截图、内容提取
+- **依赖**: Playwright、Chrome/Chromium
+
+---
+
+## 使用示例
+
+### 示例1: 登录网站
+```bash
+# 打开登录页
+browser open --url "https://example.com/login"
+
+# 输入用户名密码
+browser type --selector "input[name='username']" --text "user@example.com"
+browser type --selector "input[name='password']" --text "password123"
+
+# 点击登录按钮
+browser click --selector "button[type='submit']"
+
+# 等待跳转
+browser wait --selector ".dashboard"
+
+# 截图确认
+browser screenshot
+```
+
+### 示例2: 表单填写
+```bash
+# 填写多个字段
+browser type --selector "#name" --text "张三"
+browser type --selector "#phone" --text "13800138000"
+browser type --selector "#email" --text "test@example.com"
+
+# 选择下拉框
+browser select --selector "#city" --value "苏州"
+
+# 勾选复选框
+browser check --selector "#agree"
+
+# 提交表单
+browser click --selector "#submit"
+```
+
+### 示例3: 内容抓取
+```bash
+# 获取页面结构
+browser snapshot
+
+# 提取特定内容
+browser evaluate --script "document.querySelector('.price').textContent"
+
+# 批量提取
+browser evaluate --script "Array.from(document.querySelectorAll('.item')).map(el => el.textContent)"
+```
+
+---
+
 ## 技能说明
 
 快速的无头浏览器自动化CLI，支持AI Agent通过结构化命令导航、点击、输入和截图。

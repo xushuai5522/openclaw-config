@@ -1,0 +1,16 @@
+# Skills配置文件 - 供子代理读取
+# 主代理自动生成，请勿手动编辑
+
+export SKILLS_DIR=/Users/xs/.openclaw/workspace/skills
+export SKILLS_INDEX=/Users/xs/.openclaw/workspace/skills-index.json
+
+# 核心技能列表
+export CORE_SKILLS='rrz rrz-publish xhs-publish image-generator finance-butler'
+
+# 所有可用技能
+export AVAILABLE_SKILLS='agent-browser image-pipeline peekaboo qmd rrz-login prompt-guard system-diagnosis xhs-video-pipeline deep-research summarize find-skills rrz-publish finance-butler notion apple-reminders github things-mac rrz n8n-workflow-automation gsd weather obsidian web-copy task-planning apple-notes humanizer ai-meta xhs-publish video-toolkit flow'
+
+# 使用方法：
+# source ~/.openclaw/workspace/.skillsrc
+# echo \$SKILLS_DIR
+# cat \$SKILLS_INDEX | jq '.skills[] | select(.name==\"rrz\")'

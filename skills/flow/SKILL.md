@@ -3,6 +3,13 @@ name: flow
 description: Intelligent skill orchestrator that compiles natural language requests into secure, reusable workflows
 ---
 
+## 快速参考
+- **触发词**: 工作流、自动化流程、批量任务
+- **核心功能**: 自然语言编译为工作流、技能编排
+- **适用场景**: 复杂多步任务自动化
+
+---
+
 ---
 summary: Intelligent skill orchestrator that compiles natural language requests into secure, reusable workflows
 tags:
