@@ -1,0 +1,1062 @@
+<html lang="zh-CN"><head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="max-age=300">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="/images/title-icon/rrzuji-icon.ico" rel="icon" type="image/x-icon">
+    <link href="/images/title-icon/rrzuji-icon.ico" rel="shortcut icon" type="image/x-icon">
+    <meta name="csrf-param" content="_csrf">
+<meta name="csrf-token" content="IFVR-tIalk5aTYQ-zVXRmh2Nj3bfy07Fy2GGkZg1VSEVNGCitEL9IGo93U-iA5XrU9-6BLW_LaO_UtPZ2VgFRA==">
+    <title>人人租 - 一站式全品类信用免押租用服务平台</title>
+    <meta name="keywords" content="人人租，互联网租用，复印机租用，打印机租用，工程机租用，一体机租用，彩色复印机租用、电脑租用，投影仪租用，净水机租用，办公设备出租，机器租借平台">
+<meta name="description" content="人人租(rrzu.com)-基于信用大数据、区块链技术为企业和个人提供一站式信用免押租用服务，现覆盖电脑办公设备、手机数码、家居家电、智能硬件、健康护理、旅游户外等200个行业，服务250个城市，致力于为企业提供轻资产运营服务，为个人和家庭提供以租代购全新消费方式。 -复印机租用、打印机租用、电脑出租、投影仪租用、一体机租用等办公设备。机器共享出租行业领先者，工程机械租用、舞台设备租用、工业机器租用、无人机租用、机器人出租等专业设备机器租用平台！">
+<link href="/js/iview/style/iview.css" rel="stylesheet">
+<link href="/assets/1a557da2/css/bootstrap.css" rel="stylesheet">
+<link href="/css/site.css" rel="stylesheet">    <!--[if lt IE 9]>
+    <script src="/js/bootstrap/html5shiv.js"></script>
+    <script src="/js/bootstrap/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .flex-wrap {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        }
+        .flex-con {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        flex: 1;
+        }
+        .flex-vertical {
+        -webkit-box-orient: vertical;
+        -webkit-flex-flow: column;
+        flex-flow: column;
+        }
+        .flex-direction-column {
+        -webkit-box-orient: vertical;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+        }
+        .flex-con {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        flex: 1;
+        }
+        .flex-box {
+        flex-shrink: 0;
+        flex-grow: 0;
+        }
+        .flex-vertical {
+        -webkit-box-orient: vertical;
+        -webkit-flex-flow: column;
+        flex-flow: column;
+        }
+        .flex-x-center {
+        justify-content: center;
+        -webkit-justify-content: center;
+        -webkit-box-pack: center;
+        }
+        .flex-x-end {
+        justify-content: flex-end;
+        -webkit-justify-content: flex-end;
+        -webkit-box-pack: end;
+        }
+        .flex-x-justify {
+        -webkit-justify-content: space-between;
+        justify-content: space-between;
+        -webkit-box-pack: justify;
+        }
+        .flex-y-start {
+        align-items: flex-start;
+        -webkit-align-items: flex-start;
+        -webkit-box-align: start;
+        }
+        .flex-y-center {
+        align-items: center;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        }
+        .flex-y-end {
+        align-items: flex-end;
+        -webkit-align-items: flex-end;
+        -webkit-box-align: end;
+        }
+        .flex-stretch {
+        align-items: stretch;
+        -webkit-align-items: stretch;
+        -webkit-box-align: stretch;
+        }
+    </style>
+</head>
+<body>
+
+<script src="https://zz.bdstatic.com/linksubmit/push.js"></script><script src="/js/vue/vue.min.js"></script>
+<script src="/js/iview/iview.min.js"></script>
+<script src="/lib/buried/data.analysis.sdk.min.umd.js"></script>
+
+<script>
+    var serverUrl;
+    var bindServerUrl;
+    if ("www.rrzu.com" === location.host || "admin.rrzu.com" === location.host) {
+        serverUrl = "https://data-analysis.rrzu.com/data-analysis/api/event/batch"
+        bindServerUrl = "https://data-analysis.rrzu.com/data-analysis/api/event/bind";
+    } else if (location.host.includes('test')) {
+        serverUrl = "https://data-analysis-2.rrzuji.com/data-analysis/api/event/batch"
+        bindServerUrl = "https://data-analysis-2.rrzuji.com/data-analysis/api/event/bind";
+    } else {
+        serverUrl = "https://dev1-data-analysis.rrzuji.com/data-analysis/api/event/batch"
+        bindServerUrl = "https://dev1-data-analysis.rrzuji.com/data-analysis/api/event/bind";
+    }
+    window.sensors.init({
+        serverUrl,
+        bindServerUrl
+    });
+</script>
+
+
+
+<div id="server-login-wrap" class="new-server-login"><div class="header"><div class="warning"><div class="warning-box ivu-alert ivu-alert-warning ivu-alert-with-icon"><span class="ivu-alert-icon"><i class="ivu-icon ivu-icon-ios-alert"></i></span> <span class="ivu-alert-message">
+                记住登录天数已修改为3天，若检测风险操作行为会强制重新登录账号，优化问题可点击右上角反馈
+            </span> <span class="ivu-alert-desc"></span> <a class="ivu-alert-close"><i class="ivu-icon ivu-icon-ios-close"></i></a></div></div> <img src="https://img1.rrzuji.cn/uploads/scheme/2409/06/m/UvxoRkOUfvBDc8PaaVW1.png" class="logo"> <div class="improved"><img src="https://img1.rrzuji.cn/uploads/scheme/2408/16/m/Xtv8R2D5l5rhpeOPy8zr.png" class="icon"> <div class="text">“登录页”改进建议</div></div></div> <div class="ivu-row"><div class="col-content ivu-col ivu-col-span-sm-13 ivu-col-span-lg-13"><div class="content-left"><div class="image-content"><img src="https://img1.rrzuji.cn/uploads/scheme/2412/07/m/GebmyU6XlvfSeNiPLHJv.png" class="img-left"> <img src="https://img1.rrzuji.cn/uploads/scheme/2412/07/m/5iNPA2mfdE9Ro4BLWPMw.png" class="img"> <img src="https://img1.rrzuji.cn/uploads/scheme/2412/07/m/1DhvNVEDX2cni1aee26r.png" class="img-right"> <img src="https://img1.rrzuji.cn/uploads/scheme/2412/07/m/0iRYKHojGZvIpGE4WUGY.png" class="img-right2"></div></div></div> <div class="col-content ivu-col ivu-col-span-sm-11 ivu-col-span-lg-11"><div class="server-login-card"><div class="ivu-tabs ivu-tabs-no-animation"><div class="ivu-tabs-bar"><!----> <div tabindex="0" class="ivu-tabs-nav-container"><div class="ivu-tabs-nav-wrap" style="position: relative;"><span class="ivu-tabs-nav-prev ivu-tabs-nav-scroll-disabled"><i class="ivu-icon ivu-icon-ios-arrow-back"></i></span> <span class="ivu-tabs-nav-next ivu-tabs-nav-scroll-disabled"><i class="ivu-icon ivu-icon-ios-arrow-forward"></i></span> <div class="ivu-tabs-nav-scroll"><div class="ivu-tabs-nav"><div class="ivu-tabs-ink-bar" style="visibility: visible; width: 112px; left: 0px;"></div> <div class="ivu-tabs-tab ivu-tabs-tab-active ivu-tabs-tab-focused"><!----> 短信登录 <!----></div><div class="ivu-tabs-tab"><!----> 密码登录 <!----></div><div class="ivu-tabs-tab"><!----> 扫码登录 <!----></div></div></div><object tabindex="-1" type="text/html" data="about:blank" style="display: block; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; border: none; padding: 0px; margin: 0px; opacity: 0; z-index: -1000; pointer-events: none;"></object></div></div></div> <div class="ivu-tabs-content" style="transform: translateX(0%) translateZ(0px);"><div class="ivu-tabs-tabpane" style="visibility: visible;"></div> <div class="ivu-tabs-tabpane" style="visibility: hidden; display: none;"></div> <div class="ivu-tabs-tabpane" style="visibility: hidden; display: none;"></div></div></div> <div><form autocomplete="off" class="from ivu-form ivu-form-label-right"><div class="ivu-form-item"><!----> <div class="ivu-form-item-content"><div class="ivu-input-wrapper ivu-input-wrapper-default ivu-input-type-text"><!----> <!----> <i class="ivu-icon ivu-icon-ios-loading ivu-load-loop ivu-input-icon ivu-input-icon-validate"></i> <input autocomplete="off" spellcheck="false" type="text" placeholder="请输入手机号码" class="ivu-input ivu-input-default"> <!----></div> <!----></div></div> <div class="ivu-form-item ivu-form-item-required"><!----> <div class="ivu-form-item-content"><div class="form-code-content"><div class="ivu-input-wrapper ivu-input-wrapper-default ivu-input-type-text" style="width: 281px; margin-right: 16px;"><!----> <!----> <i class="ivu-icon ivu-icon-ios-loading ivu-load-loop ivu-input-icon ivu-input-icon-validate"></i> <input autocomplete="off" spellcheck="false" type="text" placeholder="请输入短信验证码" class="ivu-input ivu-input-default"> <!----></div> <div class="code-btn">获取验证码</div></div> <!----></div></div> <!----></form> <div class="auto-wrap"><div><label class="ivu-checkbox-wrapper ivu-checkbox-wrapper-checked ivu-checkbox-default"><span class="ivu-checkbox ivu-checkbox-checked"><span class="ivu-checkbox-inner"></span> <input type="checkbox" class="ivu-checkbox-input"></span> <!----></label> <span class="auto-label">记住登录3天</span></div> <div class="forget">手机号丢失/不再使用？</div></div> <div class="protocol"><label class="ivu-checkbox-wrapper ivu-checkbox-default"><span class="ivu-checkbox"><span class="ivu-checkbox-inner"></span> <input type="checkbox" class="ivu-checkbox-input"></span> <!----></label>
+                        已经阅读并同意<span class="link">《隐私协议》</span></div> <button type="button" class="submit-btn ivu-btn ivu-btn-primary"><!----> <!----> <span>登 录</span></button></div> <div class="other-login"><div class="other-login-text">第三方登录</div> <div class="other-login-content"><div class="other-login-item"><img src="https://img1.rrzuji.cn/uploads/scheme/2211/25/m/uMd6XEHwdAbcNhD91WqM.png" alt="" class="other-login-logo"> <div class="other-login-text">微信</div></div> <div class="other-login-item"><img src="https://img1.rrzuji.cn/uploads/scheme/2211/25/m/TiWP8p97zqIOUny42Qap.png" alt="" class="other-login-logo"> <div class="other-login-text">支付宝</div></div></div></div></div></div></div></div>
+
+
+
+<script>
+    window.g_config = window.g_config || {};
+    g_config._csrf = 'IFVR-tIalk5aTYQ-zVXRmh2Nj3bfy07Fy2GGkZg1VSEVNGCitEL9IGo93U-iA5XrU9-6BLW_LaO_UtPZ2VgFRA==';
+    window.g_domain = {
+        back: 'https://admin.rrzu.com',
+        front: 'https://www.rrzu.com',
+        current: '/auth/server-login'
+    }
+
+    let times = null;
+    let codeStatusTimes = null;
+    let sec = 60;
+    document.addEventListener("DOMContentLoaded", function() {
+        var vm = new Vue({
+            el: "#server-login-wrap",
+            data() {
+                const rReg = /^1[3-9]\d{9}$/;
+                const validatePass = (rule, value, callback) => {
+                    if(!value){
+                        callback(new Error('手机号码不能为空！'));
+                    }
+                    else if (!(rReg.test(value))) {
+                        callback(new Error('手机号码格式有误！'));
+                    } else {
+                        callback();
+                    }
+                };
+                return {
+                    loginType: 'smsLogin',
+                    codeBtnText: '获取验证码',
+                    formData:{
+                        phone: '',
+                        code: '',
+                        password: ''
+                    },
+                    ruleValidate: {
+                        phone: [
+                            { validator: validatePass,trigger:'submit' }
+                        ],
+                        code: [
+                            { required: true, message: '请输入验证码！',trigger:'submit' }
+                        ],
+                        password: [
+                            { required: true, message: '请输入密码！',trigger:'submit'}
+                        ],
+                    },
+                    isAuto:false,
+                    agreementCheck: false,
+                    hasClick:true,
+                    codeErrorText:'',
+                    passwordErrorText:'',
+                    qrCodeUrl:'',
+                    qrCodeToken:'',
+                    // 扫码状态、0未扫码，1已扫码，2确认登录、3已过期
+                    qrCodeStatus:'',
+                    imgLoad:false,
+                    btnLoading:false,
+                    protocolList: [],
+                }
+            },
+            mounted(){
+                // 刷新页面- 更新二维码
+                this.getQrCode(false)
+                this.setIsAuto()
+                this.fetchProvacyPolicy()
+                window.addEventListener('keydown', this.handleEnterKey);
+            },
+            methods:{
+                handleEnterKey(event) {
+                    if (event.key === 'Enter') {
+                       this.handleSubmit();
+                    }
+                },
+                setIsAuto(){
+                    const cookies = document.cookie;
+                    const match = cookies.match(/Remember-Me=([^;]+)/);
+                    const remember =  match ? match[1] : null;
+                    if(remember == null){
+                        this.isAuto = true;
+                        return;
+                    }
+                    this.isAuto =  remember == '1' ? true : false
+                },
+                goHome(){
+                    window.open(window.location.origin)
+                },
+                async getCode(){
+                    if(!this.hasClick) return;
+                    const self = this
+                    this.$refs.formValidate.validateField('phone',(err)=>{
+                        if(!err){
+                            //显示验证码弹框
+                            if(captcha){
+                                captcha.captchaVerifyCallback = captchaVerifyCallback
+                                captcha.onBizResultCallback = onBizResultCallback
+                                captcha.show()
+                            }else {
+                                showCaptcha({
+                                    captchaVerifyCallback: captchaVerifyCallback,
+                                    onBizResultCallback: onBizResultCallback,
+                                })
+                            }
+
+                        }
+                    });
+
+
+                    let errMsg = ''
+                    async function captchaVerifyCallback(captchaVerifyParam) {
+                        try {
+                            const result = await $.ajax({
+                                url: "/auth-new/get-phone-login-code",
+                                type: "post",
+                                data:{
+                                    "phone": self.formData.phone,
+                                    "ali_captcha_verify_param": captchaVerifyParam // 验证码参数
+                                },
+                            })
+                            const verifyResult = {
+                              captchaResult: result.data.ali_verify_captcha, // 验证码验证是否通过，boolean类型，必选
+                              bizResult: false,      // 业务是否通过，boolean类型，可选
+                            };
+                            if (result.status == 0) {
+                                verifyResult.bizResult = true
+                            }else{
+                                errMsg = result.message
+                            }
+                            return verifyResult;
+                        }catch(err){
+                            console.error('err',err)
+                            errMsg = '未知错误，请稍后重试!'
+                            return {captchaResult: false,bizResult:false};
+                        }
+                    }
+
+                    //业务请求验证结果回调函数
+                    function onBizResultCallback(bizResult) {
+                        if (bizResult === true) {
+                            self.hasClick = false;
+                            self.codeBtnText = `重新发送(${sec}s)`
+                            times = setInterval(() => {
+                                if(sec <= 0){
+                                    sec = 60;
+                                    self.codeBtnText = `获取验证码`
+                                    clearInterval(times)
+                                    times = null
+                                    self.hasClick = true;
+                                    return
+                                }
+                                sec -= 1;
+                                self.codeBtnText = `重新发送(${sec}s)`
+                            }, 1000);
+                        } else{
+                            self.$Message.error({
+                                content: errMsg,
+                                duration: 3,
+                                onClose: () => {
+                                    self.hasClick = true;
+                                }
+                            });
+                        }
+                    }
+                },
+                handleSubmit(name) {
+                    if (!this.agreementCheck) {
+                        this.$Message.error('请先阅读并同意协议');
+                        return;
+                    }
+                    this.$refs.formValidate.validate((valid) => {
+                        if (valid) {
+                            this.submit()
+                        }
+                    })
+                },
+                clearCodeErrorText(){
+                    this.codeErrorText = ''
+                },
+                clearPasswordErrorText(){
+                    this.passwordErrorText =  ""
+                },
+                async submit(){
+                    const self = this
+                    this.btnLoading = true
+                    this.clearCodeErrorText()
+                    this.clearPasswordErrorText()
+                    let dataObject = {}
+                    let ajaxUrl;
+                    if(this.loginType == 'smsLogin') {
+                        ajaxUrl = '/auth-new/phone-login'
+                        dataObject = {
+                            phone: this.formData.phone,
+                            code: this.formData.code,
+                            remember: this.isAuto ? '1' : '0'
+                        }
+                    }else {
+                        const { encrypted, iv } = await encryptAES(this.formData.password)
+                        const imBack = new URLSearchParams(window.location.search).get('im_back');
+                        ajaxUrl = '/auth-iframe/login';
+                        if (imBack) {
+                            ajaxUrl += '?im_back=' + imBack;
+                        }
+                        dataObject = {
+                            phone: this.formData.phone,
+                            password: encrypted,
+                            rememberMe: this.isAuto ? '1' : '0',
+                            auth_type: 'server',
+                            reload: 1,
+                            iv,
+                        }
+                    }
+                    $.ajax({
+                        url: ajaxUrl,
+                        type: "POST",
+                        dataType: "json",
+                        data: dataObject,
+                        success:  (res) => {
+                            if(res.status === 0){
+                                jumpUrl = res.jump_url ?? '';
+                                if (jumpUrl !== '') {
+                                    window.location.href = jumpUrl.replace(/www/, 'admin')
+                                } else {
+                                    window.location.href = window.location.origin.replace(/www/, 'admin')
+                                }
+                            }else if(res.status === 604){
+                                // console.log('进入604了')
+                                //显示验证码弹框
+                                if(captcha){
+                                    captcha.captchaVerifyCallback = captchaVerifyCallback
+                                    captcha.onBizResultCallback = onBizResultCallback
+                                    captcha.show()
+                                }else {
+                                    showCaptcha({
+                                        captchaVerifyCallback: captchaVerifyCallback,
+                                        onBizResultCallback: onBizResultCallback,
+                                    })
+                                }
+
+                                let errMsg = ''
+                                async function captchaVerifyCallback(captchaVerifyParam) {
+                                    try {
+                                        const { encrypted, iv } = await encryptAES(self.formData.password)
+                                        const result = await $.ajax({
+                                            url: "/auth-iframe/login",
+                                            type: "POST",
+                                            dataType:"json",
+                                            data: {
+                                                phone:self.formData.phone,
+                                                password: encrypted,
+                                                iv,
+                                                auth_type: 'server',
+                                                "ali_captcha_verify_param": captchaVerifyParam // 验证码参数
+                                            },
+                                        })
+
+                                        // 从结果中获取验证码验证结果，如果不存在则默认为true
+                                        let captchaResult = (result && result.ali_verify_captcha) ?? true;
+
+                                        const verifyResult = {
+                                          captchaResult, // 验证码验证是否通过，boolean类型，必选
+                                          bizResult: false,      // 业务是否通过，boolean类型，可选
+                                        };
+                                        if (result.status == 0) {
+                                            verifyResult.bizResult = true
+                                        }else{
+                                            errMsg = result.error || result.message
+                                        }
+                                        if(errMsg == '验证码错误'){
+                                            self.codeErrorText = errMsg
+                                        }
+                                        if(res.target == 'password'){
+                                            self.passwordErrorText = errMsg
+                                        }
+                                        return verifyResult;
+                                    }catch(err){
+                                        console.error('err',err)
+                                        errMsg = '未知错误，请稍后重试!'
+                                        return {captchaResult: false,bizResult:false};
+                                    }
+                                }
+                                //业务请求验证结果回调函数
+                                function onBizResultCallback(bizResult) {
+                                    if (bizResult === true) {
+                                        window.location.href = window.location.origin.replace(/www/, 'admin')
+                                    }else {
+                                        self.$Message.error({
+                                            content: errMsg,
+                                            duration: 3,
+                                            onClose: () => {
+                                                self.hasClick = true;
+                                            }
+                                         });
+                                    }
+                                }
+                            }else {
+                                const  errMsg = res.error || res.message
+                                this.$Message.error({
+                                    content: errMsg,
+                                    duration: 3,
+                                });
+                                // this.$Modal.error({
+                                //     title: '提示',
+                                //     content: errMsg
+                                // });
+                                if(errMsg == '验证码错误'){
+                                    this.codeErrorText = errMsg
+                                }
+                                if(res.target == 'password'){
+                                    this.passwordErrorText = errMsg
+                                }
+
+                            }
+                        },
+                        complete: () => {
+                            self.btnLoading = false
+                        }
+
+                    })
+                },
+                gotoImproved(){
+                    window.open('https://www.wjx.cn/vm/YDBYjzG.aspx#')
+                },
+                goto(type) {
+                    let wxUrl = window.location.origin + '/auth-new/wx-auth?auth_type=server&flag=admin&login_from=server-login'
+                    let apliayUrl = window.location.origin + '/third-login/alipay-auth?login_from=server-login&flag=admin'
+
+                    // 直接拼接个remember参数,不额外处理js了, remember=n n为天数
+                    let rememberWxUrl = window.location.origin + '/auth-new/wx-auth?remember=1&auth_type=server&flag=admin&login_from=server-login'
+                    let rememberApliayUrl = window.location.origin + '/third-login/alipay-auth?remember=1&flag=admin&login_from=server-login'
+                    if(type === 'other') {
+                        window.open('/auth/apply-for-loss-reporting')
+                    }else if( type === 'wx') {
+                        this.isAuto ? window.location.href = rememberWxUrl :  window.location.href = wxUrl
+                    }else {
+                        this.isAuto ? window.location.href = rememberApliayUrl :  window.location.href = apliayUrl
+                    }
+                },
+                openCentered(url, width, height) {
+                    const left = (screen.width / 2) - (width / 2);
+                    const top = (screen.height / 2) - (height / 2);
+                    window.open(url, '_blank', `width=${width},height=${height},left=${left},top=${top}`);
+                },
+                forgotPassword(){
+                    window.open('/auth/reset-password')
+                },
+                tabsClick(name){
+                    if(name === 'scanCodeLogin'&&!this.qrCodeUr&&!codeStatusTimes){
+                        this.getQrCode()
+                        this.interval()
+                    }
+                },
+                // 获取二维码
+                getQrCode(showErrTip = true){
+                    this.imgLoad = true
+                    $.ajax({
+                        url: '/auth-iframe/create-qrcode',
+                        type: "POST",
+                        dataType: "json",
+                        data: {},
+                        success:  (res) => {
+                            if(res.status !== 0) {
+                                this.qrCodeStatus = ''
+                                clearInterval(codeStatusTimes);
+
+                                let errMsg = res.error || res.message
+                                if(showErrTip){
+                                    this.$Message.error({
+                                        content: errMsg,
+                                        duration: 3,
+                                    });
+                                }
+                                this.errMessage = errMsg
+
+                                this.imgLoad = false
+                                return
+                            }
+
+                            this.errMessage = ''
+                            this.qrCodeUrl = res.data.qrcode_path
+                            this.qrCodeToken = res.data.token
+                            this.imgLoad = false
+                        }
+                    })
+                },
+                // 轮询二维码状态
+                checkQrCodeStatus(){
+                    const data = {token: this.qrCodeToken}
+                    $.ajax({
+                        url: '/auth-iframe/check-scan-status',
+                        type: "GET",
+                        dataType: "json",
+                        data,
+                        success:  (res) => {
+                            // 扫码状态、0未扫码，1已扫码，2确认登录、3已过期
+                            this.qrCodeStatus = res.data.status
+                            // 登录成功
+                            if(res.data.status === 2) {
+                                clearInterval(codeStatusTimes);
+                                window.location.href = window.location.origin.replace(/www/, 'admin')
+                            }else if( res.data.status === 3) {
+                                clearInterval(codeStatusTimes);
+                            }
+
+                        }
+                    })
+                },
+                interval(){
+                    codeStatusTimes = setInterval(() => {
+                            this.checkQrCodeStatus()
+                    }, 1000);
+                },
+                // 刷新二维码
+                refreshQrCode(){
+                    this.qrCodeStatus = ''
+                    this.getQrCode()
+                    this.interval()
+                },
+                userAgreement() {
+                this.openProtocol('用户协议')
+                },
+                privacyAgreement() {
+                    this.openProtocol('隐私协议')
+                },
+                async openProtocol(type) {
+                    if (!this.protocolList.length) {
+                        await this.fetchProvacyPolicy();
+                    }
+                    const protocol = this.protocolList.find(item => item.name === type);
+                    if (protocol && protocol.url) {
+                        window.open(protocol.url, '_blank');
+                    } else {
+                        this.$Message.error('暂无该协议');
+                    }
+                },
+                // 获取隐私政策
+                async fetchProvacyPolicy() {
+                    const res = await $.ajax({
+                        url: '/client-protocol/list?terminal=pc.merchant&is_history=2',
+                        type: 'get',
+                    });
+                    this.protocolList = res.data ||  []
+                },
+            },
+            //页面卸载
+            beforeDestroy() {
+                window.removeEventListener('keydown', this.handleEnterKey);
+                if (times) {
+                    clearInterval(times);
+                    times = null;
+                }
+                if(codeStatusTimes){
+                    clearInterval(codeStatusTimes);
+                    codeStatusTimes = null;
+                }
+            }
+        })
+    })
+</script>
+
+<style>
+    [v-cloak] {
+        display: none;
+    }
+    /** 覆盖alert关闭图标样式 */
+    .ivu-alert-close .ivu-icon-ios-close {
+        font-size: 30px;
+        color: #999;
+        transition: color .2s ease;
+        position: relative;
+        top: -3px;
+    }
+    #login-top{
+        display: none;
+    }
+
+    body {
+        background-image: url('https://img1.rrzuji.cn/uploads/scheme/2409/05/m/KkKi4ycWMVzRkuf9LTKu.png') ;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: fixed;
+    }
+
+    .header{
+        display: block;
+    }
+
+    .warning {
+        position: fixed;
+        top: 24px;
+        z-index: 100;
+        width: 100%;
+        padding: 0 24px;
+    }
+
+    .warning-box{
+        font-size: 14px;
+        color: rgba(6,21,51,0.85);
+        line-height: 22px;
+    }
+    .col-content{
+        padding-top: 70px;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+    .content-left {
+        width: 100%;
+    }
+    .logo{
+        cursor: pointer;
+        position: fixed;
+        top: 88px;
+        left: 32px;
+        z-index: 100;
+    }
+    .content-left > .image-content {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        position: relative;
+
+    }
+    /* 定义关键帧动画 */
+    @keyframes floatUp {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    @keyframes floatDown {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(20px);
+        }
+    }
+    .content-left > .image-content > .img-left{
+        width: 141px;
+        height: 212px;
+        right: 45px;
+        position: relative;
+        animation: floatDown 6s ease-in-out infinite;
+    }
+    .content-left > .image-content > .img{
+        width: 475px;
+        height: 429px;
+        position: absolute;
+        z-index: 99;
+    }
+    .content-left > .image-content > .img-right{
+        width: 161px;
+        height: 194px;
+        position: relative;
+        bottom: 90px;
+        left:60px;
+        animation: floatDown 6s ease-in-out infinite;
+    }
+    .content-left > .image-content > .img-right2{
+        width: 119px;
+        height: 141px;
+        position: relative;
+        bottom: -60px;
+        left: 30px;
+        animation: floatUp 6s ease-in-out infinite;
+    }
+
+    .improved {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        position: fixed;
+        top:88px;
+        z-index: 100;
+        right:80px;
+    }
+    @media (max-width: 1366px){
+        .improved {
+            display: flex;
+            align-items: center;
+            position: fixed;
+            top:88px;
+            right:100px;
+            cursor: pointer;
+        }
+    }
+    .improved > .icon{
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
+    }
+    .improved > .text{
+        text-decoration: underline;
+        font-size: 12px;
+        color: rgba(6,21,51,0.45);
+        line-height: 20px;
+    }
+
+    .server-login-card{
+        padding:49px 55px 40px 55px;
+        width: 527px;
+        height: 575px;
+        background: #FFFFFF;
+        border-radius: 4px;
+    }
+    .from {
+        margin-top:24px
+    }
+
+    .ivu-tabs-nav .ivu-tabs-tab-active {
+        color: #3777FF !important;
+        font-weight: 600 !important;
+        font-size: 20px !important;
+        line-height: 24px;
+
+    }
+    .ivu-tabs-nav .ivu-tabs-tab {
+        padding: 8px 16px 16px 16px;
+        font-weight: 400;
+        font-size: 20px;
+        color: rgba(6,21,51,0.65);
+        line-height: 24px;
+    }
+    .ivu-tabs-nav .ivu-tabs-ink-bar{
+        background-color: #3574F8;
+    }
+    .ivu-input{
+        border-radius: 4px 4px 4px 4px;
+        height: 48px;
+        padding: 4px 16px;
+    }
+    .ivu-input-suffix {
+        right: 24px;
+    }
+    .ivu-input-prefix i, .ivu-input-suffix i {
+        line-height: 48px;
+    }
+    .ivu-checkbox-checked .ivu-checkbox-inner {
+        border-color: #3777FF;
+        background-color: #3777FF;
+    }
+
+    .ivu-checkbox-focus{
+        box-shadow:0 0 0 2px rgb(53, 116, 248,.2); z-index:1
+    }
+    /* 恢复默认的 hover 样式 */
+    .ivu-input:hover,
+    .ivu-input-group:hover .ivu-input {
+      border-color: #3777FF; /* 默认边框颜色 */
+    }
+
+    /* 恢复默认的 active 样式 */
+    .ivu-input:focus,
+    .ivu-input-group:focus .ivu-input,
+    .ivu-input:active,
+    .ivu-input-group:active .ivu-input {
+      border-color:  #3777FF; /* 默认聚焦时的边框颜色 */
+      box-shadow: inset 0 0 0 2px rgba(64, 158, 255, 0.2); /* 默认聚焦时的阴影 */
+    }
+
+    .ivu-btn-primary {
+        background-color: #3777FF !important;
+        border-color: #3777FF !important;
+    }
+
+    .ivu-btn-primary:hover,
+    .ivu-btn-primary:focus,
+    .ivu-btn-primary:active {
+        background-color: #2d8cf0 !important; /* 默认的 hover/focus/active 背景色 */
+        border-color: #2d8cf0 !important;
+        box-shadow: inset 0 0 0 2px rgba(64, 158, 255, 0.2); /* 默认聚焦时的阴影 */
+    }
+
+
+
+    .form-code-content{
+        display: flex;
+        justify-content: space-between;
+    }
+    .code-btn {
+        width: 118px;
+        height: 48px;
+        border-radius: 4px 4px 4px 4px;
+        border: 1px solid #3777FF;
+        font-size: 14px;color: #3777FF;
+        line-height: 48px;
+        text-align: center;
+        cursor: pointer;
+    }
+    .code-btn-disable{
+        background: #F5F7FA;
+        color: rgba(6,21,51,0.25);
+        border: 1px solid #D9D9D9;
+    }
+    .forgot-password {
+        margin-top: 6px;
+        position: absolute;
+        right: 0;
+        font-weight: 400;
+        color: #3777FF;
+        font-size: 12px;
+        line-height: 20px;
+        cursor: pointer;
+    }
+    .auto-wrap{
+        margin-top: 64px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .auto-label{
+        font-weight: 400;
+        font-size: 12px;
+        color: rgba(6,21,51,0.45);
+        line-height: 20px;
+    }
+    .forget{
+        color: rgba(6,21,51,0.45);
+        font-size: 12px;
+        line-height: 20px;
+        font-weight: 400;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+    .submit-btn{
+        width: 415px;
+        height: 48px;
+        background: #3D77FF;
+        border-color: #3D77FF;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: 500;
+        margin-top:11px;
+        color: #FFFFFF;
+        text-align: center;
+        line-height: 48px;
+        cursor: pointer;
+    }
+    .submit-btn:hover{
+        background: #3D77FF;
+        border-color: #3D77FF;
+        opacity: 0.8;
+    }
+    .submit-btn:active{
+        opacity: 1;
+    }
+
+    .other-login{
+        padding:0 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 32px;
+        width: 415px;
+        height: 80px;
+        background: rgba(61,119,255,0.04);
+        border-radius: 0px 0px 16px 16px;
+    }
+    .other-login-content{
+        display: flex;
+        align-items: center;
+    }
+    .other-login-item{
+        margin-left: 32px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+    .other-login-logo{
+        margin-right:8px;
+        width: 24px;
+        height: 24px;
+    }
+    .other-login-text{
+        font-size: 14px;
+        color: rgba(6,21,51,0.65);
+        font-weight: 400;
+        line-height: 22px;
+    }
+
+    .scan-code{
+        margin-top:40px;
+    }
+    .scan-code-content{
+        display: flex;
+        align-items: center;
+    }
+    .scan-code-container {
+        position: relative;
+        width: 188px;
+        height: 188px;
+        margin-right:24px;
+    }
+    .scan-code-img{
+        width: 188px;
+        height: 188px;
+    }
+    .scan-code-img-mask{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 188px;
+        height: 188px;
+        background-color:rgba(255,255,255,.9);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 24px;
+    }
+    .scan-code-img-mask > .success-img{
+        margin-top: 32px;
+        width: 84px;
+        height: 84px;
+    }
+    .scan-code-img-mask > .err-img{
+        margin-top: 53px;
+        margin-bottom: 18px;
+        width: 49px;
+        height: 49px;
+        cursor: pointer;
+    }
+    .scan-code-img-mask > .title{
+        margin-top:4px;
+        font-weight:bold;
+        font-size: 16px;
+        color: rgba(6,21,51,0.85);
+        line-height: 22px;
+        text-align: center;
+    }
+    .scan-code-img-mask > .docs{
+        margin-top:4px;
+        font-weight: 400;
+        font-size: 14px;
+        color: rgba(6,21,51,0.85);
+        line-height: 22px;
+        text-align: center;
+    }
+
+    .scan-code-example{
+        width: 188px;
+        height: 188px;
+    }
+    .scan-code-open{
+        padding-bottom:2px;
+        margin-top:40px;
+        text-align: center;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+        color: rgba(6,21,51,0.65);
+    }
+    .scan-code-open-name{
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+        color: #3777FF;
+        cursor: pointer;
+    }
+    .add-code-content{
+        padding: 12px 0;
+    }
+    .add-code{
+        width: 96px;
+        height: 96px;
+    }
+
+    .code-img-spin{
+        color: #3777FF;
+    }
+    .code-img-spin-icon-load{
+        animation: ani-code-img-spin 1s linear infinite;
+    }
+
+    @keyframes ani-code-img-spin {
+        from { transform: rotate(0deg);}
+        50%  { transform: rotate(180deg);}
+        to   { transform: rotate(360deg);}
+    }
+
+    .protocol {
+        display: flex;
+        margin-top: 12px;
+        color: rgba(6,21,51,0.45);
+    }
+    .protocol .link {
+        color: #3777FF;
+        cursor: pointer;
+    }
+</style>
+
+
+
+
+
+<script src="/lib/crypto/crypto-js.min.js"></script>
+<script src="/lib/aes/aes.js"></script>
+<script src="/js/init-aliyun-captcha/init-aliyun-captcha.js"></script>
+<script src="/js/jquery/jquery-1.9.1.js"></script>
+<script src="/assets/af63ec89/yii.js"></script>
+<script src="/js/bootstrap/bootstrap.js"></script><script>
+    var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+
+    document.write(unescape("%3Cspan id='cnzz_stat_icon_1277352717'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s96.cnzz.com/z_stat.php%3Fid%3D1277352717' type='text/javascript'%3E%3C/script%3E"));
+
+    document.getElementById('cnzz_stat_icon_1277352717').style.display='none'; //注释友盟统计样式
+
+
+    <!-- Google Tag Manager -->
+//    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+//        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+//        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+//        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+//    })(window,document,'script','dataLayer','GTM-M2MWSLX');
+<!-- End Google Tag Manager -->
+
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script><span id="cnzz_stat_icon_1277352717" style="display: none;"></span><script src="https://s96.cnzz.com/z_stat.php?id=1277352717" type="text/javascript"></script>
+<!-- Google Tag Manager (noscript) -->
+<!--<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M2MWSLX"-->
+<!--                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>-->
+<!-- End Google Tag Manager (noscript) -->
+
+</body></html>

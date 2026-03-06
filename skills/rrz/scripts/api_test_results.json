@@ -1,0 +1,67 @@
+[
+  {
+    "url": "https://admin.rrzu.com/api/product/list",
+    "method": "GET",
+    "status": 405,
+    "success": true
+  },
+  {
+    "url": "https://admin.rrzu.com/api/products",
+    "method": "GET",
+    "status": 405,
+    "success": true
+  },
+  {
+    "url": "https://admin.rrzu.com/api/goods/list",
+    "method": "GET",
+    "status": 405,
+    "success": true
+  },
+  {
+    "url": "https://admin.rrzu.com/api/merchant/product/list",
+    "method": "GET",
+    "status": 405,
+    "success": true
+  },
+  {
+    "url": "https://admin.rrzu.com/api/v1/product/list",
+    "method": "GET",
+    "status": 405,
+    "success": true
+  },
+  {
+    "url": "https://admin-vue.rrzu.com/api/product/list",
+    "method": "GET",
+    "status": 200,
+    "success": true,
+    "response": "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <link rel=\"icon\" href=\"/favicon.ico\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <"
+  },
+  {
+    "url": "https://admin-vue.rrzu.com/api/products",
+    "method": "GET",
+    "status": 200,
+    "success": true,
+    "response": "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <link rel=\"icon\" href=\"/favicon.ico\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <"
+  },
+  {
+    "url": "https://admin-vue.rrzu.com/api/goods/list",
+    "method": "GET",
+    "status": 200,
+    "success": true,
+    "response": "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <link rel=\"icon\" href=\"/favicon.ico\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <"
+  },
+  {
+    "url": "https://admin-vue.rrzu.com/api/merchant/product/list",
+    "method": "GET",
+    "status": 200,
+    "success": true,
+    "response": "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <link rel=\"icon\" href=\"/favicon.ico\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <"
+  },
+  {
+    "url": "https://admin-vue.rrzu.com/api/v1/product/list",
+    "method": "GET",
+    "status": 200,
+    "success": true,
+    "response": "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <link rel=\"icon\" href=\"/favicon.ico\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <"
+  }
+]

@@ -1,0 +1,33 @@
+{
+  "name": "iPhone 14 Pro 256GB 深空黑",
+  "description": "全新未拆封，国行正品，支持以租代购。配件齐全：充电线、说明书、卡针。成色：全新，无磕碰划痕。",
+  "category": "手机数码",
+  "brand": "Apple",
+  "images": [
+    "/path/to/image1.jpg",
+    "/path/to/image2.jpg",
+    "/path/to/image3.jpg",
+    "/path/to/image4.jpg",
+    "/path/to/image5.jpg"
+  ],
+  "plans": [
+    {
+      "period": 30,
+      "price": 299,
+      "deposit": 2000,
+      "name": "月租方案"
+    },
+    {
+      "period": 90,
+      "price": 799,
+      "deposit": 2000,
+      "name": "季租方案"
+    },
+    {
+      "period": 180,
+      "price": 1499,
+      "deposit": 2000,
+      "name": "半年方案"
+    }
+  ]
+}
