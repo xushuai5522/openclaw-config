@@ -571,4 +571,36 @@ white_bg.convert('RGB').save('output.jpg', 'JPEG', quality=95)
 
 ---
 
-*最后更新：2026-03-06 新增NEC设备信息*
+## 🔧 远程服务器维护经验（2026-03-07）
+
+### 服务器信息
+- **IP**: 101.33.210.13
+- **用户**: root
+- **密码**: 20130106LenovO!
+- **用途**: OpenClaw远程部署
+
+### 常见问题与解决
+| 问题 | 症状 | 解决方案 |
+|------|------|----------|
+| Cron会话卡住 | 大量unknown token状态 | `openclaw gateway restart` |
+| 浏览器服务超时 | CDP端口18800不可用 | 重启Gateway或检查浏览器进程 |
+| 服务异常 | Gateway运行但功能不正常 | 先查状态，再决定是否重启 |
+
+### 维护命令
+```bash
+# 远程连接
+sshpass -p '20130106LenovO!' ssh root@101.33.210.13
+
+# 检查状态
+openclaw status
+
+# 重启服务
+openclaw gateway restart
+
+# 查看日志
+journalctl -u openclaw-gateway -f
+```
+
+---
+
+*最后更新：2026-03-07 新增远程服务器维护经验*
