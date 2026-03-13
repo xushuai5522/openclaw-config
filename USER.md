@@ -5,7 +5,7 @@
 - **Pronouns:** 
 - **Timezone:** Asia/Shanghai
 - **Location:** 江苏苏州
-- **Notes:** 
+- **Notes:** 永远使用中文沟通
 
 ## Context
 

@@ -12,5 +12,5 @@ export AVAILABLE_SKILLS='agent-browser image-pipeline peekaboo qmd rrz-login pro
 
 # 使用方法：
 # source ~/.openclaw/workspace/.skillsrc
-# echo \$SKILLS_DIR
-# cat \$SKILLS_INDEX | jq '.skills[] | select(.name==\"rrz\")'
+# 查看 SKILLS_DIR 环境变量
+# 查看 SKILLS_INDEX 内容并筛选 rrz 技能

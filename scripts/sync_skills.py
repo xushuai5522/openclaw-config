@@ -81,8 +81,8 @@ def generate_shellrc(skills):
         "",
         "# 使用方法：",
         "# source ~/.openclaw/workspace/.skillsrc",
-        "# echo \\$SKILLS_DIR",
-        "# cat \\$SKILLS_INDEX | jq '.skills[] | select(.name==\\\"rrz\\\")'",
+        "# 查看 SKILLS_DIR 环境变量",
+        "# 查看 SKILLS_INDEX 内容并筛选 rrz 技能",
     ]
     
     with open(OUTPUT_RC, 'w', encoding='utf-8') as f:
@@ -103,7 +103,7 @@ def main():
     print(f"   Shell: {OUTPUT_RC}")
     print("\n子代理使用方法：")
     print("  1. Python: json.load(open('skills-index.json'))")
-    print("  2. Shell: source .skillsrc && echo $SKILLS_DIR")
+    print("  2. Shell: source .skillsrc 后查看环境变量 SKILLS_DIR")
 
 if __name__ == '__main__':
     main()

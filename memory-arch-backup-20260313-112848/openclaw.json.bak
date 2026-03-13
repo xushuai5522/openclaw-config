@@ -1,0 +1,328 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.3.11",
+    "lastTouchedAt": "2026-03-12T20:19:31.400Z"
+  },
+  "wizard": {
+    "lastRunAt": "2026-02-15T15:41:18.729Z",
+    "lastRunVersion": "2026.2.15",
+    "lastRunCommand": "onboard",
+    "lastRunMode": "local"
+  },
+  "browser": {
+    "enabled": true,
+    "remoteCdpTimeoutMs": 60000,
+    "remoteCdpHandshakeTimeoutMs": 120000,
+    "headless": false,
+    "defaultProfile": "openclaw"
+  },
+  "auth": {
+    "profiles": {
+      "yescode-gpt:default": {
+        "provider": "yescode-gpt",
+        "mode": "api_key"
+      }
+    },
+    "order": {
+      "yescode-gpt": [
+        "yescode-gpt:default"
+      ]
+    }
+  },
+  "models": {
+    "mode": "replace",
+    "providers": {
+      "yescode-gpt": {
+        "baseUrl": "https://api.yescode.cloud/v1",
+        "apiKey": "sk-be956daf4ecd1138289952c2685b6f4b9c20eb8357d36c707c5b5d514008b245",
+        "api": "openai-responses",
+        "models": [
+          {
+            "id": "gpt-5.4",
+            "name": "GPT-5.4",
+            "api": "openai-responses",
+            "reasoning": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "contextWindow": 1050000,
+            "maxTokens": 128000
+          },
+          {
+            "id": "gpt-5.3-codex",
+            "name": "GPT-5.3 Codex",
+            "api": "openai-responses",
+            "reasoning": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "contextWindow": 400000,
+            "maxTokens": 128000
+          },
+          {
+            "id": "gpt-5.3-codex-spark",
+            "name": "GPT-5.3 Codex Spark",
+            "api": "openai-responses",
+            "reasoning": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "contextWindow": 128000,
+            "maxTokens": 32000
+          },
+          {
+            "id": "gpt-5.2",
+            "name": "GPT-5.2",
+            "api": "openai-responses",
+            "reasoning": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "contextWindow": 400000,
+            "maxTokens": 128000
+          },
+          {
+            "id": "gpt-5.2-codex",
+            "name": "GPT-5.2 Codex",
+            "api": "openai-responses",
+            "reasoning": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "contextWindow": 400000,
+            "maxTokens": 128000
+          },
+          {
+            "id": "gpt-5.1-codex-max",
+            "name": "GPT-5.1 Codex Max",
+            "api": "openai-responses",
+            "reasoning": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "contextWindow": 400000,
+            "maxTokens": 128000
+          },
+          {
+            "id": "gpt-5.1-codex",
+            "name": "GPT-5.1 Codex",
+            "api": "openai-responses",
+            "reasoning": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "contextWindow": 400000,
+            "maxTokens": 128000
+          },
+          {
+            "id": "gpt-5.1",
+            "name": "GPT-5.1",
+            "api": "openai-responses",
+            "reasoning": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "contextWindow": 400000,
+            "maxTokens": 128000
+          },
+          {
+            "id": "gpt-5.1-codex-mini",
+            "name": "GPT-5.1 Codex Mini",
+            "api": "openai-responses",
+            "reasoning": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "contextWindow": 400000,
+            "maxTokens": 100000
+          },
+          {
+            "id": "gpt-5",
+            "name": "GPT-5",
+            "api": "openai-responses",
+            "reasoning": true,
+            "input": [
+              "text",
+              "image"
+            ],
+            "contextWindow": 400000,
+            "maxTokens": 128000
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "yescode-gpt/gpt-5.4"
+      },
+      "models": {
+        "yescode-gpt/gpt-5.4": {}
+      },
+      "workspace": "/Users/xs/.openclaw/workspace",
+      "memorySearch": {
+        "enabled": true,
+        "sources": [
+          "memory"
+        ],
+        "provider": "openai"
+      },
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "timeoutSeconds": 600,
+      "userTimezone": "Asia/Shanghai"
+    },
+    "list": [
+      {
+        "id": "main"
+      },
+      {
+        "id": "finance-butler",
+        "name": "finance-butler",
+        "workspace": "/Users/xs/.openclaw/workspace",
+        "agentDir": "/Users/xs/.openclaw/agents/finance-butler/agent",
+        "identity": {
+          "name": "财管家",
+          "theme": "AI 理财助手",
+          "emoji": "💰"
+        }
+      }
+    ]
+  },
+  "tools": {
+    "exec": {
+      "host": "gateway",
+      "security": "full"
+    }
+  },
+  "messages": {
+    "queue": {
+      "debounceMs": 2000,
+      "drop": "new"
+    },
+    "inbound": {
+      "debounceMs": 1000
+    }
+  },
+  "session": {
+    "dmScope": "per-channel-peer"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto",
+    "restart": true,
+    "ownerDisplay": "raw"
+  },
+  "channels": {
+    "feishu": {
+      "appId": "cli_a91a7f06faf8dced",
+      "appSecret": "knOX2LVgdiy1fd9Ipcr4thpAxFzAT50i",
+      "connectionMode": "websocket",
+      "dmPolicy": "pairing",
+      "enabled": true,
+      "groupAllowFrom": [
+        "ou_8f96c8e59111d256baf4213e7480caaf",
+        "ou_ebdb44351f4a954272be6f6e02e80335",
+        "oc_995db95f75ca76920cedaead0228fc5d"
+      ],
+      "groupPolicy": "allowlist",
+      "renderMode": "raw",
+      "requireMention": true,
+      "streaming": false,
+      "groups": {
+        "*": {
+          "requireMention": true,
+          "policy": "allowlist",
+          "allowFrom": [
+            "ou_8f96c8e59111d256baf4213e7480caaf",
+            "ou_ebdb44351f4a954272be6f6e02e80335",
+            "oc_995db95f75ca76920cedaead0228fc5d"
+          ]
+        }
+      }
+    }
+  },
+  "discovery": {
+    "mdns": {
+      "mode": "minimal"
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "lan",
+    "controlUi": {
+      "allowedOrigins": [
+        "http://localhost:18789",
+        "http://127.0.0.1:18789"
+      ],
+      "allowInsecureAuth": false,
+      "dangerouslyDisableDeviceAuth": false
+    },
+    "auth": {
+      "mode": "token",
+      "token": "8be19321634a56d832bb89e93379c3860",
+      "rateLimit": {
+        "maxAttempts": 10,
+        "windowMs": 60000,
+        "lockoutMs": 300000
+      }
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    },
+    "nodes": {
+      "allowCommands": [
+        "run"
+      ]
+    }
+  },
+  "plugins": {
+    "allow": [
+      "feishu",
+      "llm-task",
+      "memory-core"
+    ],
+    "entries": {
+      "feishu": {
+        "enabled": true
+      },
+      "llm-task": {
+        "enabled": true,
+        "config": {
+          "allowedModels": [
+            "yescode-gpt/gpt-5.4",
+            "yescode-gpt/gpt-5.3-codex",
+            "yescode-gpt/gpt-5.3-codex-spark",
+            "yescode-gpt/gpt-5.2",
+            "yescode-gpt/gpt-5.2-codex",
+            "yescode-gpt/gpt-5.1-codex-max",
+            "yescode-gpt/gpt-5.1-codex",
+            "yescode-gpt/gpt-5.1",
+            "yescode-gpt/gpt-5.1-codex-mini",
+            "yescode-gpt/gpt-5"
+          ],
+          "defaultModel": "gpt-5.4",
+          "defaultProvider": "yescode-gpt",
+          "timeoutMs": 180000
+        }
+      },
+      "memory-core": {
+        "enabled": true
+      }
+    },
+    "installs": {}
+  }
+}

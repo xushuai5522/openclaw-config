@@ -1,0 +1,28 @@
+{
+  "page_index": 1,
+  "recent_history_index": 0,
+  "title": "9成新 泰克 MDO3052 混合域示波器",
+  "hint_content": "本产品为租赁服务，租期结束后需归还设备",
+  "schemes": [
+    "到期须归还"
+  ],
+  "table_rows": [
+    {
+      "scheme": "到期须归还",
+      "deposit": 32000,
+      "inventory": 5,
+      "oneDay": 1200,
+      "threeDay": 2400,
+      "sevenDay": 3600,
+      "oneMonth": 6000,
+      "threeMonth": 17100,
+      "sixMonth": 32400,
+      "oneYear": 61200
+    }
+  ],
+  "image_urls": [
+    "https://img1.rrzuji.cn/uploads/scheme/2102/04/o/8qYK9YL601bbe81a4fec.png"
+  ],
+  "description": "泰克 MDO3052 混合域示波器，500MHz 带宽，2+1 通道，适用于实验室调试、信号分析与频谱测量。",
+  "screenshot_path": "/Users/xs/.openclaw/workspace/tmp_rrz_state_patch_after.png"
+}

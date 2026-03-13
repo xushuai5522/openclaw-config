@@ -1,0 +1,242 @@
+[
+  {
+    "name": "aliyungf_tc",
+    "value": "42d600c2fb6c4bd417c8e946f836d272f3352932ea59b92cab990bc421ba5961",
+    "domain": "www.rrzu.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "canary-route",
+    "value": "\"9257c3c3b95fbd55\"",
+    "domain": "www.rrzu.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "acw_tc",
+    "value": "2466aa3d-2ef2-4961-86d2-868879bb293d4e218b414749fe72a60e5f1241cb2c54",
+    "domain": "www.rrzu.com",
+    "path": "/",
+    "expires": 1773157442.246417,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "RRZUJI_SE",
+    "value": "t1idsbl56p7iknl13o02jers24",
+    "domain": ".rrzu.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "Go-Token",
+    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOjI5NDExOTIsImV4cCI6MTc3MzQxNDg0NSwiaWF0IjoxNzczMTU1NjQ1LCJzY2VuZSI6NSwic2VydmVyX2lkIjoxMTkwNCwidXNlcl9pZCI6Mjk0MTE5Mn0.M-827l1xAeQU0QgdcTaFg6r16Rf0Fb7vqXI-eBUPU3c",
+    "domain": ".rrzu.com",
+    "path": "/",
+    "expires": 1773414846.352981,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "Data-Token",
+    "value": "c121f150fcc93e68",
+    "domain": ".rrzu.com",
+    "path": "/",
+    "expires": 1773414846.353066,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "Remember-Me",
+    "value": "1",
+    "domain": ".rrzu.com",
+    "path": "/",
+    "expires": 1773414846.353133,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "shuzhiSecret",
+    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJwYy5tZXJjaGFudCIsInN1YiI6IjI5NDExOTIiLCJhdWQiOlsicGMubWVyY2hhbnQiXSwiZXhwIjoxNzczNDE0ODQ2LCJuYmYiOjE3NzMxNTU2NDYsImlhdCI6MTc3MzE1NTY0NiwianRpIjoiMjYxOTE4OTQ1MTgyODQzNzYxMTgyNjU5NDkxNDU4MzIiLCJJZCI6Mjk0MTE5MiwiVXNlcm5hbWUiOiLlvpDluIUiLCJQaG9uZSI6IjE1MTYyMTUyNTg0IiwiSXNBZG1pbiI6ZmFsc2UsIlJvbGUiOiJzZXJ2ZXIiLCJTZXJ2ZXJJZCI6MTE5MDQsIlRlcm1pbmFsIjoiIn0.OG_A5N8tq1NUbemvzuXpX3zvSFNfhkojL66dDIzXlDs",
+    "domain": ".rrzu.com",
+    "path": "/",
+    "expires": 1773414846.353162,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_identity",
+    "value": "c5ce64e9eca6d18714cfebfd2d342b9f3a6fa0024396cd8eba798c8faa7d1bf7a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A51%3A%22%5B2941192%2C%22Z7aJQBbpOH_IfZOYR_D0nph0DQXIrDYR%22%2C259559%5D%22%3B%7D",
+    "domain": ".rrzu.com",
+    "path": "/",
+    "expires": 1773415204.353197,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "_csrf",
+    "value": "f818c0618955aba7b0693f3ac7164339fcbf5d7b23ed098d786b1579c82b7c4aa%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22h2LBDM_dhQn2fIELAGQWO7CoazMymBr6%22%3B%7D",
+    "domain": "www.rrzu.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "aliyungf_tc",
+    "value": "68e7b808ba6728ce9231ec298d1e184945f5987ee824dcc1f350218553ab2eff",
+    "domain": "admin.rrzu.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_csrf",
+    "value": "736584e88b9422be2e7e8bf6eaef6bfcca213c87a3394f017878329ed75445d3a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22FMCfliQ9pUyULhsxvHOuNcunE-4Pdg2l%22%3B%7D",
+    "domain": "admin.rrzu.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "canary-route",
+    "value": "\"2cb15d63c24d21cd\"",
+    "domain": "admin.rrzu.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "acw_tc",
+    "value": "8cfd07d8-e667-4904-b4f7-b3d5379ffdd389d951e3b8e9d7d5831417745a0d7f79",
+    "domain": "admin.rrzu.com",
+    "path": "/",
+    "expires": 1773157447.052433,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "aliyungf_tc",
+    "value": "08c53fed409d26d2f10e14c8a5911c0c9940d8dfe3d71d64acba806224d49fb8",
+    "domain": "data-analysis.rrzu.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "acw_tc",
+    "value": "d9fb157d-2bb5-96d1-966d-e3c2850e6de323b7b4cd519fa1413a6b5ac0527d4e43",
+    "domain": "data-analysis.rrzu.com",
+    "path": "/",
+    "expires": 1773157447.349618,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "G_TOUR_GUIDE",
+    "value": "1773155647822",
+    "domain": "admin.rrzu.com",
+    "path": "/",
+    "expires": 1773414847,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "acw_tc",
+    "value": "1534e8ea-ed41-4499-bf78-5cec40139717eeba840fa9f5d0636b9180c707a70f41",
+    "domain": "admin-vue.rrzu.com",
+    "path": "/",
+    "expires": 1773157448.494989,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "aliyungf_tc",
+    "value": "360a0d8bae964b4bf4ab206ea6ee998d0dd56adefb3aa897a08950f876f4ceec",
+    "domain": "go-micro.rrzu.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "canary-route",
+    "value": "\"aa3a7f46c9e46271\"",
+    "domain": "go-micro.rrzu.com",
+    "path": "/",
+    "expires": 1773155659.417881,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "acw_tc",
+    "value": "35c768cf-25c1-9746-83a9-4ae715b15ff5900eaf3473d5945cd758ca7425829344",
+    "domain": "go-micro.rrzu.com",
+    "path": "/",
+    "expires": 1773157449.417902,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "workOrderSixhour",
+    "value": "1",
+    "domain": "admin.rrzu.com",
+    "path": "/",
+    "expires": 1773177251,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "aliyungf_tc",
+    "value": "93d065e6672d33181c9155824ccb2cd625f88e1271c60f88d86f9403e3302fff",
+    "domain": "sz.rrzu.com",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "acw_tc",
+    "value": "b0646b79-ee5c-429d-b7a5-d7e11e7e135ef3371c3001205ff43bef643762b30aff",
+    "domain": "sz.rrzu.com",
+    "path": "/",
+    "expires": 1773157454.84883,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  }
+]
