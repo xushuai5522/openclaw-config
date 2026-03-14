@@ -69,9 +69,6 @@
 - 检查返回的 `mediaUrl` 是否为远程URL
 - 如果返回本地路径，说明上传失败，需要重试
 
-### 当前问题
-- 飞书返回mediaUrl有时是本地路径，需要检查上传是否成功
-
 ---
 
 ## 🛠 人人租自动化
@@ -592,6 +589,16 @@ journalctl -u openclaw-gateway -f
 - **错误**: 自作主张把 `claude-opus-4-6` 改成 `claude-once/aws.amazon/claude-opus-4-6:once`
 - **正确**: 大哥说什么就是什么，不加不减
 - **原则**: 配置修改必须精确执行，不要自行推测或"优化"
+
+### memory/SSH 联动排障经验（2026-03-13）
+- **memory 故障分三层排查**：
+  1. 本地运行时是否满足依赖（如 `node:sqlite` / `--experimental-sqlite`）
+  2. provider/base URL/证书/重定向是否正常
+  3. 本地模型下载、索引构建、代理链路是否正常
+- **memory 修复优先稳态方案**：远程 embedding 不稳定时，优先切本地 provider，避免被第三方接口证书或重定向拖死。
+- **SSH 排障优先非交互化**：先打通公钥登录，再验证 `/bin/bash -lc`；这样后续自动化排障不会反复被密码和脏 shell 打断。
+- **公钥失败先查配对关系**：`authorized_keys` 里有 key 不等于可登录，先核对当前私钥对应的实际公钥指纹。
+- **动 Gateway 必做回归验证**：重载/重启后立即检查三件事：消息收发、memory 检索、核心命令链路。
 
 ---
 
