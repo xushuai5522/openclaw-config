@@ -1,185 +1,97 @@
 ---
 name: gsd
-description: Get Shit Done - Full project planning and execution workflow. Handles project initialization with deep context gathering, automated research, roadmap creation, phase planning, and execution with verification.
-user-invocable: true
+description: |
+  Get Stuff Done — 复杂任务规划与执行。将大型任务拆解为子任务，编排多技能协同，跟踪进度直到交付。
+  合并了原 task-planning（拆分）和 flow（编排）的功能。
+  触发场景：
+  1. 用户提出跨多个步骤的复杂任务
+  2. 需要协调多个技能/工具完成一个目标
+  3. 用户说"做一个XXX"、"帮我搞定XXX"、"这个项目怎么推进"
+  4. 任务涉及多阶段：规划→执行→验证→交付
+  5. 用户明确说“拆一下”“规划一下”“列步骤”“怎么推进”
+  不适用：单步简单操作（直接做）、纯技术咨询（直接答）。
 ---
 
-<objective>
+# GSD — Get Stuff Done
 
-## 快速参考
-- **触发词**: 项目管理、GSD、Get Shit Done
-- **核心功能**: 项目规划、任务拆解、执行跟踪
-- **适用场景**: 完整项目从0到1
+## 核心原则
 
----
+> AI Agent 十大准则第1条：用 Markdown 规划而非聊天窗口
+> 第2条：花10倍时间规划，1/10 编码
 
-GSD (Get Shit Done) provides a complete workflow for taking projects from idea to execution through systematic planning, research, and phase-based development.
+**不要急着动手。先想清楚再做。**
 
-**Full workflow port from Claude Code** - Includes:
-- Deep questioning and context gathering
-- Automated domain research (4 parallel researchers)
-- Requirements definition and scoping
-- Roadmap creation with phase structure
-- Phase planning with research and verification
-- Wave-based parallel execution
-- Goal-backward verification
+## 工作流
 
-This is the complete GSD system, not a simplified version.
-</objective>
+### Step 1: 理解需求（Ask）
+- 复述任务确认理解
+- 明确：目标、约束、交付物、deadline
+- 如果有歧义，先问清楚再动手
 
-<intake>
-What would you like to do?
+### Step 2: 规划拆解（Plan）
+用 markdown 写出计划：
+```markdown
+## 任务: XXX
+### 目标: ...
+### 子任务:
+- [ ] 1. 子任务A（预计 X 分钟）
+  - 所需工具/技能: ...
+  - 依赖: 无
+- [ ] 2. 子任务B（预计 X 分钟）
+  - 所需工具/技能: ...
+  - 依赖: 子任务A
+### 风险:
+- ...
+### 交付物:
+- ...
+```
 
-**Core workflow commands:**
-- **new-project** - Initialize a new project with deep context gathering, research, requirements, and roadmap
-- **plan-phase [N]** - Create execution plans for a phase (with optional research)
-- **execute-phase [N]** - Execute all plans in a phase with wave-based parallelization
-- **progress** - Check project status and intelligently route to next action
-- **debug [issue]** - Systematic debugging with persistent state across context resets
-- **quick** - Execute ad-hoc tasks with GSD guarantees but skip optional agents
-- **discuss-phase [N]** - Gather context through adaptive questioning before planning
-- **verify-work [N]** - Validate built features through conversational UAT
-- **map-codebase** - Analyze existing codebase for brownfield projects
-- **pause-work** - Create handoff when pausing mid-phase
-- **resume-work** - Resume from previous session with full context
-- **add-todo [desc]** - Capture idea or task for later
-- **check-todos [area]** - List and work on pending todos
-- **add-phase <desc>** - Add phase to end of milestone
-- **insert-phase <after> <desc>** - Insert urgent decimal phase
-- **remove-phase <N>** - Remove future phase and renumber
-- **new-milestone [name]** - Start new milestone cycle
-- **complete-milestone <ver>** - Archive milestone and tag
-- **audit-milestone [ver]** - Verify milestone completion
-- **settings** - Configure workflow toggles and model profile
+### Step 3: 技能编排（Orchestrate）
+根据子任务匹配最佳技能：
 
-**Flags:**
-- `plan-phase [N] --research` - Force re-research before planning
-- `plan-phase [N] --skip-research` - Skip research, plan directly
-- `plan-phase [N] --gaps` - Gap closure mode (after verification finds issues)
-- `plan-phase [N] --skip-verify` - Skip plan verification loop
-- `execute-phase [N] --gaps-only` - Execute only gap closure plans
+| 任务类型 | 首选技能 |
+|---------|---------|
+| Bug 分析 | bug-killer |
+| 代码学习 | code-learner |
+| 服务操作 | service-guardian |
+| 定时任务 | cron-master |
+| 飞书文档 | feishu-doc / feishu-version-guard |
+| 代码编写 | coding-agent |
+| 深度调研 | deep-research |
+| 前端页面 | frontend-design |
+| API 设计 | api-design |
 
-**Usage:**
-- `/gsd new-project` - Start a new project
-- `/gsd plan-phase 1` - Plan phase 1
-- `/gsd execute-phase 1` - Execute phase 1
-- `/gsd progress` - Check where you are and what's next
-- `/gsd debug "button doesn't work"` - Start debugging session
-- `/gsd quick` - Quick ad-hoc task without full ceremony
-- Or just tell me what you want and I'll guide you through GSD
+独立子任务可以并行（用 sub-agent）。有依赖的必须串行。
 
-**What GSD does:**
-1. **Deep questioning** - Understand what you're building through conversation
-2. **Research** - 4 parallel researchers investigate domain (stack, features, architecture, pitfalls)
-3. **Requirements** - Define v1 scope through feature selection
-4. **Roadmap** - Derive phases from requirements (not imposed structure)
-5. **Phase planning** - Create executable plans with tasks, dependencies, verification
-6. **Execution** - Run plans in parallel waves with per-task commits
-7. **Verification** - Check must_haves against actual codebase
-</intake>
+### Step 4: 执行（Execute）
+- 按计划逐步执行
+- 每完成一个子任务打 ✅
+- 遇到阻塞及时报告大哥
+- 中间产物及时保存（不要等最后才写文件）
 
-<routing>
-Based on user input, route to appropriate workflow:
+### Step 5: 验证（Verify）
+- 对照交付物检查是否完整
+- 如有测试条件，运行验证
+- 生成简洁的完成报告
 
-| Intent | Workflow |
-|--------|----------|
-| "new project", "initialize", "start project" | workflows/new-project.md |
-| "new-project" (explicit) | workflows/new-project.md |
-| "plan phase", "plan-phase", "create plan" | workflows/plan-phase.md |
-| "execute phase", "execute-phase", "start work" | workflows/execute-phase.md |
-| "progress", "status", "where am I" | workflows/progress.md |
-| "debug", "investigate", "bug", "issue" | workflows/debug.md |
-| "quick", "quick task", "ad-hoc" | workflows/quick.md |
-| "discuss phase", "discuss-phase", "context" | workflows/discuss-phase.md |
-| "verify", "verify-work", "UAT", "test" | workflows/verify-work.md |
-| "map codebase", "map-codebase", "analyze code" | workflows/map-codebase.md |
-| "pause", "pause-work", "stop work" | workflows/pause-work.md |
-| "resume", "resume-work", "continue" | workflows/resume-work.md |
-| "add todo", "add-todo", "capture" | workflows/add-todo.md |
-| "check todos", "check-todos", "todos", "list todos" | workflows/check-todos.md |
-| "add phase", "add-phase" | workflows/add-phase.md |
-| "insert phase", "insert-phase", "urgent phase" | workflows/insert-phase.md |
-| "remove phase", "remove-phase", "delete phase" | workflows/remove-phase.md |
-| "new milestone", "new-milestone", "next milestone" | workflows/new-milestone.md |
-| "complete milestone", "complete-milestone", "archive" | workflows/complete-milestone.md |
-| "audit milestone", "audit-milestone", "audit" | workflows/audit-milestone.md |
-| "settings", "config", "configure" | workflows/settings.md |
+### Step 6: 交付（Deliver）
+- 把结果给大哥
+- 记录到 memory（学到了什么、踩了什么坑）
+- 指令结束必问：还有什么问题吗？
 
-</routing>
+## 已整合能力
+- 已吸收原 `task-planning` 的能力：复杂任务拆解、步骤规划、优先级排序、依赖关系梳理。
+- 遇到“先帮我拆一下 / 先规划一下 / 这个项目怎么推进”时，默认直接走本技能。
 
-<architecture>
-## Workflow Files
+## 子代理使用准则
 
-Located in `workflows/`:
-- **new-project.md** - Full project initialization workflow
-- **plan-phase.md** - Phase planning with research and verification
-- **execute-phase.md** - Wave-based execution orchestrator
-- **progress.md** - Status check and intelligent routing to next action
-- **debug.md** - Systematic debugging with persistent state
-- **quick.md** - Ad-hoc tasks with GSD guarantees, skip optional agents
-- **discuss-phase.md** - Gather context through adaptive questioning
-- **verify-work.md** - Conversational UAT to validate built features
-- **map-codebase.md** - Parallel codebase analysis for brownfield projects
-- **pause-work.md** - Create handoff when pausing mid-phase
-- **resume-work.md** - Resume with full context restoration
-- **add-todo.md** - Capture ideas/tasks for later
-- **check-todos.md** - List and work on pending todos
-- **add-phase.md** - Add phase to end of milestone
-- **insert-phase.md** - Insert urgent decimal phase
-- **remove-phase.md** - Remove future phase and renumber
-- **new-milestone.md** - Start new milestone cycle
-- **complete-milestone.md** - Archive milestone and tag
-- **audit-milestone.md** - Verify milestone completion
-- **settings.md** - Configure workflow toggles
+- **宁少勿多** — 单代理比集群更稳更快
+- **飞书操作不派子代理** — 容易超时
+- **独立数据处理可以派** — API 调用、代码分析
+- **超过 10 分钟的任务考虑拆分**
 
-## Agent Files
+## 安全规则
 
-Located in `agents/`:
-- **gsd-project-researcher.md** - Research domain ecosystem (stack, features, architecture, pitfalls)
-- **gsd-phase-researcher.md** - Research how to implement a specific phase
-- **gsd-research-synthesizer.md** - Synthesize parallel research into cohesive SUMMARY.md
-- **gsd-roadmapper.md** - Create roadmap from requirements and research
-- **gsd-planner.md** - Create detailed execution plans for a phase
-- **gsd-plan-checker.md** - Verify plans will achieve phase goal before execution
-- **gsd-executor.md** - Execute a single plan with task-by-task commits
-- **gsd-verifier.md** - Verify phase goal achieved by checking must_haves against codebase
-- **gsd-debugger.md** - Investigate bugs using scientific method with persistent state
-- **gsd-codebase-mapper.md** - Analyze existing codebase for brownfield projects
-- **gsd-integration-checker.md** - Verify cross-phase integration and E2E flows
-
-## Reference Files
-
-Located in `references/`:
-- **questioning.md** - Deep questioning techniques and context checklist
-- **ui-brand.md** - UI/UX principles and brand guidelines
-
-## Templates
-
-Located in `templates/`:
-- **project.md** - PROJECT.md template
-- **requirements.md** - REQUIREMENTS.md template
-- **research-project/** - Research output templates (STACK, FEATURES, ARCHITECTURE, PITFALLS, SUMMARY)
-
-## Workflow Pattern
-
-GSD uses orchestrator + subagent pattern:
-1. **Orchestrator** (workflow) - Stays in main context, spawns subagents, routes flow
-2. **Subagents** (agents) - Fresh context, focused task, return structured result
-3. **Iteration** - Verification loops (planner → checker → planner) until quality gates pass
-
-This allows:
-- Lean orchestrator context (~15%)
-- Fresh context per subagent (100%)
-- Parallel execution (4 researchers, multiple plans in wave)
-- Verification before wasting execution time
-</architecture>
-
-<success_criteria>
-- User can initialize new projects via `/gsd new-project`
-- Full workflow executes: questioning → research → requirements → roadmap
-- Phase planning includes research and verification loop
-- Phase execution uses wave-based parallelization
-- Verification checks must_haves against actual code
-- `.planning/` directory structure created with all artifacts
-- Clear next steps provided at each stage
-</success_criteria>
+- 对外操作（发邮件、发消息）必须确认
+- 代码修改必须大哥授权
+- 大型删除操作必须确认

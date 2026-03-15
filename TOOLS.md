@@ -134,3 +134,19 @@ smb://192.168.1.80
 ---
 
 Add whatever helps you do your job. This is your cheat sheet.
+
+## OpenClaw 运行环境修复（2026-03-14）
+
+### 非交互 shell PATH 修复（2026-03-14）
+- OpenClaw 真实路径：`/Users/xs/Documents/node-v24.14.0-darwin-x64/bin/openclaw`
+- Node 真实路径：`/Users/xs/Documents/node-v24.14.0-darwin-x64/bin/node`
+- 问题现象：SSH/脚本里 `openclaw` 存在，但执行时报 `env: node: No such file or directory`，表现为“能聊天但动作链不稳定/不执行”。
+- 处理方式：
+  - 在 `~/.profile` / `~/.bash_profile` / `~/.bashrc` / `~/.zprofile` / `~/.zshenv` 补 PATH
+  - 建立 `~/.local/bin/node` 与 `~/.local/bin/openclaw` 软链接
+- 后续经验：凡是通过 SSH、cron、守护脚本、非交互 shell 调 OpenClaw，都先确认 `which node && which openclaw`。
+
+### 上下文瘦身经验
+- 过时 `BOOTSTRAP.md` 会污染后续正常会话，应在完成首次初始化后停用。
+- `MEMORY.md` 不要堆长篇 SOP、账号细节、历史流水；保留长期索引即可。
+- `AGENTS.md` 应只保留高价值规则，避免把会话启动上下文塞太胖。

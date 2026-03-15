@@ -1,0 +1,13 @@
+# HEARTBEAT.md
+
+## Rules
+- Keep heartbeat under 30 seconds.
+- If a command is blocked, times out, or is missing: report the block immediately.
+- Reply HEARTBEAT_OK only when all checks finish and nothing needs attention.
+- Do not run long tasks in heartbeat.
+
+## Checks
+1. Light OpenClaw health check.
+2. Every 3 days: review memory/evolver-log.md and run capability-evolver if due.
+3. Weekly: review recent memory/YYYY-MM-DD.md files and maintain MEMORY.md.
+4. Move heavy work to cron or sub-agents.

@@ -1,0 +1,133 @@
+[
+  {
+    "name": "截图+视觉确认",
+    "summary": "先截图看真实状态，再决定动作，避免只凭DOM/口头结论误判。",
+    "triggers": [
+      "页面真实状态不确定",
+      "浏览器自动化不稳定",
+      "iframe页面",
+      "自定义组件",
+      "复杂表单",
+      "提交后需要验证",
+      "审核状态确认"
+    ],
+    "applies_to": [
+      "人人租上架",
+      "人人租审核修复",
+      "OpenClaw浏览器排障",
+      "复杂网页自动化"
+    ],
+    "preferred_tools": [
+      "browser.screenshot",
+      "browser.snapshot",
+      "image",
+      "canvas.snapshot"
+    ],
+    "priority": "high",
+    "notes": [
+      "先看页面再下结论",
+      "提交后必须截图或列表验证，不信toast"
+    ]
+  },
+  {
+    "name": "鼠标模拟点击",
+    "summary": "当标准 browser act / DOM 注入不稳定时，改走真实坐标点击和系统级交互。",
+    "triggers": [
+      "自定义上传组件",
+      "系统文件选择器",
+      "普通 click/fill 不生效",
+      "Vue 组件绑定异常",
+      "浏览器扩展辅助操作",
+      "非标准按钮"
+    ],
+    "applies_to": [
+      "人人租上传图片",
+      "复杂网页交互",
+      "桌面级浏览器操作"
+    ],
+    "preferred_tools": [
+      "exec:/Users/xs/bin/mouse_click x y",
+      "browser.screenshot",
+      "image"
+    ],
+    "priority": "high",
+    "notes": [
+      "用于兜底，不和纯DOM路线死磕",
+      "先截图定位，再点击"
+    ]
+  },
+  {
+    "name": "人人租自动登录恢复",
+    "summary": "人人租登录能力已完成，遇到登录页优先自行恢复，不再要求大哥手动登录。",
+    "triggers": [
+      "人人租登录页",
+      "登录态过期",
+      "风控后重新登录"
+    ],
+    "applies_to": [
+      "人人租上架",
+      "人人租审核修复",
+      "人人租日常运维"
+    ],
+    "preferred_tools": [
+      "skills/rrz-login",
+      "rrz_auto_v3.py",
+      "browser"
+    ],
+    "priority": "high",
+    "notes": [
+      "先判断登录态，再继续流程",
+      "账号密码已在项目文件中"
+    ]
+  },
+  {
+    "name": "Vue 数据层写入",
+    "summary": "DOM 改值不等于真正保存，涉及 Vue 表单优先考虑触发事件或直接改实例数据。",
+    "triggers": [
+      "看起来填上了但提交没保存",
+      "Vue表单",
+      "富文本描述",
+      "品牌型号申请弹窗",
+      "复杂输入控件"
+    ],
+    "applies_to": [
+      "人人租商品表单",
+      "人人租描述编辑",
+      "品牌型号申请"
+    ],
+    "preferred_tools": [
+      "browser.act:evaluate",
+      "exec:python脚本",
+      "browser.screenshot"
+    ],
+    "priority": "high",
+    "notes": [
+      "DOM修改后要触发input/change，或直接操作Vue实例",
+      "写入后要再读回或截图验证"
+    ]
+  },
+  {
+    "name": "子代理研究/拆分",
+    "summary": "独立、耗时、可并行的问题优先丢给子代理，主代理负责协调和验收。",
+    "triggers": [
+      "GitHub调研",
+      "大段资料整理",
+      "独立技术研究",
+      "复杂排障拆分"
+    ],
+    "applies_to": [
+      "机制设计",
+      "开源方案调研",
+      "复杂任务拆解"
+    ],
+    "preferred_tools": [
+      "sessions_spawn",
+      "subagents"
+    ],
+    "priority": "medium",
+    "notes": [
+      "子代理输出必须结构化沉淀",
+      "避免只做一次性聊天研究"
+    ]
+  }
+]

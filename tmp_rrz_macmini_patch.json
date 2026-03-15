@@ -1,0 +1,40 @@
+{
+  "page_index": 1,
+  "title": "90新 苹果 Mac mini（M4）2024款 办公主机",
+  "brand_id": 26,
+  "model_id": 24635,
+  "schemes": ["到期须归还", "到期可归还/续租"],
+  "table_rows": [
+    {
+      "scheme": "到期须归还",
+      "deposit": 2400,
+      "inventory": 5,
+      "oneDay": 27,
+      "threeDay": 68,
+      "sevenDay": 270,
+      "oneMonth": 450,
+      "threeMonth": 1282,
+      "sixMonth": 2430,
+      "oneYear": 4590,
+      "twoYear": 8640,
+      "threeYear": 12150
+    },
+    {
+      "scheme": "到期可归还/续租",
+      "deposit": 2400,
+      "price": 3500,
+      "inventory": 5,
+      "oneDay": 31,
+      "threeDay": 78,
+      "sevenDay": 310,
+      "oneMonth": 518,
+      "threeMonth": 1474,
+      "sixMonth": 2794,
+      "oneYear": 5278,
+      "twoYear": 9936,
+      "threeYear": 13972
+    }
+  ],
+  "description": "90新苹果Mac mini（M4）2024款迷你主机，适合办公、轻度设计、开发测试等场景。设备成色良好，功能正常，机器运行稳定。发货前会完成基础检测与清洁，收到后可直接使用。",
+  "screenshot_path": "/Users/xs/.openclaw/workspace/tmp_rrz_macmini_patch.png"
+}

@@ -1,0 +1,76 @@
+[
+  {
+    "name": "rrz-upload-and-form",
+    "summary": "人人租上架/修复的默认执行剧本。遇到非标准上传组件、Vue表单、提交验证时优先走这套。",
+    "triggers": ["人人租", "上架", "审核修复", "上传组件", "Vue表单", "提交验证"],
+    "for_projects": ["rrz"],
+    "priority": "high",
+    "do": [
+      "先读 projects/rrz.md",
+      "先截图确认页面真实状态和入口",
+      "普通 browser 路线失败 1-2 次就切截图+鼠标模拟",
+      "关键字段写入后读回或截图验证，必要时直改 Vue 数据层",
+      "主图和描述图都要上传",
+      "提交后必须去目标列表/API确认，不信 toast"
+    ],
+    "avoid": [
+      "在单一路线上反复硬试",
+      "只改DOM不验数据层",
+      "只上传主图不上传描述图",
+      "提交后不做二次验证"
+    ]
+  },
+  {
+    "name": "xhs-draft-first",
+    "summary": "小红书内容处理默认剧本：先口语化文案，再保存草稿，不默认直接发。",
+    "triggers": ["小红书", "发笔记", "上传图片", "保存草稿", "去AI味"],
+    "for_projects": ["xiaohongshu"],
+    "priority": "medium",
+    "do": [
+      "先读 projects/xiaohongshu.md",
+      "文案先去AI味，短句口语化",
+      "图片上传优先用已验证稳定入口",
+      "默认保存草稿，由大哥确认后再发"
+    ],
+    "avoid": [
+      "AI味重的文案",
+      "默认直接发布",
+      "系统推荐标签乱插正文"
+    ]
+  },
+  {
+    "name": "openclaw-diagnose-light-first",
+    "summary": "OpenClaw 排障先证据后结论，先区分主服务问题和单 session 过厚问题。",
+    "triggers": ["只说话不干活", "session异常", "memory坏了", "gateway", "openclaw排障"],
+    "for_projects": ["openclaw-ops"],
+    "priority": "high",
+    "do": [
+      "先查 openclaw status / which node / which openclaw / 日志",
+      "先区分是整体服务故障还是单 session 过厚",
+      "旧 session 过厚时优先备份后断开映射，重建干净 session",
+      "修复后做真实动作验收，不只看状态页"
+    ],
+    "avoid": [
+      "一上来笼统说 memory 坏了",
+      "只看 status 不做动作验证",
+      "一直硬拖旧 session"
+    ]
+  },
+  {
+    "name": "main-agent-steward-mode",
+    "summary": "主代理保持可中断，负责交互、调度、监控、验收和反思；具体长任务默认交子代理。",
+    "triggers": ["复杂任务", "长期项目", "多步骤任务", "需要随时响应消息"],
+    "for_projects": ["global"],
+    "priority": "high",
+    "do": [
+      "主代理先拆任务和选路线",
+      "具体长链路执行优先交子代理",
+      "主线程保持轻，随时可响应新消息和打断",
+      "结果回收后由主代理统一验收和机制更新"
+    ],
+    "avoid": [
+      "主代理长时间沉入单个执行细节",
+      "把项目状态和执行日志都堆在主会话里"
+    ]
+  }
+]
