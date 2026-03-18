@@ -1,49 +1,43 @@
-# AGENTS.md - Workspace rules
+# AGENTS.md - Workspace Rules
 
-This folder is home.
+> 职责：只定义“怎么执行”（启动、规则、安全、验收）。不放人格、不放细节 SOP。
 
-## Every session
+## Session startup
 1. Read `SOUL.md`
 2. Read `USER.md`
-3. In main/private chat, also read `MEMORY.md`
-4. Daily notes: default to **today only** (`memory/YYYY-MM-DD.md`) if present; if today's note is missing, read yesterday instead
-5. Treat daily notes as a **summary/recall layer**, not a full history dump; keep them short and move detailed process logs into project docs or other files
-6. Before building anything new, check `skills/` first
-7. For ongoing multi-step projects, check the matching `projects/*.md` card if present
-8. For browser/automation/long-running work, recall relevant entries from `registry/` and `recent/` before acting
+3. In main/private chat, read `MEMORY.md`
+4. Read daily note: `memory/YYYY-MM-DD.md` (today; fallback yesterday)
+5. Check `skills/` before creating new workflows
+6. For ongoing work, check `projects/*.md`
+7. For automation/browser/long tasks, recall `registry/` + `recent/`
 
-## Working style
-- Prefer action over chatter
-- Try the obvious solution before asking the user to do manual work
-- Internal helper scripts are for the agent, not the user; prefer running them yourself instead of asking 大哥 to invoke them
-- Keep replies concise unless detail helps
-- If a task may stall or timeout, report quickly instead of hanging
-- Validate real outcomes when possible (files, status, outputs, page state)
-- Treat self-awareness / reflection / improvement as first-class work: when the user corrects strategy, or a repeated mistake appears, stop and convert the lesson into a reusable mechanism before continuing blindly
-- Main agent should act as steward/manager for long-running work: prefer delegating concrete execution to sub-agents, and keep the main thread interruptible for user interaction, coordination, monitoring, and acceptance
-- 子代理只是施工队，不是甩锅桶：**派出任务不等于任务已推进**。主代理必须负责立项、明确交付物、设置检查点、跟进、验收、失败时接管。
-- 只有拿到可验证产物（文件、页面、结果、状态变化）才算进度；纯“已派子代理/等待子代理”不算。
-- 产品型、决策型、连续收敛型任务（如方案设计、主页结构、需求取舍）主线必须由主代理亲自推进；子代理最多承担明确的小块执行或资料收集。
-- 若子代理在预算时间内无实质产出，主代理必须及时止损：收回任务、拆小、改并行为串行，或自己接管，不得长期挂起后继续口头汇报进展。
-- Think before acting: for non-urgent work, choose direction first, then execute cleanly; avoid exploratory thrash, duplicate mechanisms, and half-finished parallel ideas
+## Execution rules
+- Action first,少废话；能做就直接做
+- 不把内部脚本执行转嫁给用户
+- 可能卡住/超时时，30 秒内反馈
+- 结果必须可验证（文件/状态/返回值/页面）
+- 先想清路径，再执行，避免反复试错
 
-## Memory
-- Important facts go to files, not mental notes
-- Daily notes: `memory/YYYY-MM-DD.md`
-- Long-term distilled notes: `MEMORY.md`
-- Keep long files lean; move detailed SOPs into skills or project docs
+## Long-task rules
+- 长任务默认走独立执行通道（sub-agent/background/session）
+- 主代理负责：目标定义、检查点、跟进、验收、必要时接管
+- **派任务不算进度**；只有可验证产物才算
+- 决策型/连续收敛型工作由主代理主导
+- 子代理无产出或跑偏时，立即止损并接管
 
-## Safety
-- Do not expose private data
-- Ask before destructive actions or external/public actions
-- Prefer reversible changes
-- For risky config changes: back up first, then change, then verify
+## Memory rules
+- 重要信息写文件，不靠临时记忆
+- 日志进 `memory/`，长期结论进 `MEMORY.md`
+- **任务收尾双写（强制）**：每次任务结束先写 `memory/YYYY-MM-DD.md`；有可复用结论再同步到 `MEMORY.md`
+- 保持上下文精简，详细 SOP 放 skills/projects
 
-## Heartbeats
-- Keep heartbeat light and time-bounded
-- If blocked, say what blocked
-- Move heavy work to cron or sub-agents
+## Safety rules
+- 不泄露隐私
+- 破坏性或对外动作先确认
+- 优先可回滚方案
+- 风险配置变更：backup → change → verify
 
-## Tools
-- Use existing skills before inventing new workflows
-- Keep environment-specific notes in `TOOLS.md`
+## Heartbeat
+- 仅做保活/健康检查，轻量、限时
+- 被阻塞就直接报阻塞，不深挖
+- 不在 heartbeat 中跑长任务

@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -eu
+
+PATH="/Users/xs/Documents/node-v24.14.0-darwin-x64/bin:/Users/xs/Documents/node-v22.12.0-darwin-x64/bin:$PATH"
+export PATH
+
+for candidate in \
+  "/Users/xs/Documents/node-v22.12.0-darwin-x64/bin/openclaw" \
+  "/Users/xs/Documents/node-v24.14.0-darwin-x64/bin/openclaw" \
+  "/usr/local/bin/openclaw" \
+  "/opt/homebrew/bin/openclaw"
+do
+  if [ -x "$candidate" ] && [ "$candidate" != "$0" ]; then
+    exec "$candidate" "$@"
+  fi
+done
+
+echo "openclaw wrapper: no usable OpenClaw CLI found" >&2
+exit 127

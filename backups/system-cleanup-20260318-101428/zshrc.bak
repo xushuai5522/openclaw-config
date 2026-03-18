@@ -1,0 +1,28 @@
+export PATH="/Users/xs/Documents/node-v24.14.0-darwin-x64/bin:$PATH"
+export HOMEBREW_PREFIX=$HOME/.linuxbrew && export PATH=$HOMEBREW_PREFIX/bin:$PATH && export HOMEBREW_CELLAR=$HOMEBREW_PREFIX/Cellar
+
+# OpenClaw Completion (disabled - file not found)
+
+# pnpm
+export PNPM_HOME="/Users/xs/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+export PATH="/usr/local/Homebrew/bin:$PATH"
+
+# 在终端运行 OpenClaw
+alias ocgw="/Users/xs/Documents/node-v24.14.0-darwin-x64/bin/openclaw gateway"
+
+
+# Open Interpreter - 中转API配置
+
+# 代理设置
+export http_proxy=http://127.0.0.1:51362
+export https_proxy=http://127.0.0.1:51362
+export HTTP_PROXY=http://127.0.0.1:51362
+export HTTPS_PROXY=http://127.0.0.1:51362
+
+# OpenClaw Completion
+# source "/Users/xs/.openclaw/completions/openclaw.zsh"
