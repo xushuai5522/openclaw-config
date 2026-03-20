@@ -1,0 +1,23 @@
+{
+  "title": "95新 Apple Mac mini M4 办公设计开发主机",
+  "brand": "Apple",
+  "model": "Mac mini M4",
+  "spec_header": "型号",
+  "shipping": {
+    "ship_send": true,
+    "ship_return": true
+  },
+  "main_images": [
+    "/Users/xs/.openclaw/workspace/projects/rrz-dashboard/meal_images/糖醋里脊.png"
+  ],
+  "desc_images": [
+    "/Users/xs/.openclaw/workspace/projects/rrz-dashboard/meal_images/红烧排骨.png"
+  ],
+  "description_html": "<p>商品成色良好，功能正常，支持办公/设计/开发场景，具体配置见图，租完归还。</p>",
+  "pricing": {
+    "daily_price": 130,
+    "monthly_price": 350,
+    "deposit": 3000,
+    "stock": 1
+  }
+}

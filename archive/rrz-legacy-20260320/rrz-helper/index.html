@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人人租上架助手</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐂 人人租上架助手</h1>
+            <p class="subtitle">快速生成商品信息 · 一键复制粘贴</p>
+        </header>
+
+        <main>
+            <!-- 商品信息输入 -->
+            <section class="card">
+                <h2>📝 商品信息</h2>
+                <div class="form-group">
+                    <label>品牌</label>
+                    <input type="text" id="brand" placeholder="例：Apple">
+                </div>
+                <div class="form-group">
+                    <label>型号</label>
+                    <input type="text" id="model" placeholder="例：iPhone 15 Pro Max 256GB">
+                </div>
+                <div class="form-group">
+                    <label>成色</label>
+                    <select id="condition">
+                        <option value="全新">全新</option>
+                        <option value="99新">99新</option>
+                        <option value="95新">95新</option>
+                        <option value="9成新">9成新</option>
+                        <option value="8成新">8成新</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>闲鱼参考价（元）</label>
+                    <input type="number" id="xianyu_price" placeholder="例：6500">
+                </div>
+                <div class="form-group">
+                    <label>商品特点（可选）</label>
+                    <textarea id="features" rows="3" placeholder="例：国行正品、原装配件齐全、无拆无修"></textarea>
+                </div>
+                <button class="btn-primary" onclick="generateContent()">🚀 生成内容</button>
+            </section>
+
+            <!-- 生成结果 -->
+            <section class="card result-section" id="resultSection" style="display:none;">
+                <h2>✅ 生成结果</h2>
+                
+                <div class="result-item">
+                    <div class="result-header">
+                        <h3>商品标题</h3>
+                        <button class="btn-copy" onclick="copyText('title')">复制</button>
+                    </div>
+                    <div class="result-content" id="title"></div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-header">
+                        <h3>商品描述</h3>
+                        <button class="btn-copy" onclick="copyText('description')">复制</button>
+                    </div>
+                    <div class="result-content" id="description"></div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-header">
+                        <h3>租赁套餐</h3>
+                        <button class="btn-copy" onclick="copyText('packages')">复制</button>
+                    </div>
+                    <div class="result-content" id="packages"></div>
+                </div>
+
+                <div class="result-item">
+                    <div class="result-header">
+                        <h3>定价信息</h3>
+                    </div>
+                    <div class="result-content" id="pricing"></div>
+                </div>
+            </section>
+
+            <!-- 图片处理 -->
+            <section class="card">
+                <h2>🖼️ 图片处理</h2>
+                <p class="hint">上传商品图片，自动生成白底主图</p>
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="imageInput" accept="image/*" multiple style="display:none;">
+                    <div class="upload-placeholder">
+                        <span class="upload-icon">📸</span>
+                        <p>点击或拖拽上传图片</p>
+                        <p class="upload-hint">支持 JPG、PNG 格式</p>
+                    </div>
+                </div>
+                <div id="imagePreview" class="image-preview"></div>
+                <button class="btn-primary" id="processBtn" style="display:none;" onclick="processImages()">🎨 处理图片</button>
+            </section>
+        </main>
+
+        <footer>
+            <p>💡 提示：生成的内容可直接复制到人人租后台</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

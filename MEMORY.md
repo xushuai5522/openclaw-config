@@ -33,6 +33,8 @@
 - RPC probe 正常不等于服务托管层正常。
 - session 过胖失效：备份旧会话 → 移除映射 → 新建干净会话。
 - `MEMORY.md` / daily note / 旧引导文件过大都会拖慢执行。
+- `exec(background=true)` 仍受 timeout 约束，长任务必须显式设高 timeout 或分批执行。
+- 人人租图片上传：不操作 file input，直接用页面已加载的 OSS SDK + base64 转 File 对象（见 `skills/rrz-e2e/scripts/rrz_upload.js`）。
 
 ## 项目索引
 - 人人租：`skills/rrz*`、`projects/rrz.md`

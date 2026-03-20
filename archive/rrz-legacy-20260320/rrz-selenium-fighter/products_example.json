@@ -1,0 +1,48 @@
+{
+  "products": [
+    {
+      "title": "索尼PS5游戏机",
+      "category": "数码产品",
+      "description": "全新索尼PS5游戏机，光驱版，配原装手柄，支持4K游戏",
+      "images": [
+        "/path/to/ps5-1.jpg",
+        "/path/to/ps5-2.jpg",
+        "/path/to/ps5-3.jpg"
+      ],
+      "pricing": {
+        "daily_price": 50,
+        "deposit": 2000,
+        "stock": 3
+      }
+    },
+    {
+      "title": "佳能EOS R6相机",
+      "category": "摄影器材",
+      "description": "佳能全画幅微单相机，2000万像素，配24-105镜头",
+      "images": [
+        "/path/to/camera-1.jpg",
+        "/path/to/camera-2.jpg"
+      ],
+      "pricing": {
+        "daily_price": 200,
+        "deposit": 8000,
+        "stock": 2
+      }
+    },
+    {
+      "title": "大疆Air 3无人机",
+      "category": "数码产品",
+      "description": "大疆Air 3无人机，双摄像头，续航46分钟，配原装包",
+      "images": [
+        "/path/to/drone-1.jpg",
+        "/path/to/drone-2.jpg",
+        "/path/to/drone-3.jpg"
+      ],
+      "pricing": {
+        "daily_price": 150,
+        "deposit": 5000,
+        "stock": 1
+      }
+    }
+  ]
+}
