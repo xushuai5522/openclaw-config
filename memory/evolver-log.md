@@ -159,3 +159,47 @@
 - [medium/repair] 超时/中断问题出现16次,需优化超时配置或执行通道
 
 ---
+
+## 2026-03-20 进化记录 (2026-03-20T19:00:29.022Z)
+
+**策略**: balanced
+
+### 发现
+- [2026-03-20.md] toolFailure: 2次 (异常, 失败)
+- [2026-03-20.md] timeout: 1次 (超时)
+- [2026-03-19.md] timeout: 1次 (超时)
+- [2026-03-18.md] permission: 1次 (权限)
+- [2026-03-17.md] timeout: 2次 (timeout)
+- [2026-03-16.md] timeout: 12次 (超时, sigterm, timeout)
+- [2026-03-15.md] toolFailure: 2次 (失败, 异常)
+- [2026-03-14.md] toolFailure: 4次 (异常)
+- [2026-03-14.md] timeout: 1次 (timeout, timed out)
+
+### 建议
+- [high/repair] 工具调用失败出现8次,需检查工具配置、输入格式和权限
+- [high/repair] 权限问题出现1次,需更新权限或记录到TOOLS.md
+- [medium/repair] 超时/中断问题出现17次,需优化超时配置或执行通道
+
+---
+
+## 2026-03-21 进化记录 (2026-03-21T19:00:09.943Z)
+
+**策略**: balanced
+
+### 发现
+- [2026-03-21.md] toolFailure: 1次 (异常)
+- [2026-03-21.md] permission: 1次 (unauthorized)
+- [2026-03-20.md] toolFailure: 2次 (异常, 失败)
+- [2026-03-20.md] timeout: 1次 (超时)
+- [2026-03-19.md] timeout: 1次 (超时)
+- [2026-03-18.md] permission: 1次 (权限)
+- [2026-03-17.md] timeout: 2次 (timeout)
+- [2026-03-16.md] timeout: 12次 (超时, sigterm, timeout)
+- [2026-03-15.md] toolFailure: 2次 (失败, 异常)
+
+### 建议
+- [high/repair] 工具调用失败出现5次,需检查工具配置、输入格式和权限
+- [high/repair] 权限问题出现2次,需更新权限或记录到TOOLS.md
+- [medium/repair] 超时/中断问题出现16次,需优化超时配置或执行通道
+
+---

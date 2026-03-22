@@ -51,6 +51,10 @@ def state_path(product_id: str) -> Path:
 def alert_path() -> Path:
     return STATE_DIR / "rrz_alerts.json"
 
+
+def gate_path(product_id: str) -> Path:
+    return STATE_DIR / f"rrz_gate_{product_id}.json"
+
 def do_lock(product_id: str):
     lp = lock_path(product_id)
     # 检查过期锁
@@ -79,7 +83,7 @@ def do_unlock(product_id: str):
 
 # ── 幂等状态 ────────────────────────────────────────────
 
-STEPS = ["pricing", "images", "info", "draft", "submit", "verify"]
+STEPS = ["pricing", "images", "info", "gate", "draft", "submit", "verify"]
 
 def do_init(product_id: str, resume: bool):
     sp = state_path(product_id)
@@ -160,6 +164,69 @@ def do_check(product_id: str):
             return
     print("🎉 全部完成")
 
+
+def do_gate_report(product_id: str, report_path: str = ""):
+    sp = state_path(product_id)
+    state = safe_read(sp)
+    if not state:
+        print("❌ 无状态文件，先运行 init")
+        sys.exit(1)
+
+    gp = gate_path(product_id)
+    if report_path:
+        src = Path(report_path)
+        if not src.exists():
+            print(f"❌ gate 报告不存在: {src}")
+            sys.exit(1)
+        try:
+            report = json.loads(src.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as e:
+            print(f"❌ gate 报告不是有效 JSON: {src} ({e})")
+            sys.exit(1)
+    else:
+        report = safe_read(gp)
+        if not report:
+            print(f"❌ gate 报告不存在: {gp}")
+            sys.exit(1)
+
+    stored = {
+        "product_id": product_id,
+        "updated": time.time(),
+        "report": report,
+        "status": report.get("status"),
+        "ok": bool(report.get("ok")),
+        "block_count": report.get("summary", {}).get("blockCount", 0),
+        "warning_count": report.get("summary", {}).get("warningCount", 0),
+        "_version": 0,
+    }
+    atomic_write(gp, stored)
+
+    state["gate_status"] = stored["status"]
+    state["gate_ok"] = stored["ok"]
+    state["gate_report_path"] = str(gp)
+    state["gate_summary"] = {
+        "block_count": stored["block_count"],
+        "warning_count": stored["warning_count"],
+    }
+    if stored["ok"]:
+        state["step_gate"] = state.get("step_gate") or time.time()
+    else:
+        state["step_gate"] = None
+        state["submit_blocked"] = True
+    atomic_write(sp, state)
+    print(json.dumps(stored, ensure_ascii=False, indent=2))
+
+
+def do_can_submit(product_id: str):
+    sp = state_path(product_id)
+    state = safe_read(sp)
+    if not state:
+        print("❌ 无状态文件"); sys.exit(1)
+    if not state.get("step_gate") or state.get("gate_ok") is False:
+        print("🚫 gate 未通过，不允许 submit")
+        sys.exit(2)
+    print("✅ gate 已通过，可以 submit")
+
 # ── 告警去重 ────────────────────────────────────────────
 
 def do_alert(category: str, message: str):
@@ -204,6 +271,12 @@ def main():
     sub.add_parser("reset-breaker").add_argument("product_id")
     sub.add_parser("check").add_argument("product_id")
 
+    gate_p = sub.add_parser("gate-report")
+    gate_p.add_argument("product_id")
+    gate_p.add_argument("report_path", nargs="?", default="")
+
+    sub.add_parser("can-submit").add_argument("product_id")
+
     alert_p = sub.add_parser("alert")
     alert_p.add_argument("category")
     alert_p.add_argument("message")
@@ -220,6 +293,8 @@ def main():
         "fail": lambda: do_fail(args.product_id, args.step, args.reason),
         "reset-breaker": lambda: do_reset_breaker(args.product_id),
         "check": lambda: do_check(args.product_id),
+        "gate-report": lambda: do_gate_report(args.product_id, args.report_path),
+        "can-submit": lambda: do_can_submit(args.product_id),
         "alert": lambda: do_alert(args.category, args.message),
     }
     dispatch[args.cmd]()

@@ -11,28 +11,61 @@
  */
 
 (function() {
+  const SDK_URL = 'https://img1.rrzuji.cn/cdn/js/2412/06/rrzuOssSdkUmd.js';
+
+  async function ensureCreateUploader() {
+    if (typeof window.createUploader === 'function') {
+      return { source: 'window.createUploader', loaded: false };
+    }
+
+    const existed = Array.from(document.scripts || []).find(s => s.src === SDK_URL);
+    if (existed) {
+      await new Promise(resolve => setTimeout(resolve, 300));
+      if (typeof window.createUploader === 'function') {
+        return { source: 'window.createUploader', loaded: false };
+      }
+    }
+
+    await new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = SDK_URL;
+      script.async = true;
+      script.onload = () => resolve();
+      script.onerror = () => reject(new Error(`rrz uploader SDK 加载失败: ${SDK_URL}`));
+      document.head.appendChild(script);
+    });
+
+    if (typeof window.createUploader !== 'function') {
+      throw new Error('createUploader 仍不可用：真实页未暴露全局工厂');
+    }
+
+    return { source: SDK_URL, loaded: true };
+  }
+
+  function buildUploader(goToken) {
+    return window.createUploader({
+      project: () => 'shop-admin',
+      getGoToken: () => goToken,
+      goMicroBaseURL: 'https://go-micro.rrzu.com'
+    });
+  }
+
   /**
    * 上传图片到人人租 OSS
    * @param {string[]} base64Images - base64 编码的图片数组（不含 data: 前缀）
    * @param {string} fileType - 'image' (默认)
    * @param {string} suffix - 文件后缀，默认 'jpg'
-   * @returns {Promise<{done: boolean, urls: string[], paths: string[]}>}
+   * @returns {Promise<{done: boolean, urls: string[], paths: string[], uploaderSource?: string}>}
    */
   window.rrzUpload = async function(base64Images, fileType = 'image', suffix = 'jpg') {
-    if (!window.createUploader) {
-      throw new Error('createUploader SDK 未加载');
-    }
+    const sdkState = await ensureCreateUploader();
 
     const goToken = document.cookie.match(/Go-Token=([^;]+)/)?.[1] || '';
     if (!goToken) {
       throw new Error('Go-Token 未找到，请先登录');
     }
 
-    const uploader = window.createUploader({
-      project: () => 'shop-admin',
-      getGoToken: () => goToken,
-      goMicroBaseURL: 'https://go-micro.rrzu.com'
-    });
+    const uploader = buildUploader(goToken);
 
     // base64 转 File 对象
     const files = base64Images.map((b64, i) => {
@@ -52,7 +85,9 @@
     return {
       done: result.done,
       urls: result.pathWithOssServer || [],
-      paths: result.path || []
+      paths: result.path || [],
+      uploaderSource: sdkState.source,
+      sdkLoadedNow: !!sdkState.loaded
     };
   };
 
@@ -67,7 +102,9 @@
     return {
       done: result.done,
       url: result.urls[0] || '',
-      path: result.paths[0] || ''
+      path: result.paths[0] || '',
+      uploaderSource: result.uploaderSource || '',
+      sdkLoadedNow: !!result.sdkLoadedNow
     };
   };
 
