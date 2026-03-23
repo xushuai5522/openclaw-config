@@ -13,6 +13,7 @@
   const TITLE_MAX = 60;
   const PACKAGE_ALLOWED = [
     '租完归还',
+    '到期须归还',
     '可归还',
     '到期可归还/续租',
     '到期可归还',
@@ -42,8 +43,26 @@
     return normalizeText(v).replace(/\s+/g, '').toUpperCase();
   }
 
+  function domTitleText() {
+    const selectors = [
+      'input[placeholder*="30个字"]',
+      'input[maxlength="30"]',
+      '.ant-input',
+      'input'
+    ];
+    for (const selector of selectors) {
+      const nodes = Array.from(document.querySelectorAll(selector));
+      for (const node of nodes) {
+        const value = normalizeText(node?.value);
+        const placeholder = normalizeText(node?.getAttribute?.('placeholder'));
+        if (value && (!placeholder || /30个字|商品标题|标题/.test(placeholder))) return value;
+      }
+    }
+    return '';
+  }
+
   function titleText(formModel, payload) {
-    return normalizeText(payload?.title || formModel?.name || formModel?.title || '');
+    return normalizeText(payload?.title || formModel?.name || formModel?.title || formModel?.goodsName || domTitleText() || '');
   }
 
   function detailsHtml(formModel, payload) {
@@ -109,12 +128,14 @@
 
   function packageNames(rows) {
     if (!Array.isArray(rows)) return [];
-    const keys = ['name', 'specValue', 'configName', 'packageName', 'title'];
+    const keys = ['name', 'specValue', 'configName', 'packageName', 'title', 'scheme'];
     return rows.map((row) => {
       for (const key of keys) {
         const text = normalizeText(row?.[key]);
         if (text) return text;
       }
+      const specsCombo = normalizeText(row?.gradientDiscount?.specsCombo);
+      if (specsCombo) return specsCombo;
       return '';
     }).filter(Boolean);
   }
@@ -131,26 +152,28 @@
   }
 
   function priceFieldSummary(rows) {
-    const requiredKeys = ['deposit', 'buyoutPrice'];
-    const optionalRentKeys = ['oneMonth', 'threeMonth', 'sixMonth', 'oneYear', 'monthPrice', 'price'];
+    const optionalRentKeys = ['oneDay', 'threeDay', 'sevenDay', 'oneMonth', 'threeMonth', 'sixMonth', 'oneYear', 'twoYear', 'threeYear', 'monthPrice', 'price'];
     const missing = [];
     if (!Array.isArray(rows) || !rows.length) {
       return { rowCount: 0, missing: ['sellTableData'], rows: [] };
     }
     const rowSummary = rows.map((row, idx) => {
       const rowMissing = [];
-      for (const key of requiredKeys) {
-        const value = row?.[key];
-        if (value === '' || value === null || value === undefined) rowMissing.push(key);
-      }
+      const deposit = row?.deposit;
+      const buyoutPrice = row?.buyoutPrice;
+      const requiresBuyout = row?.isBuy === true || row?.scheme?.includes?.('续租') || row?.scheme?.includes?.('买断');
+      if (deposit === '' || deposit === null || deposit === undefined) rowMissing.push('deposit');
+      if (requiresBuyout && (buyoutPrice === '' || buyoutPrice === null || buyoutPrice === undefined)) rowMissing.push('buyoutPrice');
       const hasAnyRent = optionalRentKeys.some(key => row?.[key] !== '' && row?.[key] !== null && row?.[key] !== undefined);
       if (!hasAnyRent) rowMissing.push('rentPrice');
       if (rowMissing.length) missing.push({ row: idx, fields: rowMissing });
       return {
         row: idx,
-        name: normalizeText(row?.name || row?.specValue || row?.configName || ''),
-        deposit: row?.deposit ?? null,
-        buyoutPrice: row?.buyoutPrice ?? null,
+        name: normalizeText(row?.name || row?.specValue || row?.configName || row?.scheme || row?.gradientDiscount?.specsCombo || ''),
+        scheme: normalizeText(row?.scheme || row?.gradientDiscount?.specsCombo || ''),
+        requiresBuyout,
+        deposit: deposit ?? null,
+        buyoutPrice: buyoutPrice ?? null,
         hasRentPrice: hasAnyRent
       };
     });
@@ -160,6 +183,51 @@
   function truncateTitle(title, max) {
     if (title.length <= max) return { changed: false, title };
     return { changed: true, title: title.slice(0, max) };
+  }
+
+  function evaluateImageChecks(payload, main, desc) {
+    const checks = isObj(payload?.imageChecks) ? payload.imageChecks : null;
+    const issues = [];
+    if (!checks) {
+      issues.push({ level: 'block', code: 'IMAGE_CHECKS_MISSING', message: '缺少 image pipeline 质量检查结果，禁止提审', extra: null });
+      return { checks: null, issues };
+    }
+
+    const blockReasons = Array.isArray(checks.block_reasons) ? checks.block_reasons : [];
+    if (payload?.imagePipelineStatus && payload.imagePipelineStatus !== 'ready') {
+      issues.push({ level: 'block', code: 'IMAGE_PIPELINE_NOT_READY', message: `image pipeline 状态为 ${payload.imagePipelineStatus}` });
+    }
+    if (checks.hard_fail === true || blockReasons.length) {
+      issues.push({ level: 'block', code: 'IMAGE_QUALITY_HARD_FAIL', message: '图片质量检查未通过', extra: { blockReasons } });
+    }
+    if (checks.cover_white_bg === false) {
+      issues.push({ level: 'block', code: 'COVER_NOT_WHITE_BG', message: '首图不是白底', extra: checks });
+    }
+    if (checks.cover_near_square === false) {
+      issues.push({ level: 'block', code: 'COVER_NOT_NEAR_SQUARE', message: '首图不是近似正方形', extra: checks });
+    }
+    if (checks.cover_not_screenshot === false) {
+      issues.push({ level: 'block', code: 'COVER_LOOKS_LIKE_SCREENSHOT', message: '首图疑似后台截图/页面截图', extra: checks });
+    }
+    if (checks.desc_non_duplicate === false) {
+      issues.push({ level: 'block', code: 'DESC_DUPLICATE_TEMPLATE', message: '描述图重复或高度相似', extra: checks });
+    }
+    if (checks.desc_not_placeholder === false) {
+      issues.push({ level: 'block', code: 'DESC_PLACEHOLDER_ONLY', message: '描述图是纯占位卡，禁止提审', extra: checks });
+    }
+    if (typeof checks.main_count === 'number' && checks.main_count < 1) {
+      issues.push({ level: 'block', code: 'MAIN_IMAGES_MISSING', message: '主图缺失', extra: checks });
+    }
+    if (typeof checks.desc_count === 'number' && checks.desc_count < 3) {
+      issues.push({ level: 'block', code: 'DESC_IMAGES_LT_3', message: '描述图少于 3 张', extra: checks });
+    }
+    if (main.length && typeof checks.main_count === 'number' && checks.main_count !== main.length) {
+      issues.push({ level: 'warning', code: 'MAIN_COUNT_MISMATCH', message: 'payload 主图数量与 imageChecks 记录不一致', extra: { payload: main.length, checks: checks.main_count } });
+    }
+    if (desc.length && typeof checks.desc_count === 'number' && checks.desc_count !== desc.length) {
+      issues.push({ level: 'warning', code: 'DESC_COUNT_MISMATCH', message: 'payload 描述图数量与 imageChecks 记录不一致', extra: { payload: desc.length, checks: checks.desc_count } });
+    }
+    return { checks, issues };
   }
 
   window.rrzRunGate = function (payload) {
@@ -177,6 +245,7 @@
     const priceSummary = priceFieldSummary(rows);
     const titleTrim = truncateTitle(title, TITLE_MAX);
     const titleForCheck = titleTrim.title;
+    const imageQuality = evaluateImageChecks(payload, main, desc);
 
     if (!title) {
       pushIssue(issues, 'block', 'TITLE_EMPTY', '标题为空');
@@ -210,6 +279,10 @@
     if (!main.length) pushIssue(issues, 'block', 'MAIN_IMAGES_MISSING', '主图缺失');
     if (!desc.length) pushIssue(issues, 'block', 'DESC_IMAGES_MISSING', '描述图缺失');
     if (!descriptionContainsImage(details, desc)) pushIssue(issues, 'block', 'DETAILS_NO_IMAGE', '商品描述未包含图片');
+
+    for (const item of imageQuality.issues) {
+      pushIssue(issues, item.level, item.code, item.message, item.extra);
+    }
 
     if (!pkgNames.length) {
       pushIssue(issues, 'block', 'PACKAGE_NAME_MISSING', '未识别到套餐名称');
@@ -251,6 +324,7 @@
         descImageCount: desc.length,
         packageNames: pkgNames,
         priceSummary,
+        imageChecks: clone(imageQuality.checks),
         locateMeta: located.meta || {}
       },
       issues,

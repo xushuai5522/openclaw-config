@@ -65,8 +65,30 @@
     const nextTitle = payload.autoTruncateTitle && payload.title.length > 60
       ? payload.title.slice(0, 60)
       : payload.title;
-    if ('name' in formModel) formModel.name = nextTitle;
-    if ('title' in formModel) formModel.title = nextTitle;
+    let patched = false;
+    if ('name' in formModel) {
+      formModel.name = nextTitle;
+      patched = true;
+    }
+    if ('title' in formModel) {
+      formModel.title = nextTitle;
+      patched = true;
+    }
+    if ('goodsName' in formModel) {
+      formModel.goodsName = nextTitle;
+      patched = true;
+    }
+    if (!patched) {
+      const input = document.querySelector('input[placeholder*="30个字"]') || document.querySelector('input[maxlength="30"]');
+      if (input) {
+        const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value')?.set;
+        if (setter) setter.call(input, nextTitle);
+        else input.value = nextTitle;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+        input.dispatchEvent(new KeyboardEvent('keyup', { bubbles: true, key: 'End' }));
+      }
+    }
   }
 
   function patchDetails(formModel, payload) {
