@@ -157,6 +157,49 @@
     };
   }
 
+  function normalizeAuditStatus(status) {
+    return String(status || '').trim().toLowerCase();
+  }
+
+  function evaluateAuditBlock(payload) {
+    const audit = payload.auditResult || null;
+    const status = normalizeAuditStatus(payload.auditStatus || audit?.status);
+    const blockingIssues = Array.isArray(audit?.blocking_issues) ? audit.blocking_issues : [];
+    const allowSubmitOnWarning = payload.allowSubmitOnWarning !== false;
+
+    if (!audit && payload.requireAuditBeforeSubmit) {
+      return {
+        blocked: true,
+        reason: 'audit-required-but-missing',
+        status: 'missing'
+      };
+    }
+    if (status === 'block' || status === 'blocked' || blockingIssues.length > 0) {
+      return {
+        blocked: true,
+        reason: 'audit-blocked-submit',
+        status: status || 'block',
+        blockCount: blockingIssues.length,
+        audit
+      };
+    }
+    if ((status === 'warning' || status === 'pass_with_warning') && !allowSubmitOnWarning) {
+      return {
+        blocked: true,
+        reason: 'audit-warning-blocked-by-policy',
+        status,
+        warningCount: Array.isArray(audit?.warnings) ? audit.warnings.length : null,
+        audit
+      };
+    }
+    return {
+      blocked: false,
+      reason: 'audit-passed',
+      status: status || (audit ? 'pass' : 'missing'),
+      audit
+    };
+  }
+
   window.rrzSubmitAtomic = async function (payload) {
     ensure(window.rrzLocateVueState, 'rrzLocateVueState 未注入');
     const located = window.rrzLocateVueState();
@@ -182,10 +225,20 @@
       descImages: descImages.length ? descImages : (payload.descImages || [])
     };
     const gateReport = window.rrzRunGate ? window.rrzRunGate(gatePayload) : null;
+    const auditDecision = evaluateAuditBlock(payload);
 
     let action = { clicked: false, reason: 'skipped' };
     if (payload.submitReview) {
-      if (gateReport && !gateReport.ok) {
+      if (auditDecision.blocked) {
+        action = {
+          clicked: false,
+          blocked: true,
+          reason: auditDecision.reason,
+          auditStatus: auditDecision.status,
+          auditBlockCount: auditDecision.blockCount || 0,
+          auditWarningCount: auditDecision.warningCount || 0
+        };
+      } else if (gateReport && !gateReport.ok) {
         action = {
           clicked: false,
           blocked: true,
@@ -205,6 +258,7 @@
       ok: !action.blocked,
       meta: located.meta,
       snapshot: buildSnapshot(afterPatch.formModel || formModel, afterPatch.sellTableData || rows),
+      audit: auditDecision,
       gate: gateReport,
       action,
       toastTexts: toastTexts()
